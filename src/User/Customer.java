@@ -6,7 +6,7 @@ import java.util.List;
  *
  * @author neild
  */
-public class Customer extends User {
+public class Customer extends User implements ICustomer {
 
     //private List<ITransaction> transactions;
     private List<IHistory> userHistory;
@@ -44,5 +44,10 @@ public class Customer extends User {
     @Override
     public String toString() {
         return super.getName() + " : " + super.getEmail();
+    }
+
+    @Override
+    public String getCustomer() {
+        return this.toString();
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class History implements IHistory {
 
-    private Customer renter, leaser;
+    private ICustomer renter, leaser;
     private Date startDate, endDate;
     private List<Date> dates;
 
@@ -20,16 +20,16 @@ public class History implements IHistory {
         this.endDate = endDate;
     }
 
-    public Customer getRenter() {
-        return renter;
+    public String getRenter() {
+        return renter.getCustomer();
     }
 
     public void setRenter(Customer renter) {
         this.renter = renter;
     }
 
-    public Customer getLeaser() {
-        return leaser;
+    public String getLeaser() {
+        return leaser.getCustomer();
     }
 
     public void setLeaser(Customer leaser) {
