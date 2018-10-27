@@ -13,7 +13,7 @@ public class History implements IHistory {
     private Date startDate, endDate;
     private List<Date> dates;
 
-    public History(Customer renter, Customer leaser, Date startDate, Date endDate) {
+    public History(ICustomer renter, ICustomer leaser, Date startDate, Date endDate) {
         this.renter = renter;
         this.leaser = leaser;
         this.startDate = startDate;
