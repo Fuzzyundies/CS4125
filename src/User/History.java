@@ -24,7 +24,7 @@ public class History implements IHistory {
         return renter.getCustomer();
     }
 
-    public void setRenter(Customer renter) {
+    public void setRenter(ICustomer renter) {
         this.renter = renter;
     }
 
@@ -32,7 +32,7 @@ public class History implements IHistory {
         return leaser.getCustomer();
     }
 
-    public void setLeaser(Customer leaser) {
+    public void setLeaser(ICustomer leaser) {
         this.leaser = leaser;
     }
 
