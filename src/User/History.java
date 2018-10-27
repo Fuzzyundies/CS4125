@@ -7,7 +7,8 @@ import java.util.List;
  *
  * @author neild
  */
-public class History {
+public class History implements IHistory {
+
     private Customer renter, leaser;
     private Date startDate, endDate;
     private List<Date> dates;
@@ -50,10 +51,20 @@ public class History {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-    
+
     public void addDate(Date d) {
         dates.add(d);
     }
 
-    
+    @Override
+    public void showHistory() {
+        System.out.println(this.toString());
+    }
+
+    @Override
+    public String toString() {
+        return "Renter = { " + renter.toString() + "}\nLeaser = {" + leaser.toString() + "}\nStartDate = {" + startDate.toString()
+                + "}\nEndDate = {" + endDate.toString() + "}\nDates = {" + dates.toString() + "}";
+    }
+
 }
