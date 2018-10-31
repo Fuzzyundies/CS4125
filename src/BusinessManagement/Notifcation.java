@@ -11,7 +11,7 @@ import User.Customer;
  *
  * @author Benjamin Grimes
  */
-public class Notifcation 
+public class Notifcation //interface ideally
 {
     private final Customer renter;
     private final Customer leaser;

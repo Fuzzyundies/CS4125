@@ -22,18 +22,18 @@ public class Transaction
     private Customer leaser;
     private String productID;
     
+    //builder - debits & credits 
+    
     public Transaction(Date saleDate, double amount, Customer renter, 
             Customer leaser, String productID)
     {
         // TODO generate transactionID
         this.transactionID = null;
-        
         this.saleDate = saleDate;
         this.amount = amount;
         this.renter = renter;
         this.leaser = leaser;
         this.productID = productID;
-        
     }
 
     public String getTransactionID() 

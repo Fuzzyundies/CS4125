@@ -13,6 +13,7 @@ import Product.Product;
  */
 public class DBManager 
 {
+    //JDBI
     
     
     public DBManager()
