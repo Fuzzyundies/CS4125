@@ -6,10 +6,10 @@ package User;
  */
 public class Admin implements User {
 
-    private final String id;
-    private final String name;
-    private final String email;
-    private final String password;
+    private String id;
+    private String name;
+    private String email;
+    private String password;
     //private DBManager dbHelper;
     
     public Admin(String id, String name, String email, String password) {
@@ -53,5 +53,25 @@ public class Admin implements User {
     @Override
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public void setID(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
