@@ -6,7 +6,7 @@ import java.util.List;
  *
  * @author neild
  */
-public class Customer implements ICustomer, User {
+public class Customer implements ICustomer, IUser {
 
     private List<IHistory> userHistory;
     private int rating;

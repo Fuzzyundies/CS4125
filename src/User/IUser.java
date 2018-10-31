@@ -5,7 +5,7 @@ package User;
  * @author neild
  */
 
-public interface User {
+public interface IUser {
     String getID();
     String getEmail();
     String getName();

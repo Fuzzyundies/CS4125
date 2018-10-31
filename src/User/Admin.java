@@ -4,7 +4,7 @@ package User;
  *
  * @author neild
  */
-public class Admin implements User {
+public class Admin implements IUser {
 
     private String id;
     private String name;
@@ -27,11 +27,11 @@ public class Admin implements User {
 
     }
 
-    public void deleteAccount(User u) {
+    public void deleteAccount(IUser u) {
 
     }
 
-    public void searchHistory(User u) {
+    public void searchHistory(IUser u) {
 
     }
 
