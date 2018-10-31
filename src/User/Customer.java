@@ -6,17 +6,22 @@ import java.util.List;
  *
  * @author neild
  */
-public class Customer extends User implements ICustomer {
+public class Customer implements ICustomer, User {
 
     //private List<ITransaction> transactions;
     private List<IHistory> userHistory;
     private int rating;
     //private ISubscription subscription;
     private String paymentDetails;
+    private final String id;
+    private String name, email, password;
 
     public Customer(String id, String name, String email, String password, List<IHistory> history) {
-        super(id, name, email, password);
         this.userHistory = history;
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
     public int getRating() {
@@ -43,11 +48,31 @@ public class Customer extends User implements ICustomer {
 
     @Override
     public String toString() {
-        return super.getName() + " : " + super.getEmail();
+        return getName() + " : " + getEmail();
     }
 
     @Override
     public String getCustomer() {
         return this.toString();
+    }
+
+    @Override
+    public String getID() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getEmail() {
+        return this.email;
+    }
+
+    @Override
+    public String getName() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getPassword() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
