@@ -10,6 +10,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -41,25 +42,19 @@ public class HomeView extends JFrame
         
         rent = new JButton("Rent");
         rentOut = new JButton("Rent out");
+        viewProfile = new JButton("View Profile");
+        signOut = new JButton("Sign Out");
         
         panel.removeAll();
         
-        VBox vbox = new VBox();
-        
-        //vbox.setPadding();
-        vbox.setSpacing(10);
-        
-        panel.add(vbox);
-        //panel.add(new JLabel("Username:"));
-        panel.add(uname_textF);
-        panel.add(new JLabel("Password:"));
-        panel.add(pw_textF);
-        panel.add(signup_btn);
-        panel.add(login_btn);
-        
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(rent);
+        panel.add(rentOut);
+        panel.add(viewProfile);
+        panel.add(signOut);
         panel.revalidate();
         
         this.setVisible(true);
-        this.setTitle("Login");
+        this.setTitle("Home");
     }
 }
