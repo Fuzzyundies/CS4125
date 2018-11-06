@@ -22,12 +22,41 @@ public class Authentication
         dbAccess = new CustomerDAO();
     }
     
+    public boolean checkIfEmailInUse(String email)
+    {
+        boolean inUse = false;
+        
+        try 
+        {
+            inUse = dbAccess.findEmail(email);
+        }
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+        
+        return inUse;
+    }
+    
+    public boolean checkIfUsernameInUse(String username)
+    {
+        boolean inUse = false;
+        
+        try 
+        {
+            inUse = dbAccess.findUsername(username);
+        }
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+        return inUse;
+    }
+    
     public void checkForUser(String username, String password)
     {
         result = 0;
-        
         System.out.println("Checking DB for user " + username + "...");
-        
         try
         {
             result = dbAccess.findCustomer(username, password);
@@ -41,5 +70,19 @@ public class Authentication
     public int getResult()
     {
         return result;
+    }
+    
+    public boolean addNewUser(String username, String email, String password)
+    {
+        boolean inserted = false;
+        try
+        {
+            inserted = dbAccess.insert(username, email, password);
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return inserted;
     }
 }
