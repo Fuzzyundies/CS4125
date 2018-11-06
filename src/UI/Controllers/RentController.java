@@ -21,7 +21,7 @@ public class RentController {
     private ActionListener seleActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-              System.out.println(view.getChosenCategory());
+              System.out.println(view.getChosenCategory().getName());
         }
     };
 
