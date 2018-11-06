@@ -5,13 +5,13 @@ package Business.User;
  * @author neild
  */
 public class Admin implements IUser {
-
+    //testing neils new branch
     private String id;
     private String name;
     private String email;
     private String password;
     //private DBManager dbHelper;
-    
+
     public Admin(String id, String name, String email, String password) {
         this.id = id;
         this.name = name;
