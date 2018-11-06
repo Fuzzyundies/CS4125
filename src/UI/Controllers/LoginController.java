@@ -24,12 +24,12 @@ public class LoginController
         this.view = view;
         this.model = model;
         
-        view.addLoginListener(new LoginListener());
+        view.addLoginBtnListener(new LoginBtnListener());
+        view.addSignUpBtnListener(new SignUpBtnListener());
     }
     
-    class LoginListener implements ActionListener
+    class LoginBtnListener implements ActionListener
     {
-
         @Override
         public void actionPerformed(ActionEvent e) 
         {
@@ -58,6 +58,16 @@ public class LoginController
             {
                 view.displayErrorMessage("Error loggin in");
             }
+        }
+    }
+    
+    class SignUpBtnListener implements ActionListener
+    {
+
+        @Override
+        public void actionPerformed(ActionEvent e) 
+        {
+            view.displaySignUpView();
         }
         
     }
