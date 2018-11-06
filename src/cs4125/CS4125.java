@@ -16,8 +16,8 @@ public class CS4125 {
     {
         // Temp login: username = benjamin, password = benjaminpw
         LoginView view = new LoginView();
-        Authentication model = new Authentication();
-        LoginController controller = new LoginController(view, model);
+        //Authentication model = new Authentication();
+        //LoginController controller = new LoginController(view, model);
     }
 
 }
