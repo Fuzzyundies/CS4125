@@ -9,6 +9,13 @@ package DatabaseManagement;
  *
  * @author Benjamin Grimes
  */
-public interface DAO {
+public interface DAO 
+{
+    String select(Object o);
     
+    boolean insert(Object o);
+    
+    boolean update(Object o);
+    
+    boolean delete(Object o);
 }
