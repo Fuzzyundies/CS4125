@@ -98,14 +98,9 @@ public class Customer implements ICustomer, IUser, Observer {
             history.showHistory();
         });
     }
-
-    //WOW FACTORS = NOT COVERED IN LECTURES
-    //lambda exoressions to support extensibility
-    //aws
-    //cool design
-
+    
     @Override
     public void update(Product product) {
-        System.out.println("Product now available:\n" + product.getID() + " - " + product.getName() + "\nSending email to " + getEmail() + "\n\n");
+        System.out.println("Product now available:\n" + product.getId() + " - " + product.getName() + "\nSending email to " + getEmail() + "\n\n");
     }
 }

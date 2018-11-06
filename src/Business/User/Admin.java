@@ -1,10 +1,13 @@
 package Business.User;
 
+import Business.Product.Product;
+
 /**
  *
  * @author neild
  */
-public class Admin implements IUser {
+public class Admin implements IUser, Observer {
+
     //testing neils new branch
     private String id;
     private String name;
@@ -23,7 +26,7 @@ public class Admin implements IUser {
 
     }
 
-    public void deleteProduct(/*Product p*/) {
+    public void deleteProduct(Product p) {
 
     }
 
@@ -73,5 +76,10 @@ public class Admin implements IUser {
     @Override
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public void update(Product product) {
+        System.out.println("Product now available:\n" + product.getId() + " - " + product.getName() + "\nSending email to " + getEmail() + "\n\n");
     }
 }

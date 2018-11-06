@@ -9,7 +9,7 @@ public class CS4125 {
     public static void main(String[] args) {
         login();
     }
-  
+
     private static void login() {
         // Temp login: username = benjamin, password = benjaminpw
         LoginView view = new LoginView();
