@@ -1,12 +1,13 @@
 package Business.User;
 
+import Business.Product.Product;
 import java.util.List;
 
 /**
  *
  * @author neild
  */
-public class Customer implements ICustomer, IUser {
+public class Customer implements ICustomer, IUser, Observer {
 
     private List<IHistory> userHistory;
     private int rating;
@@ -102,4 +103,9 @@ public class Customer implements ICustomer, IUser {
     //lambda exoressions to support extensibility
     //aws
     //cool design
+
+    @Override
+    public void update(Product product) {
+        System.out.println("Product now available:\n" + product.getID() + " - " + product.getName() + "\nSending email to " + getEmail() + "\n\n");
+    }
 }
