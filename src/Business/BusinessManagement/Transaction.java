@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BusinessManagement;
+package Business.BusinessManagement;
 
 import java.util.Date;
 
-import User.Customer;
+import Business.User.Customer;
 
 /**
  *

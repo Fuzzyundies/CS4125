@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Product;
+package UI.UserInterfaces;
 
 /**
  *
  * @author Benjamin Grimes
  */
-public class Category {
-    private String id;
-    private String name;
-    
+public class ProfileView {
     
 }
