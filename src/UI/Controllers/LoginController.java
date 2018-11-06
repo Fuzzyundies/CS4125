@@ -24,12 +24,20 @@ public class LoginController
         this.view = view;
         this.model = model;
         
-        view.addLoginListener(new LoginListener());
+        view.addLoginBtnListener(new LoginBtnListener());
+        view.addSignUpBtnListener(new SignUpBtnListener());
+        
     }
     
-    class LoginListener implements ActionListener
+    private void backToLogin()
     {
-
+        view.displayLoginView();
+        view.addLoginBtnListener(new LoginBtnListener());
+        view.addSignUpBtnListener(new SignUpBtnListener());
+    }
+    
+    class LoginBtnListener implements ActionListener
+    {
         @Override
         public void actionPerformed(ActionEvent e) 
         {
@@ -59,6 +67,63 @@ public class LoginController
                 view.displayErrorMessage("Error loggin in");
             }
         }
+    }
+    
+    class SignUpBtnListener implements ActionListener
+    {
+
+        @Override
+        public void actionPerformed(ActionEvent e) 
+        {
+            view.displaySignUpView();
+            view.addCancelBtnListener(new CancelBtnListener());
+            view.addConfirmBtnListener(new ConfirmBtnListner());
+        }
+    }
+    
+    class CancelBtnListener implements ActionListener
+    {
+
+        @Override
+        public void actionPerformed(ActionEvent e) 
+        {
+            System.out.println("Back to login");
+            backToLogin();
+        }
         
     }
+    
+    class ConfirmBtnListner implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            String username = view.getName();
+            String email = view.getEmail();
+            String password = view.getPassword();
+            
+            boolean inUse = model.checkIfEmailInUse(email);
+            
+            if(inUse)
+            {
+                view.displayErrorMessage("Email is in use");
+            }
+            else
+            {
+                inUse = model.checkIfUsernameInUse(username);
+                if(inUse)
+                {
+                    view.displayErrorMessage("Username is in use");
+                }
+                else
+                {
+                    // Create new customer
+                    model.addNewUser(username, email, password);
+                    backToLogin();
+                }
+            }
+        }
+    }
+    
+    
 }

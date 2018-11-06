@@ -8,6 +8,7 @@ package DatabaseManagement;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -27,6 +28,7 @@ public class CustomerDAO implements DAO
     private static Connection connection = null;
     private static Statement statement = null;
     private static ResultSet resultSet = null;
+    private static PreparedStatement preparedStatement = null;
 
     @Override
     public String select(Object o) 
@@ -41,6 +43,42 @@ public class CustomerDAO implements DAO
     {
         boolean inserted = false;
         
+        return inserted;
+    }
+    
+    public boolean insert(String name, String email, String password) throws SQLException
+    {
+        boolean inserted = false;
+        try
+        {
+            connection = DriverManager.getConnection(JDBC_URL);
+            String query = "INSERT INTO BeanSquadRentalDB.Users "
+                    + "VALUES ( default, ? , ? , PASSWORD( ? ))";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, email);
+            preparedStatement.setString(3, password);
+            int result = preparedStatement.executeUpdate();
+            System.out.println(result);
+            
+            if(result == 1)
+                inserted = true;
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        finally
+        {
+            if(connection != null)
+                connection.close();
+            if(statement != null)
+                statement.close();
+            if(preparedStatement != null)
+                preparedStatement.close();
+            if(resultSet != null)
+                resultSet.close();
+        }
         return inserted;
     }
 
@@ -100,6 +138,79 @@ public class CustomerDAO implements DAO
         }
         
         return id;
+    }
+    
+    public boolean findUsername(String username) throws SQLException
+    {
+        boolean found = false;
+        
+        try 
+        {
+            connection = DriverManager.getConnection(JDBC_URL);
+            
+            // Query
+            statement = connection.createStatement();
+            String query = "SELECT * "
+                    + "FROM BeanSquadRentalDB.Users "
+                    + "WHERE name = '" + username + "'";
+            
+            resultSet = statement.executeQuery(query);
+            if(resultSet.next())
+            {
+                found = true;
+            }
+        }
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            if(connection != null)
+                connection.close();
+            if(statement != null)
+                statement.close();
+            if(resultSet != null)
+                resultSet.close();
+        }
+        
+        return found;
+    }
+    
+    public boolean findEmail(String email) throws SQLException
+    {
+        boolean found = false;
+        
+        try
+        {
+            connection = DriverManager.getConnection(JDBC_URL);
+            
+            // Query
+            statement = connection.createStatement();
+            String query = "SELECT * "
+                    + "FROM BeanSquadRentalDB.Users "
+                    + "WHERE email = '" + email + "'";
+            
+            resultSet = statement.executeQuery(query);
+            if(resultSet.next())
+            {
+                found = true;
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        finally
+        {
+            if(connection != null)
+                connection.close();
+            if(statement != null)
+                statement.close();
+            if(resultSet != null)
+                resultSet.close();
+        }
+        return found;
     }
     
 }
