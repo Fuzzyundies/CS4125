@@ -1,5 +1,6 @@
 package UI.UserInterfaces;
 
+import Business.Product.Category;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -28,6 +29,7 @@ public class RentView extends JFrame {
     public void displayRentView() {
         this.setBounds(50, 50, 250, 100);
         categoryList = new JComboBox(categories);
+        categoryList.addItem(new Category("1", "What"));
         panel.add(categoryList);
         select = new JButton("Select");
         back = new JButton("Back");
