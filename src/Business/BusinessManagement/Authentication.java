@@ -11,6 +11,7 @@ import DatabaseManagement.CustomerDAO;
  *
  * @author Benjamin Grimes
  */
+
 public class Authentication 
 {
     CustomerDAO dbAccess;

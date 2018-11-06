@@ -10,5 +10,5 @@ package UI.UserInterfaces;
  * @author Benjamin Grimes
  */
 public class RentOutView {
-    
+
 }
