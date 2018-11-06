@@ -112,6 +112,11 @@ public class LoginView extends JFrame
         return pw_textF.getText();
     }
     
+    public String getEmail()
+    {
+        return email_textF.getText();
+    }
+    
     public void resetNameText()
     {
         uname_textF.setText("");
@@ -122,6 +127,11 @@ public class LoginView extends JFrame
         pw_textF.setText("");
     }
     
+    public void resetEmailText()
+    {
+        email_textF.setText("");
+    }
+    
     public void addLoginBtnListener(ActionListener listenerForLoginBtn)
     {
         login_btn.addActionListener(listenerForLoginBtn);
@@ -130,6 +140,16 @@ public class LoginView extends JFrame
     public void addSignUpBtnListener(ActionListener listener)
     {
         signup_btn.addActionListener(listener);
+    }
+    
+    public void addCancelBtnListener(ActionListener listener)
+    {
+        cancel_btn.addActionListener(listener);
+    }
+    
+    public void addConfirmBtnListener(ActionListener listener)
+    {
+        confirm_btn.addActionListener(listener);
     }
     
     public void displayErrorMessage(String errorMsg)
