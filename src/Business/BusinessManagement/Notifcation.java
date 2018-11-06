@@ -13,29 +13,27 @@ import Business.User.Customer;
  */
 public class Notifcation //interface ideally
 {
+
     private final Customer renter;
     private final Customer leaser;
-    
-    public Notifcation(Customer renter, Customer leaser)
-    {
+
+    public Notifcation(Customer renter, Customer leaser) {
         this.renter = renter;
         this.leaser = leaser;
     }
-    
-    public Customer getRenter()
-    {
+
+    public Customer getRenter() {
         return renter;
     }
-    
-    public Customer getLeaser()
-    {
+
+    public Customer getLeaser() {
         return leaser;
     }
-    
-    public void sendEmail(Customer r, Customer l)
-    {
+
+    public void sendEmail(Customer r, Customer l) {
         // TODO implement sendEmail method
     }
     
     
+
 }
