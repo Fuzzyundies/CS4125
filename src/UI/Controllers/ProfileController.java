@@ -7,8 +7,13 @@ package UI.Controllers;
 
 /**
  *
- * @author Benjamin Grimes
+ * @author Eric Lambert
  */
-public class ProfileController {
+import UI.UserInterfaces.LoginView;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ProfileController 
+{
     
 }
