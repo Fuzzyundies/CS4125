@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 
 public class ProfileView extends JFrame
 {
-    private JPanel panel;
+    private JPanel mainPanel, infoPanel, buttonPanel;
     private JLabel nameL, ratingL, userNameL, userRatingL;
     private JButton homeBtn, histBtn, subBtn, editBtn;
     
@@ -29,23 +29,65 @@ public class ProfileView extends JFrame
     Current parts are either commented out or using placeholder values.
     Any place holder variable starts with "ph"
     */
-    public ProfileView(String user)
+    public ProfileView(String user, double rating)
     {
         //get Information from the database about the user
-        panel = new JPanel();
+        user = "Temporary Bean";
+        rating = 3.6;
         //setDefaultCloseOperation() see if can make it go back to home
         
-        this.add(panel);
+        this.setTitle("Profile");
+        this.add(mainPanel);
         this.setBounds(50, 50, 200, 200);
-        
-        panel.setLayout(new GridLayout());
-        
+
+        mainPanel.setLayout(new GridLayout(2,1,5,5));
+        buttonPanel.setLayout(new GridLayout(1,4,2,2));
+        infoPanel.setLayout(new GridLayout(2,2,5,5));
+
+        nameL = new JLabel("User Name:");
+        userNameL = new JLabel(user);
+        ratingL = new JLabel("Rating:");
+        userRatingL = new JLabel(rating + ""); //Didn't lie .toString()
+        infoPanel.add(nameL);
+        infoPanel.add(userNameL);
+        infoPanel.add(ratingL);
+        infoPanel.add(userRatingL);
+
+
         homeBtn = new JButton("Home");
         histBtn = new JButton("History");
         subBtn = new JButton("Renew\nSubscription");
         editBtn = new JButton("Edit\nProfile");
+        buttonPanel.add(subBtn);
+        buttonPanel.add(histBtn);
+        buttonPanel.add(editBtn);
+        buttonPanel.add(homeBtn);
+
+        mainPanel.add(infoPanel);
+        mainPanel.add(buttonPanel);
+        
+        this.setVisible(true);
     }
     
+    public void addSubBtnListener(ActionListener listener)
+    {
+        subBtn.addActionListener(listener);
+    }
+    
+    public void addHistBtnListener(ActionListener listener)
+    {
+        histBtn.addActionListener(listener);
+    }
+    
+    public void addEditBtnListener(ActionListener listener)
+    {
+        editBtn.addActionListener(listener);
+    }
+    
+    public void addHomeBtnListener(ActionListener listener)
+    {
+        homeBtn.addActionListener(listener);
+    }
 }
 
 
