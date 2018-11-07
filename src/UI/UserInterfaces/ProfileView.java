@@ -21,5 +21,31 @@ import javax.swing.JPanel;
 public class ProfileView extends JFrame
 {
     private JPanel panel;
-    private JLabel name, rating, userName, userRating;
+    private JLabel nameL, ratingL, userNameL, userRatingL;
+    private JButton homeBtn, histBtn, subBtn, editBtn;
+    
+    /*
+    Must take in the username, and then check against the database for the information.
+    Current parts are either commented out or using placeholder values.
+    Any place holder variable starts with "ph"
+    */
+    public ProfileView(String user)
+    {
+        //get Information from the database about the user
+        panel = new JPanel();
+        //setDefaultCloseOperation() see if can make it go back to home
+        
+        this.add(panel);
+        this.setBounds(50, 50, 200, 200);
+        
+        panel.setLayout(new GridLayout());
+        
+        homeBtn = new JButton("Home");
+        histBtn = new JButton("History");
+        subBtn = new JButton("Renew\nSubscription");
+        editBtn = new JButton("Edit\nProfile");
+    }
+    
 }
+
+
