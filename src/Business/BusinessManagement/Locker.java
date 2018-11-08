@@ -17,14 +17,14 @@ public class Locker
 {
     private String renterPin;
     private String leaserPin;
-    private Product product;
+    private Transaction transaction;
     private Date startDate;
     
-    public Locker(String renterPin, String leaserPin, Product product, Date startDate)
+    public Locker(String renterPin, String leaserPin, Transaction transaction, Date startDate)
     {
         this.renterPin = renterPin;
         this.leaserPin = leaserPin;
-        this.product = product;
+        this.transaction = transaction;
         this.startDate = startDate;
         
     }
@@ -39,9 +39,9 @@ public class Locker
         return leaserPin;
     }
 
-    public Product getProduct() 
+    public Transaction getTransaction() 
     {
-        return product;
+        return transaction;
     }
 
     public Date getStartDate() 
