@@ -109,3 +109,4 @@ public class RentOutView extends JFrame
         cancel.addActionListener(listenerForCancel);
     }
 }
+//Hi love
