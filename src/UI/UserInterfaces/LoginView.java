@@ -69,7 +69,7 @@ public class LoginView extends JFrame
         this.setVisible(true);
         this.setTitle("Login");
     }
-    
+    //blahlahtrlae hpoerjapgoajeporvkae
     public void displaySignUpView()
     {
         this.setBounds(50, 50, 300, 300);
