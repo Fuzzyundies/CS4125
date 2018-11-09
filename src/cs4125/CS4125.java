@@ -3,6 +3,8 @@ package cs4125;
 import Business.BusinessManagement.Authentication;
 import UI.Controllers.LoginController;
 import UI.UserInterfaces.LoginView;
+import UI.UserInterfaces.HomeView;
+import UI.UserInterfaces.RentOutView;
 
 public class CS4125 {
 
@@ -15,9 +17,10 @@ public class CS4125 {
     private static void login()
     {
         // Temp login: username = benjamin, password = benjaminpw
-        LoginView view = new LoginView();
-        Authentication model = new Authentication();
-        LoginController controller = new LoginController(view, model);
+        RentOutView view = new RentOutView();
+        //LoginView view = new LoginView();
+        //Authentication model = new Authentication();
+        //LoginController controller = new LoginController(view, model);
     }
 
 }
