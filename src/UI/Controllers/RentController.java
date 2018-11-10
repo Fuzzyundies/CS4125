@@ -1,5 +1,6 @@
 package UI.Controllers;
 
+import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.RentView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,14 +12,16 @@ import java.awt.event.ActionListener;
 public class RentController {
 
     private RentView view;
+    private HomeView homeView;
 
-    public RentController(RentView view) {
+    public RentController(RentView view, HomeView homeView) {
         this.view = view;
-        view.addSelectBtnListener(seleActionListener);
+        this.homeView = homeView;
+        view.addSelectBtnListener(selectActionListener);
         view.addBackBtnListner(backActionListener);
     }
 
-    private ActionListener seleActionListener = new ActionListener() {
+    private ActionListener selectActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
               System.out.println(view.getChosenCategory().getName());
@@ -29,6 +32,8 @@ public class RentController {
         @Override
         public void actionPerformed(ActionEvent e) {
            
+           homeView.setVisible(true);
+           view.dispose();
         }
     };
 

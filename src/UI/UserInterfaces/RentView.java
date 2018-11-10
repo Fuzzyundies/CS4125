@@ -44,8 +44,8 @@ public class RentView extends JFrame {
         this.setTitle("Categories");
     }
 
-    public void addSelectBtnListener(ActionListener listner) {
-        select.addActionListener(listner);
+    public void addSelectBtnListener(ActionListener listener) {
+        select.addActionListener(listener);
     }
 
     public void addBackBtnListner(ActionListener listener) {
