@@ -28,7 +28,7 @@ public class RentView extends JFrame {
     }
 
     public void displayRentView() {
-        this.setBounds(50, 50, 270, 100);
+        this.setBounds(450, 250, 270, 100);
         categoryList = new JComboBox(categories);
         select = new JButton("Select");
         back = new JButton("Back");

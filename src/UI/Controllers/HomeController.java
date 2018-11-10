@@ -37,13 +37,13 @@ public class HomeController {
         RentView rentView = new RentView();
         RentController rentViewController = new RentController(rentView, view);
         view.setVisible(false);
-        System.out.println("After rentView made in ActionListener in Controller");
     };
     
     private ActionListener RentOutActionListener = (ActionEvent e) -> {
         //Go to RentOutView ----------RentoutController needs to be done
-        //RentOutView rentOutView = new RentOutView();
-        //RentOutController rentOutController = new RentOutController(rentOutView);
+        RentOutView rentOutView = new RentOutView();
+        RentOutController rentOutController = new RentOutController(rentOutView, view);
+        view.setVisible(false);
     };
     
     private ActionListener AddViewProfileActionListener = new ActionListener() {
