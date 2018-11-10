@@ -5,7 +5,13 @@
  */
 package Business.BusinessManagement;
 
+import Business.Product.Product;
 import Business.User.Customer;
+<<<<<<< HEAD
+import Business.User.Observer;
+import java.util.ArrayList;
+import java.util.List;
+=======
 import java.sql.Timestamp;
 
 import java.util.Properties;
@@ -17,13 +23,22 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+>>>>>>> 926d4634d505c18198affaa9700865c3757280f7
 
 /**
  *
  * @author Benjamin Grimes
  */
-public class Notifcation //interface ideally
+public class Notifcation implements Subject //interface ideally
 {
+<<<<<<< HEAD
+
+    private List<Observer> observers;
+    private final Customer renter;
+    private final Customer leaser;
+
+    public Notifcation(Customer renter, Customer leaser) {
+=======
     // NOTE: Limited to 99 emails every 24 hours. 
     // Uses Google SMTP instead of AWS SES because AWS costs approx 10 cent per email.
     private final static String username = "BeanSquadRental@gmail.com";
@@ -35,19 +50,23 @@ public class Notifcation //interface ideally
     
     public Notifcation(Customer renter, Customer leaser)
     {
+>>>>>>> 926d4634d505c18198affaa9700865c3757280f7
         this.renter = renter;
         this.leaser = leaser;
+        this.observers = new ArrayList();
     }
-    
-    public Customer getRenter()
-    {
+
+    public Customer getRenter() {
         return renter;
     }
-    
-    public Customer getLeaser()
-    {
+
+    public Customer getLeaser() {
         return leaser;
     }
+<<<<<<< HEAD
+
+    public void sendEmail(Customer r, Customer l) {
+=======
     
     public Timestamp getTimestamp()
     {
@@ -56,6 +75,7 @@ public class Notifcation //interface ideally
     
     public void sendEmail(Customer r, Customer l)
     {
+>>>>>>> 926d4634d505c18198affaa9700865c3757280f7
         // TODO implement sendEmail method
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -107,6 +127,28 @@ public class Notifcation //interface ideally
             throw new RuntimeException(e);
         }
     }
-    
-    
+
+    @Override
+    public void registerObserver(Observer o) {
+        System.out.println("Adding observer..\n");
+        observers.add(o);
+    }
+
+    @Override
+    public void unregisterObserver(Observer o) {
+        observers.remove(observers.indexOf(o));
+        System.out.println("Observer removed..\nLength of queue - " + observers.size());
+    }
+
+    @Override
+    public void notify(Product product) {
+        for (Observer o : observers) {
+            o.update(product);
+        }
+    }
+
+    public void notifyProductReturned(Product product) {
+        notify(product);
+    }
+
 }

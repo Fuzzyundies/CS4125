@@ -66,7 +66,6 @@ public class LoginView extends JFrame
         panel.add(login_btn);
         
         panel.revalidate();
-        
         this.setVisible(true);
         this.setTitle("Login");
     }
