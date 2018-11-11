@@ -16,11 +16,12 @@ public class CS4125 {
     
     private static void login()
     {
-        // Temp login: username = benjamin, password = benjaminpw
-        RentOutView view = new RentOutView();
-        //LoginView view = new LoginView();
-        //Authentication model = new Authentication();
-        //LoginController controller = new LoginController(view, model);
+        //Temp login: username = username1, password = password1
+        //RentOutView view = new RentOutView();
+        //HomeView view = new HomeView();
+        LoginView view = new LoginView();
+        Authentication model = new Authentication();
+        LoginController controller = new LoginController(view, model);
     }
 
 }

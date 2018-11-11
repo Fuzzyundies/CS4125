@@ -5,12 +5,21 @@
  */
 package DatabaseManagement;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 /**
  *
  * @author Benjamin Grimes
  */
 public class ProductDAO implements DAO 
 {
+    private static Connection connection = null;
+    private static Statement statement = null;
+    private static ResultSet resultSet = null;
+    private static PreparedStatement preparedStatement = null;
 
     @Override
     public String select(Object o) 
