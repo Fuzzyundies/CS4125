@@ -22,6 +22,9 @@ public class CustomerTest {
      */
     @Test
     public void testGetID() {
+        final String testID = "121";
+        Customer customer = new Customer(testID, "neil", "neil@mail.ie", "TestPassword", null);
+        assertEquals(testID, customer.getID());
     }
 
     /**
@@ -31,7 +34,6 @@ public class CustomerTest {
     public void testGetEmail() {
         final String testEmail = "test@mail.ie";
         Customer customer = new Customer("", "TestName", testEmail, "TestPassword", null);
-        assertEquals("16170008@mail.ie", customer.getEmail());
         assertEquals(testEmail, customer.getEmail());
     }
 
@@ -40,6 +42,9 @@ public class CustomerTest {
      */
     @Test
     public void testGetName() {
+        final String testName = "TestName";
+        Customer customer = new Customer("", testName, "neil@mail.ie", "TestPassword", null);
+        assertEquals(testName, customer.getName());
     }
 
     /**
@@ -47,6 +52,9 @@ public class CustomerTest {
      */
     @Test
     public void testGetPassword() {
+        final String testPassword = "TestPassword";
+        Customer customer = new Customer("", "TestName", "neil@mail.ie", testPassword, null);
+        assertEquals(testPassword, customer.getPassword());
     }
 
     /**
@@ -68,6 +76,9 @@ public class CustomerTest {
      */
     @Test
     public void testSetID() {
+        Customer customer = new Customer("101", "TestName", "neil@mail.ie", "password", null);
+        customer.setID("103");
+        assertEquals("103", customer.getID());
     }
 
     /**
@@ -75,6 +86,9 @@ public class CustomerTest {
      */
     @Test
     public void testSetEmail() {
+        Customer customer = new Customer("", "TestName", "neil@mail.ie", "password", null);
+        customer.setEmail("new@mail.ie");
+        assertEquals("new@mail.ie", customer.getEmail());
     }
 
     /**
@@ -82,6 +96,9 @@ public class CustomerTest {
      */
     @Test
     public void testSetName() {
+        Customer customer = new Customer("", "TestName", "neil@mail.ie", "pass", null);
+        customer.setName("newName");
+        assertEquals("newName", customer.getName());
     }
 
     /**
@@ -89,6 +106,9 @@ public class CustomerTest {
      */
     @Test
     public void testSetPassword() {
+        Customer customer = new Customer("", "TestName", "neil@mail.ie", "password", null);
+        customer.setPassword("newPass");
+        assertEquals("newPass", customer.getPassword());
     }
 
     /**
