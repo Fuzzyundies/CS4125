@@ -14,12 +14,12 @@ import java.util.ArrayList;
  */
 public class CollectionPoint 
 {
-    private String id;
+    private int id;
     private List<Locker> lockers;
     private String postCode;
     private String address;
     
-    public CollectionPoint(String id, String postCode, String address)
+    public CollectionPoint(int id, String postCode, String address)
     {
         this.id = id;
         lockers = new ArrayList<Locker>();
@@ -27,7 +27,7 @@ public class CollectionPoint
         this.address = address;
     }
 
-    public String getId() 
+    public int getId() 
     {
         return id;
     }
@@ -47,7 +47,7 @@ public class CollectionPoint
         return address;
     }
 
-    public void setId(String id) 
+    public void setId(int id) 
     {
         // TODO implement validation for setID method
         this.id = id;
