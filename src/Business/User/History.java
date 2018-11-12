@@ -66,5 +66,4 @@ public class History implements IHistory {
         return "Renter = { " + renter.toString() + "}\nLeaser = {" + leaser.toString() + "}\nStartDate = {" + startDate.toString()
                 + "}\nEndDate = {" + endDate.toString() + "}\nDates = {" + dates.toString() + "}";
     }
-
 }
