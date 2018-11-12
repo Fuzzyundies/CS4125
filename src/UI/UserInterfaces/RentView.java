@@ -54,6 +54,33 @@ public class RentView extends JFrame {
         this.setVisible(true);
         this.setTitle("Categories");
     }
+    
+    /*
+    public void displayBrowseCategories()
+    {
+        
+    }
+    */
+    
+    public void displayListOfProducts()
+    {
+        
+    }
+    
+    public void displayProductDetails()
+    {
+        
+    }
+    
+    public void displayConfirmRental()
+    {
+        
+    }
+    
+    public void displayRentalConfirmation()
+    {
+        
+    }
 
     public void addSelectBtnListener(ActionListener listener) {
         select.addActionListener(listener);
