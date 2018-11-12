@@ -9,12 +9,13 @@ package Business.Product;
  *
  * @author Benjamin Grimes
  */
-public class Category {
-
-    private String id;
+public class Category 
+{
+    private int id;
     private String name;
 
-    public Category(String id, String name) {
+    public Category(int id, String name) 
+    {
         this.id = id;
         this.name = name;
     }
