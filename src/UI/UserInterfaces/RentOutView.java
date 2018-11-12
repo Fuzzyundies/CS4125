@@ -5,6 +5,7 @@
  */
 package UI.UserInterfaces;
 
+
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -107,6 +108,6 @@ public class RentOutView extends JFrame
     public void cancelAddListener(ActionListener listenerForCancel)
     {
         cancel.addActionListener(listenerForCancel);
+        System.out.println("In rent out view cancel add listener");
     }
 }
-//Hi love

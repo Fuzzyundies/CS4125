@@ -6,6 +6,7 @@
 package UI.Controllers;
 
 import Business.BusinessManagement.Authentication;
+import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.LoginView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -60,6 +61,7 @@ public class LoginController
                 {
                     // User found, 
                     // TODO goto HOME
+                    HomeView view = new HomeView();   
                     System.out.println("User found...\nID:" + result);
                 }
             }

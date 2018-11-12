@@ -1,7 +1,10 @@
 package cs4125;
 
+import UI.UserInterfaces.RentView;
 import Business.BusinessManagement.Authentication;
+import UI.Controllers.HomeController;
 import UI.Controllers.LoginController;
+import UI.Controllers.RentController;
 import UI.UserInterfaces.LoginView;
 import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.RentOutView;
@@ -10,7 +13,6 @@ public class CS4125 {
 
     public static void main(String[] args) 
     {
-        // TODO code application logic here
         login();
     }
     
@@ -23,5 +25,4 @@ public class CS4125 {
         Authentication model = new Authentication();
         LoginController controller = new LoginController(view, model);
     }
-
 }
