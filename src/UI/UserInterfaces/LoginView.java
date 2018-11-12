@@ -96,6 +96,7 @@ public class LoginView extends JFrame
         panel.add(confirm_btn);
         
         panel.revalidate();
+        panel.repaint();
         
         this.setVisible(true);
         this.setTitle("Sign up");

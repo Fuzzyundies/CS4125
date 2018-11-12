@@ -25,6 +25,7 @@ public class RentController {
         @Override
         public void actionPerformed(ActionEvent e) {
               System.out.println(view.getChosenCategory().getName());
+              view.displayListOfProducts(view.getChosenCategory().getId());
         }
     };
 
