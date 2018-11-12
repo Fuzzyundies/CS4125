@@ -13,8 +13,12 @@ import static org.junit.Assert.*;
  * @author neild
  */
 public class CustomerTest {
-    
+
+    private UserFactory userFactory = null;
+    private IUser user;
+
     public CustomerTest() {
+        userFactory = new UserFactory();
     }
 
     /**
@@ -22,9 +26,8 @@ public class CustomerTest {
      */
     @Test
     public void testGetID() {
-        final String testID = "121";
-        Customer customer = new Customer(testID, "neil", "neil@mail.ie", "TestPassword", null);
-        assertEquals(testID, customer.getID());
+        user = userFactory.createUser("C");
+        assertEquals("121", user.getID());
     }
 
     /**
@@ -32,9 +35,8 @@ public class CustomerTest {
      */
     @Test
     public void testGetEmail() {
-        final String testEmail = "test@mail.ie";
-        Customer customer = new Customer("", "TestName", testEmail, "TestPassword", null);
-        assertEquals(testEmail, customer.getEmail());
+        user = userFactory.createUser("C");
+        assertEquals("cust@mail.ie", user.getEmail());
     }
 
     /**
@@ -42,9 +44,8 @@ public class CustomerTest {
      */
     @Test
     public void testGetName() {
-        final String testName = "TestName";
-        Customer customer = new Customer("", testName, "neil@mail.ie", "TestPassword", null);
-        assertEquals(testName, customer.getName());
+        user = userFactory.createUser("C");
+        assertEquals("customer", user.getName());
     }
 
     /**
@@ -52,9 +53,8 @@ public class CustomerTest {
      */
     @Test
     public void testGetPassword() {
-        final String testPassword = "TestPassword";
-        Customer customer = new Customer("", "TestName", "neil@mail.ie", testPassword, null);
-        assertEquals(testPassword, customer.getPassword());
+        user = userFactory.createUser("C");
+        assertEquals("pass", user.getPassword());
     }
 
     /**
@@ -76,9 +76,10 @@ public class CustomerTest {
      */
     @Test
     public void testSetID() {
-        Customer customer = new Customer("101", "TestName", "neil@mail.ie", "password", null);
-        customer.setID("103");
-        assertEquals("103", customer.getID());
+        
+        user = userFactory.createUser("C");
+        user.setID("233");
+        assertEquals("233", user.getID());
     }
 
     /**
@@ -86,9 +87,7 @@ public class CustomerTest {
      */
     @Test
     public void testSetEmail() {
-        Customer customer = new Customer("", "TestName", "neil@mail.ie", "password", null);
-        customer.setEmail("new@mail.ie");
-        assertEquals("new@mail.ie", customer.getEmail());
+       
     }
 
     /**
@@ -96,9 +95,7 @@ public class CustomerTest {
      */
     @Test
     public void testSetName() {
-        Customer customer = new Customer("", "TestName", "neil@mail.ie", "pass", null);
-        customer.setName("newName");
-        assertEquals("newName", customer.getName());
+        
     }
 
     /**
@@ -106,9 +103,7 @@ public class CustomerTest {
      */
     @Test
     public void testSetPassword() {
-        Customer customer = new Customer("", "TestName", "neil@mail.ie", "password", null);
-        customer.setPassword("newPass");
-        assertEquals("newPass", customer.getPassword());
+        
     }
 
     /**
@@ -152,5 +147,5 @@ public class CustomerTest {
     @Test
     public void testUpdate() {
     }
-    
+
 }
