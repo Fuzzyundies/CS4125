@@ -19,12 +19,12 @@ import java.sql.Statement;
  */
 public class CustomerDAO implements DAO 
 {
-    private static final String DBNAME = "BeanSquadRentalDB";
-    private static final String RDS_INSTANCE_HOSTNAME = "rds-mysql-testdb.cvkugwdh5xf5.eu-west-1.rds.amazonaws.com";
+    /*    private static final String DBNAME = "BeanSquadRentalDB";
+    private static final String RDS_INSTANCE_HOSTNAME = "beansquadinstance.cvkugwdh5xf5.eu-west-1.rds.amazonaws.com";
     private static final int RDS_INSTANCE_PORT = 3306;
-    private static final String JDBC_URL = "jdbc:mysql://" + RDS_INSTANCE_HOSTNAME 
-            + ":" + RDS_INSTANCE_PORT+ "/BeanSquadRentalDB?user=benjamingrimes&password=benjamingrimes";
-    
+    private static final String JDBC_URL = "jdbc:mysql://" + RDS_INSTANCE_HOSTNAME
+    + ":" + RDS_INSTANCE_PORT+ "/BeanSquadRentalDB?user=BeanSquad&password=squad1234";
+    */
     private static Connection connection = null;
     private static Statement statement = null;
     private static ResultSet resultSet = null;
@@ -48,6 +48,7 @@ public class CustomerDAO implements DAO
     
     public boolean insert(String name, String email, String password) throws SQLException
     {
+        /*
         boolean inserted = false;
         try
         {
@@ -80,6 +81,8 @@ public class CustomerDAO implements DAO
                 resultSet.close();
         }
         return inserted;
+        */
+        return false;
     }
 
     @Override
@@ -98,7 +101,7 @@ public class CustomerDAO implements DAO
         return deleted;
     }
     
-    public int findCustomer(String name, String pw) throws SQLException
+    public int findCustomer(String username, String pw) throws SQLException
     {
         int id = 0;
         
@@ -109,14 +112,16 @@ public class CustomerDAO implements DAO
             
             // Query
             statement = connection.createStatement();
-            String query = "SELECT * "
-                    + "FROM BeanSquadRentalDB.Users "
-                    + "WHERE name = '" + name + "' AND password = PASSWORD('" + pw + "')";
+            String query = "SELECT *"
+                    + " FROM BeanSquadRentalDB.Users"
+                    + " WHERE username = '" + username + "' "
+                    + "AND password = PASSWORD('" + pw + "')";
+            
             resultSet = statement.executeQuery(query);
             
             if(resultSet.next())
             {
-                id = resultSet.getInt("id");
+                id = resultSet.getInt("userID");
             }
             else
             {

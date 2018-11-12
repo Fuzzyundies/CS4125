@@ -7,8 +7,22 @@ package UI.Controllers;
 
 /**
  *
- * @author Benjamin Grimes
+ * @author Eric Lambert
  */
-public class ProfileController {
+import UI.UserInterfaces.ProfileView;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ProfileController 
+{
+    private ProfileView profile;
     
+    public ProfileController(ProfileView profile)
+    {
+        this.profile = profile;
+        //profile.addSubBtnListener(new subBtnListener());
+        //profile.addHistBtnListener(new histBtnListener());
+        //profile.addEditBtnListener(new editBtnListener());
+        //profile.addHomeBtnListener(new homeBtnListener());
+    }
 }
