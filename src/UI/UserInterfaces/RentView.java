@@ -1,10 +1,14 @@
 package UI.UserInterfaces;
 
 import Business.Product.Category;
+import DatabaseManagement.CategoriesDAO;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -18,7 +22,7 @@ public class RentView extends JFrame {
     private JButton select;
     private JButton back;
     private JComboBox categoryList;
-    private Category[] categories = {new Category("1", "Computers & Networking"), new Category("2", "Cameras & Photography")};
+    private Category[] categories; //= {new Category(1, "Computers & Networking"), new Category(2, "Cameras & Photography")};
 
     public RentView() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,7 +31,14 @@ public class RentView extends JFrame {
         displayRentView();
     }
 
-    public void displayRentView() {
+    public void displayRentView() 
+    {
+        try {
+            categories = CategoriesDAO.getCategories();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
         this.setBounds(450, 250, 270, 100);
         categoryList = new JComboBox(categories);
         select = new JButton("Select");
