@@ -124,6 +124,16 @@ public class RentView extends JFrame {
     public void addBackBtnListner(ActionListener listener) {
         back.addActionListener(listener);
     }
+    
+    public void addBackToCatBtnListener(ActionListener listener)
+    {
+        back.addActionListener(listener);
+    }
+    
+    public void addSelectProductBtnListener(ActionListener listener)
+    {
+        select.addActionListener(listener);
+    }
 
     public Category getChosenCategory() {
         return (Category) categoryList.getSelectedItem();

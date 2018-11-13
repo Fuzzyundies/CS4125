@@ -47,7 +47,7 @@ public class LoginView extends JFrame
     
     public void displayLoginView()
     {
-        this.setBounds(50, 50, 200, 100);
+        this.setBounds(300, 300, 200, 100);
         
         uname_textF = new JTextField();
         pw_textF = new JPasswordField();
@@ -72,7 +72,7 @@ public class LoginView extends JFrame
     //blahlahtrlae hpoerjapgoajeporvkae
     public void displaySignUpView()
     {
-        this.setBounds(50, 50, 300, 300);
+        this.setBounds(300, 300, 300, 300);
         
         uname_textF = new JTextField();
         pw_textF = new JPasswordField();

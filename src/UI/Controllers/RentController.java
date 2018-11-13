@@ -19,13 +19,16 @@ public class RentController {
         this.homeView = homeView;
         view.addSelectBtnListener(selectActionListener);
         view.addBackBtnListner(backActionListener);
+        
     }
 
     private ActionListener selectActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-              System.out.println(view.getChosenCategory().getName());
-              view.displayListOfProducts(view.getChosenCategory().getId());
+            System.out.println(view.getChosenCategory().getName());
+            view.displayListOfProducts(view.getChosenCategory().getId());
+            view.addBackToCatBtnListener(backToCategoryActionListioner);
+            view.addSelectProductBtnListener(selectProductActionListener);
         }
     };
 
@@ -35,6 +38,23 @@ public class RentController {
            
            homeView.setVisible(true);
            view.dispose();
+        }
+    };
+    
+    private ActionListener backToCategoryActionListioner = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.displayRentView();
+            view.addSelectBtnListener(selectActionListener);
+            view.addBackBtnListner(backActionListener);
+            
+        }
+    };
+    
+    private ActionListener selectProductActionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+           System.out.println("Select product...");
         }
     };
 
