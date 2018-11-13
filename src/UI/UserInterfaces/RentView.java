@@ -132,14 +132,34 @@ public class RentView extends JFrame {
         panel.repaint();
     }
     
-    public void displayConfirmRental()
+    public void displayRentProduct(Product p)
     {
+        System.out.println("Displaying confirm rental...");
         
+        select = new JButton("Confirm rental");
+        back = new JButton("Back");
+        
+        panel.removeAll();
+        
+        panel.setLayout(new GridLayout(5, 2));
+        panel.add(new JLabel("Product:"));
+        panel.add(new JLabel(p.getName()));
+        panel.add(new JLabel("TODO ADD TRANSCTION FIELDS"));
+        panel.add(new JLabel(""));
+        panel.add(new JLabel("Collection Depot:"));
+        panel.add(new JLabel("TODO get depot location"));
+        panel.add(new JLabel("Rental Period:"));
+        panel.add(new JLabel("TODO ADD DROP DOWN TO PICK RENTAL PERIOD"));
+        panel.add(back);
+        panel.add(select);
+        
+        panel.revalidate();
+        panel.repaint();
     }
     
     public void displayRentalConfirmation()
     {
-        
+        System.out.println("Displaying rental confirmation...");
     }
 
     public void addSelectBtnListener(ActionListener listener) {

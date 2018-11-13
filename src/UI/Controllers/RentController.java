@@ -77,6 +77,25 @@ public class RentController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Rent product...");
+            view.displayRentProduct(view.getSelectedProduct());
+            view.addSelectBtnListener(confirmRentalActionListener);
+            view.addBackBtnListner(backToProductDetailsActionListener);
+        }
+    };
+    
+    private ActionListener backToProductDetailsActionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.displayProductDetails(view.getSelectedProduct());
+            view.addBackBtnListner(backToProductListActionListener);
+            view.addRentProductBtnListener(rentProductActionListener);
+        }
+    };
+    
+    private ActionListener confirmRentalActionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Confirm rental...");
         }
     };
 
