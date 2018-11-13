@@ -1,5 +1,6 @@
 package UI.Controllers;
 
+import Business.Product.Product;
 import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.RentView;
 import java.awt.event.ActionEvent;
@@ -19,7 +20,6 @@ public class RentController {
         this.homeView = homeView;
         view.addSelectBtnListener(selectActionListener);
         view.addBackBtnListner(backActionListener);
-        
     }
 
     private ActionListener selectActionListener = new ActionListener() {
@@ -27,8 +27,8 @@ public class RentController {
         public void actionPerformed(ActionEvent e) {
             System.out.println(view.getChosenCategory().getName());
             view.displayListOfProducts(view.getChosenCategory().getId());
-            view.addBackToCatBtnListener(backToCategoryActionListioner);
-            view.addSelectProductBtnListener(selectProductActionListener);
+            view.addBackBtnListner(backToCategoryActionListioner);
+            view.addSelectBtnListener(selectProductActionListener);
         }
     };
 
@@ -54,7 +54,29 @@ public class RentController {
     private ActionListener selectProductActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-           System.out.println("Select product...");
+            Product p = view.getSelectedProduct();
+            if(p != null)
+            {
+                view.displayProductDetails(p);
+                view.addBackBtnListner(backToProductListActionListener);
+                view.addRentProductBtnListener(rentProductActionListener);
+            }
+        }
+    };
+    
+    private ActionListener backToProductListActionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.displayListOfProducts(view.getChosenCategory().getId());
+            view.addBackBtnListner(backToCategoryActionListioner);
+            view.addSelectBtnListener(selectProductActionListener);
+        }
+    };
+    
+    private ActionListener rentProductActionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Rent product...");
         }
     };
 

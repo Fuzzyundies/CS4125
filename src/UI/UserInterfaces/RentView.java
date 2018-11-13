@@ -34,6 +34,10 @@ public class RentView extends JFrame {
     // ----------- Product List View ------------------
     private JList listOfProducts;
     // ------------------------------------------------
+    
+    // ----------- Product Details View ---------------
+    private JButton rent_btn;
+    // ------------------------------------------------
 
     public RentView() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -102,9 +106,30 @@ public class RentView extends JFrame {
         panel.repaint();
     }
     
-    public void displayProductDetails()
+    public void displayProductDetails(Product p)
     {
+        System.out.println("Displaying product details...");
+        this.setBounds(450, 250, 270, 100);
         
+        rent_btn = new JButton("Rent Product");
+        back = new JButton("Back");
+        
+        panel.removeAll();
+        
+        panel.setLayout(new GridLayout(5, 2));
+        panel.add(new JLabel("Product:"));
+        panel.add(new JLabel(p.getName()));
+        panel.add(new JLabel("Description:"));
+        panel.add(new JLabel(p.getDescription()));
+        panel.add(new JLabel("Price:"));
+        panel.add(new JLabel(""+p.getPrice()));
+        panel.add(new JLabel("Rating:"));
+        panel.add(new JLabel(""+p.getRating()));
+        panel.add(back);
+        panel.add(rent_btn);
+        
+        panel.revalidate();
+        panel.repaint();
     }
     
     public void displayConfirmRental()
@@ -125,17 +150,19 @@ public class RentView extends JFrame {
         back.addActionListener(listener);
     }
     
-    public void addBackToCatBtnListener(ActionListener listener)
+    public void addRentProductBtnListener(ActionListener listener)
     {
-        back.addActionListener(listener);
+        rent_btn.addActionListener(listener);
     }
     
-    public void addSelectProductBtnListener(ActionListener listener)
-    {
-        select.addActionListener(listener);
-    }
 
     public Category getChosenCategory() {
         return (Category) categoryList.getSelectedItem();
+    }
+    
+    public Product getSelectedProduct()
+    {
+        Product tmp = (Product) listOfProducts.getSelectedValue();
+        return tmp;
     }
 }
