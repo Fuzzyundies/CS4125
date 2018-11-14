@@ -20,7 +20,7 @@ public class Category
         this.name = name;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

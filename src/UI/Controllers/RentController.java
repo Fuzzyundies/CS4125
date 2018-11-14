@@ -1,6 +1,5 @@
 package UI.Controllers;
 
-
 import Business.Product.Product;
 
 import UI.UserInterfaces.HomeView;
@@ -39,9 +38,9 @@ public class RentController {
     private ActionListener backActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-           
-           homeView.setVisible(true);
-           view.dispose();
+
+            homeView.setVisible(true);
+            view.dispose();
         }
     };
 
@@ -51,23 +50,22 @@ public class RentController {
             view.displayRentView();
             view.addSelectBtnListener(selectActionListener);
             view.addBackBtnListner(backActionListener);
-            
+
         }
     };
-    
+
     private ActionListener selectProductActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             Product p = view.getSelectedProduct();
-            if(p != null)
-            {
+            if (p != null) {
                 view.displayProductDetails(p);
                 view.addBackBtnListner(backToProductListActionListener);
                 view.addRentProductBtnListener(rentProductActionListener);
             }
         }
     };
-    
+
     private ActionListener backToProductListActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -76,7 +74,7 @@ public class RentController {
             view.addSelectBtnListener(selectProductActionListener);
         }
     };
-    
+
     private ActionListener rentProductActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -86,7 +84,7 @@ public class RentController {
             view.addBackBtnListner(backToProductDetailsActionListener);
         }
     };
-    
+
     private ActionListener backToProductDetailsActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -95,7 +93,7 @@ public class RentController {
             view.addRentProductBtnListener(rentProductActionListener);
         }
     };
-    
+
     private ActionListener confirmRentalActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {

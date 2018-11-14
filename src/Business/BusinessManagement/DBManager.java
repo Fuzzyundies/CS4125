@@ -11,29 +11,23 @@ import Business.Product.Product;
  *
  * @author Benjamin Grimes
  */
-public class DBManager 
-{
+public class DBManager {
     //JDBI
-    
-    
-    public DBManager()
-    {
+
+    public DBManager() {
         // TODO implement DBManager Constructor.
     }
-    
-    public void insertProduct(Product p)
-    {
+
+    public void insertProduct(Product p) {
         // TODO implement insertProduct method
     }
-    
-    public Product searchProduct(Product p)
-    {
+
+    public Product searchProduct(Product p) {
         // TODO implement searchProduct method
         return null;
     }
-    
-    public void deleteProduct(Product p)
-    {
+
+    public void deleteProduct(Product p) {
         // TODO implement deleteProduct method
     }
 }

@@ -13,44 +13,38 @@ import Business.Product.Product;
  *
  * @author Benjamin Grimes
  */
-public class Locker 
-{
+public class Locker {
+
     private String renterPin;
     private String leaserPin;
     private Transaction transaction;
     private Date startDate;
-    
-    public Locker(String renterPin, String leaserPin, Transaction transaction, Date startDate)
-    {
+
+    public Locker(String renterPin, String leaserPin, Transaction transaction, Date startDate) {
         this.renterPin = renterPin;
         this.leaserPin = leaserPin;
         this.transaction = transaction;
         this.startDate = startDate;
-        
+
     }
 
-    public String getRenterPin() 
-    {
+    public String getRenterPin() {
         return renterPin;
     }
 
-    public String getLeaserPin() 
-    {
+    public String getLeaserPin() {
         return leaserPin;
     }
 
-    public Transaction getTransaction() 
-    {
+    public Transaction getTransaction() {
         return transaction;
     }
 
-    public Date getStartDate() 
-    {
+    public Date getStartDate() {
         return startDate;
     }
-    
-    public void reset()
-    {
+
+    public void reset() {
         // TODO implement reset method
     }
 }
