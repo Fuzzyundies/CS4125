@@ -20,9 +20,10 @@ public class Product {
     private double price;
     private int rating;
     private String description;
+    private int is_available;
     //private String URLPic;
 
-    public Product(int id, String name, int catID, int ownerID, double price, int rating, String description/*, String URLPic*/) {
+    public Product(int id, String name, int catID, int ownerID, double price, int rating, String description, int is_available/*, String URLPic*/) {
         this.id = id;
         this.name = name;
         this.catID = catID;
@@ -30,7 +31,12 @@ public class Product {
         this.price = price;
         this.rating = rating;
         this.description = description;
+        this.is_available = is_available;
         //this.URLPic = URLPic;
+    }
+
+    public int getIs_available() {
+        return is_available;
     }
 
     public int getId() {

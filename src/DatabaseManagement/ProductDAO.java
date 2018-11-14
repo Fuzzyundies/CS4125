@@ -91,7 +91,7 @@ public class ProductDAO implements DAO
                 price = resultSet.getDouble("price");
                 rating = resultSet.getInt("rating");
                 
-                products.add(new Product(pID, pName, catID, ownerID, price, rating, description));
+                products.add(new Product(pID, pName, catID, ownerID, price, rating, description, is_available));
             }
             
         }
