@@ -34,14 +34,10 @@ public class RentController {
 
         }
     };
-
-    private ActionListener backActionListener = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-            homeView.setVisible(true);
-            view.dispose();
-        }
+    
+    private ActionListener backActionListener = (ActionEvent e) -> {
+        homeView.setVisible(true);
+        view.dispose();
     };
 
     private ActionListener backToCategoryActionListioner = new ActionListener() {
