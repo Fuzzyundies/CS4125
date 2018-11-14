@@ -29,6 +29,8 @@ public class ProfileView extends JFrame
     Current parts are either commented out or using placeholder values.
     Any place holder variable starts with "ph"
     */
+    
+    //Accept Customer instead of values.
     public ProfileView(String user, double rating)
     {
         //get Information from the database about the user

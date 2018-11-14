@@ -49,6 +49,7 @@ public class Product {
         this.name = name;
     }
 
+
     public int getCategoryID() {
         return catID;
     }
@@ -88,7 +89,7 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
-
+  
     @Override
     public String toString()
     {

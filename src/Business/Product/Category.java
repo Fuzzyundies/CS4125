@@ -11,7 +11,6 @@ package Business.Product;
  */
 public class Category 
 {
-
     private int id;
     private String name;
 
@@ -21,7 +20,7 @@ public class Category
         this.name = name;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

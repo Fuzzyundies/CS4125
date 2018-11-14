@@ -1,6 +1,8 @@
 package UI.Controllers;
 
+
 import Business.Product.Product;
+
 import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.RentView;
 import java.awt.event.ActionEvent;
@@ -25,10 +27,12 @@ public class RentController {
     private ActionListener selectActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+
             System.out.println(view.getChosenCategory().getName());
             view.displayListOfProducts(view.getChosenCategory().getId());
             view.addBackBtnListner(backToCategoryActionListioner);
             view.addSelectBtnListener(selectProductActionListener);
+
         }
     };
 
@@ -40,7 +44,7 @@ public class RentController {
            view.dispose();
         }
     };
-    
+
     private ActionListener backToCategoryActionListioner = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -98,5 +102,4 @@ public class RentController {
             System.out.println("Confirm rental...");
         }
     };
-
 }

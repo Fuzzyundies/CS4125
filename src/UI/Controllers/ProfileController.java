@@ -25,4 +25,40 @@ public class ProfileController
         //profile.addEditBtnListener(new editBtnListener());
         //profile.addHomeBtnListener(new homeBtnListener());
     }
+    
+    class subBtnListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            
+        }
+    }
+    
+    class histBtnListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            
+        }
+    }
+    
+    class editBtnListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            
+        }
+    }
+    
+    class homeBtnListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            
+        }
+    }
 }

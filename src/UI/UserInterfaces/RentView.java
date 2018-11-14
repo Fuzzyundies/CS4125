@@ -1,6 +1,7 @@
 package UI.UserInterfaces;
 
 import Business.Product.Category;
+
 import Business.Product.Product;
 import DatabaseManagement.CategoriesDAO;
 import DatabaseManagement.ProductDAO;
@@ -11,14 +12,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
 
 public class RentView extends JFrame {
 
@@ -39,12 +43,14 @@ public class RentView extends JFrame {
     private JButton rent_btn;
     // ------------------------------------------------
 
+
     public RentView() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new JPanel();
         add(panel);
         displayRentView();
     }
+
 
     public void displayRentView() 
     {
@@ -67,6 +73,7 @@ public class RentView extends JFrame {
         panel.add(categoryList);
         panel.add(select);
         panel.add(back);
+
         
         panel.revalidate();
         panel.repaint();
@@ -162,6 +169,7 @@ public class RentView extends JFrame {
         System.out.println("Displaying rental confirmation...");
     }
 
+
     public void addSelectBtnListener(ActionListener listener) {
         select.addActionListener(listener);
     }
@@ -175,6 +183,7 @@ public class RentView extends JFrame {
         rent_btn.addActionListener(listener);
     }
     
+
 
     public Category getChosenCategory() {
         return (Category) categoryList.getSelectedItem();

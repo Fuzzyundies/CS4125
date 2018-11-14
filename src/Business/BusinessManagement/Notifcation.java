@@ -34,6 +34,10 @@ public class Notifcation implements Subject //interface ideally
     private List<Observer> observers;
     private final Customer renter;
     private final Customer leaser;
+
+    public Notifcation(Customer renter, Customer leaser) {
+        
+    }
     // NOTE: Limited to 99 emails every 24 hours. 
     // Uses Google SMTP instead of AWS SES because AWS costs approx 10 cent per email.
     private final static String username = "BeanSquadRental@gmail.com";

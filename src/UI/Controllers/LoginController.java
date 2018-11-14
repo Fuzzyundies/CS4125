@@ -61,6 +61,7 @@ public class LoginController
                 {
                     // User found, 
                     // TODO goto HOME
+
                     HomeView homeView = new HomeView();  
                     HomeController controller = new HomeController(homeView);
                     
