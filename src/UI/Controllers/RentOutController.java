@@ -5,6 +5,7 @@
  */
 package UI.Controllers;
 
+import Business.Product.Product;
 import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.RentOutView;
 import java.awt.event.ActionEvent;
@@ -44,7 +45,7 @@ public class RentOutController {
         // Added Product to DB
     };
     
-    private ActionListener CancelAddActionListener = new ActionListener() {
+    private ActionListener CancelActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.displayRentOutView();
@@ -60,7 +61,20 @@ public class RentOutController {
             System.out.println("Goto add new product...");
             view.displayRentOutNewProduct();
             view.addAddListener(AddAddActionListener);
-            view.cancelAddListener(CancelAddActionListener);
+            view.cancelAddListener(CancelActionListener);
+        }
+    };
+    
+    private ActionListener selectProducListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Display product details...");
+            Product p = view.getSelectedProduct();
+            if(p != null){
+                view.displayProductDetails(p);
+                view.backBtnListener(backToProductsActionListener);
+                view.stopLeasingOutBtnListener(stopLeasingOutProductActionListener);
+            }
         }
     };
     
@@ -68,6 +82,9 @@ public class RentOutController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("View products ive up for lease...");
+            view.displayProductsUpForRent();
+            view.backBtnListener(CancelActionListener);
+            view.selectProductBtnListener(selectProducListener);
         }
     };
     
@@ -76,6 +93,24 @@ public class RentOutController {
         public void actionPerformed(ActionEvent e) {
             System.out.println("Back to home...");
             backToHome();
+        }
+    };
+    
+    private ActionListener backToProductsActionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("View products ive up for lease...");
+            view.displayProductsUpForRent();
+            view.backBtnListener(CancelActionListener);
+            view.selectProductBtnListener(selectProducListener);
+        }
+    };
+    
+    private ActionListener stopLeasingOutProductActionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Stop Leasing out product...");
+            
         }
     };
     

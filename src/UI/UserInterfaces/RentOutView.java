@@ -7,7 +7,9 @@ package UI.UserInterfaces;
 
 
 import Business.Product.Category;
+import Business.Product.Product;
 import DatabaseManagement.CategoriesDAO;
+import DatabaseManagement.ProductDAO;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -15,29 +17,39 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 public class RentOutView extends JFrame
 {
+    
+    JButton backBtn;
     // -------- Rent Out View -----------
     JButton newRentOutBtn;
     JButton viewProductsBtn;
-    JButton backBtn;
-    
     // ----------------------------------
     
+    // --------- Rent out new product -----
     private Category[] categories;
-    
     private JPanel panel;
     private JTextField productNameText;
     private JTextField description;
     private JTextField price;
-
     private JComboBox category;
-    
     private JButton add;
     private JButton cancel;
+    // -------------------------------------
+    
+    // ---- List of products up for rent ---
+    private JList listOfProducts;
+    private JButton selectBtn;
+    // -------------------------------------
+    
+    
+    // ----- Product details ----------------
+    JButton stopLeasingOutBtn;
     
     public RentOutView()
     {
@@ -86,9 +98,6 @@ public class RentOutView extends JFrame
         
         this.setBounds(500, 250, 300, 300);
         
-        //label.setHorizontalAlignment(JLabel.CENTER);
-        //label.setVerticalAlignment(JLabel.CENTER);
-        
         panel.removeAll();
         
         productNameText = new JTextField();
@@ -122,6 +131,72 @@ public class RentOutView extends JFrame
         this.setTitle("RentOutView");
     }
     
+    public void displayProductsUpForRent()
+    {
+        this.setBounds(500, 250, 300, 300);
+        
+        // TODO get list of products where:
+        // ownerID = loggedInUserID
+        Product [] products = ProductDAO.getListProducts(1); // Temp value
+        
+        
+        
+        panel.removeAll();
+        
+        listOfProducts = new JList(products);
+        backBtn = new JButton("Back");
+        selectBtn = new JButton("Select Product");
+        
+        panel.setLayout(new GridLayout(2, 1));
+        panel.add(new JScrollPane(listOfProducts));
+        
+        JPanel btnContainer = new JPanel();
+        btnContainer.setLayout(new GridLayout(1, 2));
+        btnContainer.add(backBtn);
+        btnContainer.add(selectBtn);
+        
+        panel.add(btnContainer);
+        
+        panel.revalidate();
+        panel.repaint();
+        
+        this.setTitle("List of products up for rent");
+    }
+    
+    public void displayProductDetails(Product p)
+    {
+        System.out.println("Displaying product details...");
+        this.setBounds(450, 250, 400, 200);
+        
+        stopLeasingOutBtn = new JButton("Stop Leasing Product");
+        backBtn = new JButton("Back");
+        
+        String available;
+        if(p.getIs_available() >= 1)
+            available = "Available for rental";
+        else
+            available = "Currently being rented";
+        
+        panel.removeAll();
+        
+        panel.setLayout(new GridLayout(6, 2));
+        panel.add(new JLabel("Product:"));
+        panel.add(new JLabel(p.getName()));
+        panel.add(new JLabel("Description:"));
+        panel.add(new JLabel(p.getDescription()));
+        panel.add(new JLabel("Price:"));
+        panel.add(new JLabel(""+p.getPrice()));
+        panel.add(new JLabel("Rating:"));
+        panel.add(new JLabel(""+p.getRating()));
+        panel.add(new JLabel("Available:"));
+        panel.add(new JLabel(available));
+        panel.add(backBtn);
+        panel.add(stopLeasingOutBtn);
+        
+        panel.revalidate();
+        panel.repaint();
+    }
+    
     
     public String getNewProductName()
     {
@@ -136,6 +211,12 @@ public class RentOutView extends JFrame
     public String getNewProductPrice()
     {
         return price.getText();
+    }
+    
+    public Product getSelectedProduct()
+    {
+        Product tmp = (Product) listOfProducts.getSelectedValue();
+        return tmp;
     }
     
     /*
@@ -171,5 +252,15 @@ public class RentOutView extends JFrame
     {
         cancel.addActionListener(listenerForCancel);
         System.out.println("In rent out view cancel add listener");
+    }
+    
+    public void selectProductBtnListener(ActionListener listener)
+    {
+        selectBtn.addActionListener(listener);
+    }
+    
+    public void stopLeasingOutBtnListener(ActionListener listener)
+    {
+        stopLeasingOutBtn.addActionListener(listener);
     }
 }
