@@ -61,7 +61,11 @@ public class LoginController
                 {
                     // User found, 
                     // TODO goto HOME
-                    HomeView view = new HomeView();   
+
+                    HomeView homeView = new HomeView();  
+                    HomeController controller = new HomeController(homeView);
+                    
+                    view.setVisible(false);
                     System.out.println("User found...\nID:" + result);
                 }
             }

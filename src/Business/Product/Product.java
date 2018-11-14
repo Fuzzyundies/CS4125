@@ -13,31 +13,31 @@ import Business.User.Customer;
  */
 public class Product {
 
-    private String id;
+    private int id;
     private String name;
-    private Category category;
-    private Customer owner;
+    private int catID;
+    private int ownerID;
     private double price;
     private int rating;
     private String description;
-    private String URLPic;
+    //private String URLPic;
 
-    public Product(String id, String name, Category category, Customer owner, double price, int rating, String description, String URLPic) {
+    public Product(int id, String name, int catID, int ownerID, double price, int rating, String description/*, String URLPic*/) {
         this.id = id;
         this.name = name;
-        this.category = category;
-        this.owner = owner;
+        this.catID = catID;
+        this.ownerID = ownerID;
         this.price = price;
         this.rating = rating;
         this.description = description;
-        this.URLPic = URLPic;
+        //this.URLPic = URLPic;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -49,20 +49,21 @@ public class Product {
         this.name = name;
     }
 
-    public Category getCategory() {
-        return category;
+
+    public int getCategoryID() {
+        return catID;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategory(int catID) {
+        this.catID = catID;
     }
 
-    public Customer getOwner() {
-        return owner;
+    public int getOwner() {
+        return ownerID;
     }
 
-    public void setOwner(Customer owner) {
-        this.owner = owner;
+    public void setOwner(int ownerID) {
+        this.ownerID = ownerID;
     }
 
     public double getPrice() {
@@ -88,5 +89,10 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
-
+  
+    @Override
+    public String toString()
+    {
+        return getName();
+    }
 }

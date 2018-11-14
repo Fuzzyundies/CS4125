@@ -24,7 +24,7 @@ public class Category
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

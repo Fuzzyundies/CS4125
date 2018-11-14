@@ -64,7 +64,4 @@ public class HomeController {
             //To do Sign out functionality
         }
     };
-    
-
-    
 }

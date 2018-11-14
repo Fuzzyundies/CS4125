@@ -42,9 +42,6 @@ public class Notifcation implements Subject //interface ideally
     // Uses Google SMTP instead of AWS SES because AWS costs approx 10 cent per email.
     private final static String username = "BeanSquadRental@gmail.com";
     private final static String password = "squad1234";
-    
-    private final Customer renter;
-    private final Customer leaser;
     private Timestamp timestamp;
     
     public Notifcation(Customer renter, Customer leaser)

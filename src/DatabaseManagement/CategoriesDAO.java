@@ -47,7 +47,7 @@ public class CategoriesDAO implements DAO
     }
     
     
-    public static ArrayList<Category> getCategories() throws SQLException
+    public static Category[] getCategories() throws SQLException
     {
         ArrayList<Category> categoryList = new ArrayList<>();
         
@@ -78,7 +78,13 @@ public class CategoriesDAO implements DAO
             close();
         }
         
-        return categoryList;
+        Category [] cats = new Category[categoryList.size()];
+        for(int i = 0; i < cats.length; i++)
+        {
+            cats[i] = categoryList.get(i);
+        }
+        
+        return cats;
     }
     
     public static void close() throws SQLException
