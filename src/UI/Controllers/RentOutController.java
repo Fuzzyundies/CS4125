@@ -41,6 +41,7 @@ public class RentOutController {
     
     private ActionListener AddAddActionListener = (ActionEvent e) -> {
         System.out.println("Add pressed...");
+        // Added Product to DB
     };
     
     private ActionListener CancelAddActionListener = new ActionListener() {

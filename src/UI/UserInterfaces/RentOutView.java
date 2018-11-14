@@ -6,8 +6,11 @@
 package UI.UserInterfaces;
 
 
+import Business.Product.Category;
+import DatabaseManagement.CategoriesDAO;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -24,16 +27,14 @@ public class RentOutView extends JFrame
     
     // ----------------------------------
     
+    private Category[] categories;
     
     private JPanel panel;
-    private JTextField title;
-    private JLabel titleL;
+    private JTextField productNameText;
     private JTextField description;
-    private JLabel descriptionL;
     private JTextField price;
-    private JLabel priceL;
+
     private JComboBox category;
-    private JLabel categoryL;
     
     private JButton add;
     private JButton cancel;
@@ -75,8 +76,14 @@ public class RentOutView extends JFrame
     
     public void displayRentOutNewProduct()
     {
-        //-------Temp----Need to add category objects to category Spinner
-        String [] temp = {"Old BBQ", "New BBQ"};
+        try{
+            categories = CategoriesDAO.getCategories();
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+        
         this.setBounds(500, 250, 300, 300);
         
         //label.setHorizontalAlignment(JLabel.CENTER);
@@ -84,34 +91,26 @@ public class RentOutView extends JFrame
         
         panel.removeAll();
         
-        title = new JTextField();
-        titleL = new JLabel("Title");
-        titleL.setHorizontalAlignment(JLabel.CENTER);
+        productNameText = new JTextField();
         
         description = new JTextField();
-        descriptionL = new JLabel("Description");
-        descriptionL.setHorizontalAlignment(JLabel.CENTER);
         
-        category = new JComboBox(temp);
+        category = new JComboBox(categories);
         category.setEditable(false);
-        categoryL = new JLabel("Category");
-        categoryL.setHorizontalAlignment(JLabel.CENTER);
         
         price = new JTextField();
-        priceL = new JLabel("Price");
-        priceL.setHorizontalAlignment(JLabel.CENTER);
         
         add = new JButton("Add");
         cancel = new JButton("Cancel");
         
         panel.setLayout(new GridLayout(5, 2, 10, 10));
-        panel.add(titleL);
-        panel.add(title);
-        panel.add(descriptionL);
+        panel.add(new JLabel("Product name:"));
+        panel.add(productNameText);
+        panel.add(new JLabel("Description:"));
         panel.add(description);
-        panel.add(categoryL);
+        panel.add(new JLabel("Category:"));
         panel.add(category);
-        panel.add(priceL);
+        panel.add(new JLabel("Price:"));
         panel.add(price);
         panel.add(add);
         panel.add(cancel);
@@ -123,20 +122,22 @@ public class RentOutView extends JFrame
         this.setTitle("RentOutView");
     }
     
-    /*
-    public String getTitle()
+    
+    public String getNewProductName()
     {
-        return title.getText();
+        return productNameText.getText();
     }
-    public String getDescription()
+    
+    public String getNewProductDescription()
     {
         return description.getText();
     }
-    public String getPrice()
+    
+    public String getNewProductPrice()
     {
         return price.getText();
     }
-    */
+    
     /*
     public Category getName()
     {
