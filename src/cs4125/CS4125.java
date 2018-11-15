@@ -46,6 +46,7 @@ public class CS4125
         rentView.setVisible(false);
         model = new Authentication();
         controller = new LoginController(loginView, model);
+        //make rest of controllers
     }
     
     public static void sceneManager(int scene)
@@ -70,6 +71,7 @@ public class CS4125
     {
         CS4125.rating = rating;
     }
+    
     /*
     private static void login()
     {
