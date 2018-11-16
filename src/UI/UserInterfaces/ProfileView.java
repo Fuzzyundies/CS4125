@@ -47,6 +47,10 @@ public class ProfileView extends JFrame {
     private JButton selectBtn;
     // ----------------------------------------
 
+    
+    // ------------ Product Window --------------
+    JButton rentBtn;
+    // -----------------------------------------
 
     /*
     Must take in the username, and then check against the database for the information.
@@ -156,6 +160,39 @@ public class ProfileView extends JFrame {
         mainPanel.revalidate();
         mainPanel.repaint();
     }
+    
+    public void displayProductDetails(Product p) {
+        System.out.println("Displaying product details...");
+        this.setBounds(450, 250, 400, 200);
+        rentBtn = new JButton("Rent Product Again");
+        cancelBtn = new JButton("Back");
+
+        String available;
+        if (p.getIs_available() >= 1) {
+            available = "Available for rental";
+        } else {
+            available = "Currently being rented";
+            rentBtn.setText("Notify me");
+        }
+        mainPanel.removeAll();
+
+        mainPanel.setLayout(new GridLayout(6, 2));
+        mainPanel.add(new JLabel("Product:"));
+        mainPanel.add(new JLabel(p.getName()));
+        mainPanel.add(new JLabel("Description:"));
+        mainPanel.add(new JLabel(p.getDescription()));
+        mainPanel.add(new JLabel("Price:"));
+        mainPanel.add(new JLabel("" + p.getPrice()));
+        mainPanel.add(new JLabel("Rating:"));
+        mainPanel.add(new JLabel("" + p.getRating()));
+        mainPanel.add(new JLabel("Available:"));
+        mainPanel.add(new JLabel(available)); // Check if user is currently renting?
+        mainPanel.add(cancelBtn);
+        mainPanel.add(rentBtn);
+
+        mainPanel.revalidate();
+        mainPanel.repaint();
+    }
 
     public void addSubscriptionButtonListener(ActionListener listener) {
         subBtn.addActionListener(listener);
@@ -180,5 +217,10 @@ public class ProfileView extends JFrame {
     public void addSelectBtnListener(ActionListener listener)
     {
         selectBtn.addActionListener(listener);
+    }
+    
+    public Product getSelectedProduct() {
+        Product tmp = (Product) listOfHistory.getSelectedValue();
+        return tmp;
     }
 }

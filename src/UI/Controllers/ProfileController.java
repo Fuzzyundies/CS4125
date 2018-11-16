@@ -65,6 +65,20 @@ public class ProfileController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Select product...");
+            profileView.displayProductDetails(profileView.getSelectedProduct());
+            profileView.addBackBtnListner(backToHistory);
+            //profileView.addRentAginListener(); 
+            // TODO add option to rent again
+            // probably instatiate RentView?
+        }
+    };
+    
+    private ActionListener backToHistory = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            profileView.createHistoryWindow();
+            profileView.addBackBtnListner(backHomeListener);
+            profileView.addSelectBtnListener(selectProductActionListener);
         }
     };
 
