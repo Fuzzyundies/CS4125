@@ -18,41 +18,40 @@ import java.awt.event.ActionListener;
  */
 public class HomeController {
 
-    private HomeView view;
+    private HomeView homeView;
 
     public HomeController(HomeView view) {
-        this.view = view;
+        this.homeView = view;
 
-        view.addRentListener(RentActionListener);
-        view.addRentOutListener(RentOutActionListener);
-        view.addViewProfileListener(AddViewProfileActionListener);
-        view.addSignOutListener(AddSignOutActionListener);
+        view.addRentListener(rentActionListener);
+        view.addRentOutListener(rentOutActionListener);
+        view.addViewProfileListener(viewProfileActionListener);
+        view.addSignOutListener(signOutActionListener);
     }
 
-    private ActionListener RentActionListener = (ActionEvent e) -> {
+    private final ActionListener rentActionListener = (ActionEvent e) -> {
         //Go to RentView
         RentView rentView = new RentView();
-        RentController rentViewController = new RentController(rentView, view);
-        view.setVisible(false);
+        RentController rentViewController = new RentController(rentView, homeView);
+        homeView.setVisible(false);
     };
 
-    private ActionListener RentOutActionListener = (ActionEvent e)
-            -> {
+    private final ActionListener rentOutActionListener = (ActionEvent e) -> {
         //Go to RentOutView ----------RentoutController needs to be done
         RentOutView rentOutView = new RentOutView();
-        RentOutController rentOutController = new RentOutController(rentOutView, view);
-        view.setVisible(false);
+        RentOutController rentOutController = new RentOutController(rentOutView, homeView);
+        homeView.setVisible(false);
     };
 
-    private ActionListener AddViewProfileActionListener = (ActionEvent e)
-            -> {
-        //Go to ViewProfile
+    private final ActionListener viewProfileActionListener = (ActionEvent e) -> {
         String temp = "temp";
         Double temp2 = 2.0;
         ProfileView profileView = new ProfileView(temp, temp2);
+        ProfileController profileController = new ProfileController(profileView, homeView);
+        homeView.setVisible(false);
     };
 
-    private ActionListener AddSignOutActionListener = (ActionEvent e) -> {
+    private final ActionListener signOutActionListener = (ActionEvent e) -> {
         //To do Sign out functionality
     };
 }

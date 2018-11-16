@@ -9,56 +9,41 @@ package UI.Controllers;
  *
  * @author Eric Lambert
  */
+import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.ProfileView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ProfileController 
 {
-    private final ProfileView profile;
+    private final ProfileView profileView;
+    private final HomeView homeView;
     
-    public ProfileController(ProfileView profile)
+    public ProfileController(ProfileView profileView, HomeView homeView)
     {
-        this.profile = profile;
-        profile.addSubBtnListener(new subBtnListener());
-        profile.addHistBtnListener(new histBtnListener());
-        profile.addEditBtnListener(new editBtnListener());
-        profile.addHomeBtnListener(new homeBtnListener());
+        this.profileView = profileView;
+        this.homeView = homeView;
+        profileView.addSubscriptionButtonListener(renewSubscriptionListener);
+        profileView.addHistBtnListener(viewHistoryListener);
+        profileView.addEditBtnListener(editProfileListener);
+        profileView.addHomeBtnListener(backHomeListener);
     }
     
-    class subBtnListener implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent e)
-        {
+    private final ActionListener renewSubscriptionListener = (ActionEvent e) -> {
+    };
             
-        }
-    }
+    private final ActionListener viewHistoryListener = (ActionEvent e) -> {
+    };
+            
+    private final ActionListener editProfileListener = (ActionEvent e) -> {
+    };
+          
+    private final ActionListener backHomeListener = (ActionEvent e) -> {
+       backToHome();
+    };
     
-    class histBtnListener implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent e)
-        {
-            
-        }
-    }
-    
-    class editBtnListener implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent e)
-        {
-            
-        }
-    }
-    
-    class homeBtnListener implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent e)
-        {
-            
-        }
+    private void backToHome() {
+        homeView.setVisible(true);
+        profileView.dispose();
     }
 }

@@ -7,6 +7,7 @@ package UI.UserInterfaces;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -17,6 +18,7 @@ import javax.swing.JPanel;
 public class HomeView extends JFrame {
 
     private JPanel panel;
+    private JPanel buttonPanel;
     private JButton rent;
     private JButton rentOut;
     private JButton viewProfile;
@@ -27,11 +29,13 @@ public class HomeView extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.add(panel);
+        buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(4, 1, 10, 10));
         displayHomeView();
     }
 
     public void displayHomeView() {
-        this.setBounds(500, 250, 200, 225);
+        this.setBounds(50, 50, 400, 225);
 
         rent = new JButton("Rent");
         rent.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -42,19 +46,14 @@ public class HomeView extends JFrame {
         signOut = new JButton("Sign Out");
         signOut.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        panel.removeAll();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        buttonPanel.add(rent);
+        buttonPanel.add(rentOut);
+        buttonPanel.add(viewProfile);
+        buttonPanel.add(signOut);
 
-        panel.add(Box.createRigidArea(new Dimension(100, 20)));
-        panel.add(rent);
-        panel.add(Box.createRigidArea(new Dimension(100, 15)));
-        panel.add(rentOut);
-        panel.add(Box.createRigidArea(new Dimension(100, 15)));
-        panel.add(viewProfile);
-        panel.add(Box.createRigidArea(new Dimension(100, 15)));
-        panel.add(signOut);
+        panel.add(buttonPanel);
         panel.revalidate();
-
+        pack();
         this.setVisible(true);
         this.setTitle("Home");
     }

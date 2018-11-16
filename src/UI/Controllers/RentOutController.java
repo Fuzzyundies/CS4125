@@ -11,40 +11,35 @@ import UI.UserInterfaces.RentOutView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 public class RentOutController {
-    
+
     private RentOutView view;
     private HomeView homeView;
-    
-    public RentOutController(RentOutView view, HomeView homeView)  //addAuthentication model as third arg
+
+    public RentOutController(RentOutView view, HomeView homeView) //addAuthentication model as third arg
     {
         this.view = view;
         this.homeView = homeView;
-        
+
         view.addAddNewProductBtnListener(addNewProductActionListener);
         view.viewProductsBtnListener(viewProductsActionListener);
         view.backBtnListener(backToHomeActionListener);
-        
         /*
         view.addAddListener(AddAddActionListener);
         view.cancelAddListener(CancelAddActionListener);
-        */
+         */
     }
-    
-    
-    
-    private void backToHome() 
-    {
+
+    private void backToHome() {
         homeView.setVisible(true);
         view.dispose();
     }
-    
+
     private ActionListener AddAddActionListener = (ActionEvent e) -> {
         System.out.println("Add pressed...");
         // Added Product to DB
     };
-    
+
     private ActionListener CancelActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -54,7 +49,7 @@ public class RentOutController {
             view.backBtnListener(backToHomeActionListener);
         }
     };
-    
+
     private ActionListener addNewProductActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -64,20 +59,20 @@ public class RentOutController {
             view.cancelAddListener(CancelActionListener);
         }
     };
-    
+
     private ActionListener selectProducListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Display product details...");
             Product p = view.getSelectedProduct();
-            if(p != null){
+            if (p != null) {
                 view.displayProductDetails(p);
                 view.backBtnListener(backToProductsActionListener);
                 view.stopLeasingOutBtnListener(stopLeasingOutProductActionListener);
             }
         }
     };
-    
+
     private ActionListener viewProductsActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -87,15 +82,14 @@ public class RentOutController {
             view.selectProductBtnListener(selectProducListener);
         }
     };
-    
+
     private ActionListener backToHomeActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Back to home...");
             backToHome();
         }
     };
-    
+
     private ActionListener backToProductsActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -105,13 +99,13 @@ public class RentOutController {
             view.selectProductBtnListener(selectProducListener);
         }
     };
-    
+
     private ActionListener stopLeasingOutProductActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Stop Leasing out product...");
-            
+
         }
     };
-    
+
 }

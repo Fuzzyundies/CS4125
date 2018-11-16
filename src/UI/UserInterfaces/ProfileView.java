@@ -49,7 +49,7 @@ public class ProfileView extends JFrame
         
         this.setTitle("Profile");
         this.add(mainPanel);
-        this.setBounds(50, 50, 200, 200);
+        this.setBounds(50, 50, 700, 100);
 
         mainPanel.setLayout(new GridLayout(2,1,5,5));
         buttonPanel.setLayout(new GridLayout(1,4,2,2));
@@ -65,10 +65,10 @@ public class ProfileView extends JFrame
         infoPanel.add(userRatingL);
 
 
-        homeBtn = new JButton("Home");
+        homeBtn = new JButton("Back");
         histBtn = new JButton("History");
-        subBtn = new JButton("Renew\nSubscription");
-        editBtn = new JButton("Edit\nProfile");
+        subBtn = new JButton("Renew Subscription");
+        editBtn = new JButton("Edit Profile");
         buttonPanel.add(subBtn);
         buttonPanel.add(histBtn);
         buttonPanel.add(editBtn);
@@ -80,7 +80,7 @@ public class ProfileView extends JFrame
         this.setVisible(true);
     }
     
-    public void addSubBtnListener(ActionListener listener)
+    public void addSubscriptionButtonListener(ActionListener listener)
     {
         subBtn.addActionListener(listener);
     }
