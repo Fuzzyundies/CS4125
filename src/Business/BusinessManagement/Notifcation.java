@@ -17,6 +17,7 @@ import java.sql.Timestamp;
 import java.util.Properties;
 
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -107,7 +108,7 @@ public class Notifcation implements Subject //interface ideally
 
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.println("Done..." + timestamp);
-        } catch (Exception e) {
+        } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
     }
@@ -128,9 +129,9 @@ public class Notifcation implements Subject //interface ideally
 
     @Override
     public void notify(Product product) {
-        for (Observer o : observers) {
+        observers.forEach((o) -> { //for eacg loop
             o.update(product);
-        }
+        });
     }
 
     public void notifyProductReturned(Product product) {
