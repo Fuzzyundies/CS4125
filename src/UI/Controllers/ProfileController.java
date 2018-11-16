@@ -16,8 +16,8 @@ import java.awt.event.ActionListener;
 
 public class ProfileController 
 {
-    private final ProfileView profileView;
-    private final HomeView homeView;
+    private ProfileView profileView;
+    private HomeView homeView;
     
     public ProfileController(ProfileView profileView, HomeView homeView)
     {
@@ -36,6 +36,7 @@ public class ProfileController
     };
             
     private final ActionListener editProfileListener = (ActionEvent e) -> {
+        profileView.createEditProfileWindow();
     };
           
     private final ActionListener backHomeListener = (ActionEvent e) -> {
