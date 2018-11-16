@@ -21,7 +21,7 @@ public class CustomerTest {
      */
     @Test
     public void testGetID() {
-        user = userFactory.createUser("C");
+        user = userFactory.getUser("C");
         assertEquals("121", user.getID());
     }
 
@@ -30,7 +30,7 @@ public class CustomerTest {
      */
     @Test
     public void testGetEmail() {
-        user = userFactory.createUser("C");
+        user = userFactory.getUser("C");
         assertEquals("cust@mail.ie", user.getEmail());
     }
 
@@ -39,7 +39,7 @@ public class CustomerTest {
      */
     @Test
     public void testGetName() {
-        user = userFactory.createUser("C");
+        user = userFactory.getUser("C");
         assertEquals("customer", user.getName());
     }
 
@@ -48,7 +48,7 @@ public class CustomerTest {
      */
     @Test
     public void testGetPassword() {
-        user = userFactory.createUser("C");
+        user = userFactory.getUser("C");
         assertEquals("pass", user.getPassword());
     }
 
@@ -72,7 +72,7 @@ public class CustomerTest {
     @Test
     public void testSetID() {
 
-        user = userFactory.createUser("C");
+        user = userFactory.getUser("C");
         user.setID("233");
         assertEquals("233", user.getID());
     }

@@ -14,8 +14,8 @@ import DatabaseManagement.CustomerDAO;
 
 public class Authentication 
 {
-    CustomerDAO dbAccess;
-    private int result;
+    private CustomerDAO dbAccess;
+    private int customerID;
     
     public Authentication()
     {
@@ -55,11 +55,11 @@ public class Authentication
     
     public void checkForUser(String username, String password)
     {
-        result = 0;
+        customerID = 0;
         System.out.println("Checking DB for user " + username + "...");
         try
         {
-            result = dbAccess.findCustomer(username, password);
+            customerID = dbAccess.findCustomer(username, password);
         }
         catch(Exception ex)
         {
@@ -69,7 +69,7 @@ public class Authentication
     
     public int getResult()
     {
-        return result;
+        return customerID;
     }
     
     public boolean addNewUser(String username, String email, String password)

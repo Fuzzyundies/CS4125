@@ -17,24 +17,22 @@ import java.awt.event.ActionListener;
  */
 public class LoginController 
 {
-    private LoginView view;
-    private Authentication model;
+    private LoginView loginView;
+    private Authentication authenticationModel;
     
     public LoginController(LoginView view, Authentication model)
     {
-        this.view = view;
-        this.model = model;
-        
+        this.loginView = view;
+        this.authenticationModel = model;
         view.addLoginBtnListener(new LoginBtnListener());
         view.addSignUpBtnListener(new SignUpBtnListener());
-        
     }
     
     private void backToLogin()
     {
-        view.displayLoginView();
-        view.addLoginBtnListener(new LoginBtnListener());
-        view.addSignUpBtnListener(new SignUpBtnListener());
+        loginView.displayLoginView();
+        loginView.addLoginBtnListener(new LoginBtnListener());
+        loginView.addSignUpBtnListener(new SignUpBtnListener());
     }
     
     class LoginBtnListener implements ActionListener
@@ -47,15 +45,15 @@ public class LoginController
             
             try
             {
-                username = view.getName();
-                password = view.getPassword();
+                username = loginView.getName();
+                password = loginView.getPassword();
                 
-                model.checkForUser(username, password);
-                int result = model.getResult();
+                authenticationModel.checkForUser(username, password);
+                int result = authenticationModel.getResult();
                 
                 if(result <= 0)
                 {
-                    view.displayErrorMessage("User not found");
+                    loginView.displayErrorMessage("User not found");
                 }
                 else
                 {
@@ -63,15 +61,15 @@ public class LoginController
                     // TODO goto HOME
 
                     HomeView homeView = new HomeView();  
-                    HomeController controller = new HomeController(homeView);
+                    HomeController homeController = new HomeController(homeView);
                     
-                    view.setVisible(false);
+                    loginView.setVisible(false);
                     System.out.println("User found...\nID:" + result);
                 }
             }
             catch(Exception ex)
             {
-                view.displayErrorMessage("Error loggin in");
+                loginView.displayErrorMessage("Error loggin in");
             }
         }
     }
@@ -82,9 +80,9 @@ public class LoginController
         @Override
         public void actionPerformed(ActionEvent e) 
         {
-            view.displaySignUpView();
-            view.addCancelBtnListener(new CancelBtnListener());
-            view.addConfirmBtnListener(new ConfirmBtnListner());
+            loginView.displaySignUpView();
+            loginView.addCancelBtnListener(new CancelBtnListener());
+            loginView.addConfirmBtnListener(new ConfirmBtnListner());
         }
     }
     
@@ -105,27 +103,27 @@ public class LoginController
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            String username = view.getName();
-            String email = view.getEmail();
-            String password = view.getPassword();
+            String username = loginView.getName();
+            String email = loginView.getEmail();
+            String password = loginView.getPassword();
             
-            boolean inUse = model.checkIfEmailInUse(email);
+            boolean inUse = authenticationModel.checkIfEmailInUse(email);
             
             if(inUse)
             {
-                view.displayErrorMessage("Email is in use");
+                loginView.displayErrorMessage("Email is in use");
             }
             else
             {
-                inUse = model.checkIfUsernameInUse(username);
+                inUse = authenticationModel.checkIfUsernameInUse(username);
                 if(inUse)
                 {
-                    view.displayErrorMessage("Username is in use");
+                    loginView.displayErrorMessage("Username is in use");
                 }
                 else
                 {
                     // Create new customer
-                    model.addNewUser(username, email, password);
+                    authenticationModel.addNewUser(username, email, password);
                     backToLogin();
                 }
             }

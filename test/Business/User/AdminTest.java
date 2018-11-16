@@ -39,14 +39,14 @@ public class AdminTest {
 
     @Test
     public void testGetID() {
-        user = userFactory.createUser("A");
+        user = userFactory.getUser("A");
         assertEquals("101", user.getID());
     }
 
     @Test
     public void testGetEmail() {
         //Purposely fail this test
-        user = userFactory.createUser("A");
+        user = userFactory.getUser("A");
         assertEquals("someEmail@mail.ie", user.getEmail());
     }
 
