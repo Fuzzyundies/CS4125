@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 public class ProfileView extends JFrame {
 
     private JPanel mainPanel, infoPanel, buttonPanel;
-    private final JLabel nameL;
+    private JLabel nameL;
     private JLabel ratingL;
     private JLabel userNameL;
     private JLabel userRatingL;
@@ -45,13 +45,17 @@ public class ProfileView extends JFrame {
      */
     //Accept Customer instead of values.
     public ProfileView(String user, double rating) {
+        //get Information from the database about the user
         mainPanel = new JPanel();
+        displayProfile();
+    }
+
+    public void displayProfile() {
+        mainPanel.removeAll();
         infoPanel = new JPanel();
         buttonPanel = new JPanel();
-
-        //get Information from the database about the user
-        user = "Temporary Bean";
-        rating = 3.6;
+        String user = "Temporary Bean";
+        double rating = 3.6;
         //setDefaultCloseOperation() see if can make it go back to home
         this.setTitle("Profile");
         this.add(mainPanel);
@@ -81,8 +85,38 @@ public class ProfileView extends JFrame {
 
         mainPanel.add(infoPanel);
         mainPanel.add(buttonPanel);
-
+        
+        mainPanel.revalidate();
+        mainPanel.repaint();
+        pack();
         this.setVisible(true);
+    }
+    
+    public void createEditProfileWindow() {
+
+        //init components
+        usernameInput = new JTextField();
+        firstPasswordInput = new JPasswordField();
+        secondPasswordInput = new JPasswordField();
+        saveBtn = new JButton("Save");
+        cancelBtn = new JButton("Cancel");
+
+        this.setBounds(450, 250, 400, 200);
+        mainPanel.removeAll();
+        mainPanel.setLayout(new GridLayout(4, 2));
+
+        //add in fields
+        mainPanel.add(new JLabel("Username:"));
+        mainPanel.add(usernameInput);
+        mainPanel.add(new JLabel("Password:"));
+        mainPanel.add(firstPasswordInput);
+        mainPanel.add(new JLabel("Confirm Password:"));
+        mainPanel.add(secondPasswordInput);
+        mainPanel.add(saveBtn);
+        mainPanel.add(cancelBtn);
+
+        mainPanel.revalidate();
+        mainPanel.repaint();
     }
 
     public void addSubscriptionButtonListener(ActionListener listener) {
@@ -100,32 +134,8 @@ public class ProfileView extends JFrame {
     public void addHomeBtnListener(ActionListener listener) {
         homeBtn.addActionListener(listener);
     }
-
-    public void createEditProfileWindow() {
-        
-        //init components
-        usernameInput = new JTextField();
-        firstPasswordInput = new JPasswordField();
-        secondPasswordInput = new JPasswordField();
-        saveBtn = new JButton("Save");
-        cancelBtn = new JButton("Cancel");
-        
-        
-        this.setBounds(450, 250, 400, 200);
-        mainPanel.removeAll();
-        mainPanel.setLayout(new GridLayout(4, 2));
-
-        //add in fields
-        mainPanel.add(new JLabel("Username:"));
-        mainPanel.add(usernameInput);
-        mainPanel.add(new JLabel("Password:"));
-        mainPanel.add(firstPasswordInput);
-        mainPanel.add(new JLabel("Confirm Password:"));
-        mainPanel.add(secondPasswordInput);
-        mainPanel.add(saveBtn);
-        mainPanel.add(cancelBtn);
-        
-        mainPanel.revalidate();
-        mainPanel.repaint();
+    
+    public void addBackBtnListner(ActionListener backToProfileListener) {
+        this.cancelBtn.addActionListener(backToProfileListener);
     }
 }

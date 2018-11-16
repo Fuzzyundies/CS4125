@@ -14,13 +14,12 @@ import UI.UserInterfaces.ProfileView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ProfileController 
-{
+public class ProfileController {
+
     private ProfileView profileView;
     private HomeView homeView;
-    
-    public ProfileController(ProfileView profileView, HomeView homeView)
-    {
+
+    public ProfileController(ProfileView profileView, HomeView homeView) {
         this.profileView = profileView;
         this.homeView = homeView;
         profileView.addSubscriptionButtonListener(renewSubscriptionListener);
@@ -28,23 +27,35 @@ public class ProfileController
         profileView.addEditBtnListener(editProfileListener);
         profileView.addHomeBtnListener(backHomeListener);
     }
-    
+
     private final ActionListener renewSubscriptionListener = (ActionEvent e) -> {
     };
-            
+
     private final ActionListener viewHistoryListener = (ActionEvent e) -> {
     };
-            
-    private final ActionListener editProfileListener = (ActionEvent e) -> {
+
+    private final ActionListener backToProfileListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            profileView.displayProfile();
+            profileView.addEditBtnListener(editProfileListener);
+            profileView.addHomeBtnListener(backHomeListener);
+        }
+    };
+
+    private ActionListener editProfileListener = (ActionEvent e) -> {
         profileView.createEditProfileWindow();
+        profileView.addBackBtnListner(backToProfileListener);
+        //save..
     };
-          
+
     private final ActionListener backHomeListener = (ActionEvent e) -> {
-       backToHome();
+        backToHome();
     };
-    
+
     private void backToHome() {
         homeView.setVisible(true);
         profileView.dispose();
     }
+
 }

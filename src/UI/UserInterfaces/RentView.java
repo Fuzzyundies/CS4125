@@ -53,7 +53,6 @@ public class RentView extends JFrame {
         }
 
         this.setBounds(450, 250, 400, 200);
-
         panel.removeAll();
 
         categoryList = new JComboBox(categories);
@@ -80,6 +79,7 @@ public class RentView extends JFrame {
         
     }
      */
+    
     public void displayListOfProducts(int cID) {
         System.out.println("Displaying list of products...");
         Product[] products = ProductDAO.getListProducts(cID);
