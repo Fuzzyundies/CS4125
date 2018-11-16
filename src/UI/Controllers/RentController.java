@@ -34,7 +34,7 @@ public class RentController {
 
         }
     };
-    
+
     private ActionListener backActionListener = (ActionEvent e) -> {
         homeView.setVisible(true);
         view.dispose();
@@ -57,9 +57,17 @@ public class RentController {
             if (p != null) {
                 view.displayProductDetails(p);
                 view.addBackBtnListner(backToProductListActionListener);
-                view.addRentProductBtnListener(rentProductActionListener);
+                if (p.getIs_available() >= 1) {
+                    view.addRentProductBtnListener(rentProductActionListener);
+                } else {
+                    view.registerObserverListener(registerObserverActionListener);
+                }
             }
         }
+    };
+
+    private ActionListener registerObserverActionListener = (ActionEvent e) -> {
+        System.out.println("Queue");
     };
 
     private ActionListener backToProductListActionListener = new ActionListener() {
