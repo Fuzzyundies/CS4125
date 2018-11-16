@@ -90,8 +90,7 @@ public class ProductDAO implements DAO
                 catID = resultSet.getInt("catID");
                 price = resultSet.getDouble("price");
                 rating = resultSet.getInt("rating");
-                
-                products.add(new Product(pID, pName, catID, ownerID, price, rating, description, is_available));
+                products.add(new Product(pID, pName, catID, ownerID, price, rating, description, 0)); //0 just for testing unavailable product
             }
             
         }

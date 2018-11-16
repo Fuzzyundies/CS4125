@@ -38,6 +38,10 @@ public class Product {
     public int getIs_available() {
         return is_available;
     }
+    
+    public void setIs_available(final int isAvailable) {
+        this.is_available = isAvailable;
+    }
 
     public int getId() {
         return id;

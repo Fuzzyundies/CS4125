@@ -4,6 +4,9 @@ import Business.Product.Product;
 
 import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.RentView;
+import Business.BusinessManagement.Notifcation;
+import Business.User.Customer;
+import Business.User.UserFactory;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,61 +16,79 @@ import java.awt.event.ActionListener;
  */
 public class RentController {
 
-    private RentView view;
+    private RentView rentView;
     private HomeView homeView;
 
     public RentController(RentView view, HomeView homeView) {
-        this.view = view;
+        this.rentView = view;
         this.homeView = homeView;
-        view.addSelectBtnListener(selectActionListener);
-        view.addBackBtnListner(backActionListener);
+        rentView.addSelectBtnListener(selectActionListener);
+        rentView.addBackBtnListner(backActionListener);
     }
 
     private ActionListener selectActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-
-            System.out.println(view.getChosenCategory().getName());
-            view.displayListOfProducts(view.getChosenCategory().getId());
-            view.addBackBtnListner(backToCategoryActionListioner);
-            view.addSelectBtnListener(selectProductActionListener);
-
+            System.out.println(rentView.getChosenCategory().getName());
+            rentView.displayListOfProducts(rentView.getChosenCategory().getId());
+            rentView.addBackBtnListner(backToCategoryActionListioner);
+            rentView.addSelectBtnListener(selectProductActionListener);
         }
     };
-    
+
     private ActionListener backActionListener = (ActionEvent e) -> {
         homeView.setVisible(true);
-        view.dispose();
+        rentView.dispose();
     };
 
     private ActionListener backToCategoryActionListioner = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.displayRentView();
-            view.addSelectBtnListener(selectActionListener);
-            view.addBackBtnListner(backActionListener);
-
+            rentView.displayRentView();
+            rentView.addSelectBtnListener(selectActionListener);
+            rentView.addBackBtnListner(backActionListener);
         }
     };
 
     private ActionListener selectProductActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Product p = view.getSelectedProduct();
+            Product p = rentView.getSelectedProduct();
             if (p != null) {
-                view.displayProductDetails(p);
-                view.addBackBtnListner(backToProductListActionListener);
-                view.addRentProductBtnListener(rentProductActionListener);
+                rentView.displayProductDetails(p);
+                rentView.addBackBtnListner(backToProductListActionListener);
+                if (p.getIs_available() >= 1) {
+                    rentView.addRentProductBtnListener(rentProductActionListener);
+                } else {
+                    rentView.registerObserverListener(registerObserverActionListener);
+                }
             }
+        }
+    };
+
+    private ActionListener registerObserverActionListener = (ActionEvent e) -> {
+        Product p = rentView.getSelectedProduct();
+        if (p != null) {
+            System.out.println("\n\nAdding you to the queue");
+            UserFactory userFactory = new UserFactory();
+            Notifcation notification = new Notifcation();
+            Customer customer = (Customer) userFactory.getUser("C");
+            notification.registerObserver(customer);
+
+            //Some time later - product is now available - leaser makes it available via their list of products
+            //testing
+            p.setIs_available(1);
+            notification.notify(p);
+            notification.unregisterObserver(customer);
         }
     };
 
     private ActionListener backToProductListActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.displayListOfProducts(view.getChosenCategory().getId());
-            view.addBackBtnListner(backToCategoryActionListioner);
-            view.addSelectBtnListener(selectProductActionListener);
+            rentView.displayListOfProducts(rentView.getChosenCategory().getId());
+            rentView.addBackBtnListner(backToCategoryActionListioner);
+            rentView.addSelectBtnListener(selectProductActionListener);
         }
     };
 
@@ -75,18 +96,18 @@ public class RentController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Rent product...");
-            view.displayRentProduct(view.getSelectedProduct());
-            view.addSelectBtnListener(confirmRentalActionListener);
-            view.addBackBtnListner(backToProductDetailsActionListener);
+            rentView.displayRentProduct(rentView.getSelectedProduct());
+            rentView.addSelectBtnListener(confirmRentalActionListener);
+            rentView.addBackBtnListner(backToProductDetailsActionListener);
         }
     };
 
     private ActionListener backToProductDetailsActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.displayProductDetails(view.getSelectedProduct());
-            view.addBackBtnListner(backToProductListActionListener);
-            view.addRentProductBtnListener(rentProductActionListener);
+            rentView.displayProductDetails(rentView.getSelectedProduct());
+            rentView.addBackBtnListner(backToProductListActionListener);
+            rentView.addRentProductBtnListener(rentProductActionListener);
         }
     };
 

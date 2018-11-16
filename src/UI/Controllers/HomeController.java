@@ -5,63 +5,53 @@
  */
 package UI.Controllers;
 
-import Business.BusinessManagement.Authentication;
 import UI.UserInterfaces.HomeView;
-import UI.UserInterfaces.LoginView;
 import UI.UserInterfaces.ProfileView;
 import UI.UserInterfaces.RentOutView;
-import UI.Controllers.RentOutController;
 import UI.UserInterfaces.RentView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 /**
  *
  * @author Benjamin Grimes
  */
 public class HomeController {
-    
-    private HomeView view;
-    
-    public HomeController(HomeView view)
-    {
-        this.view = view;
-        
-        view.addRentListener(RentActionListener);
-        view.addRentOutListener(RentOutActionListener);
-        view.addViewProfileListener(AddViewProfileActionListener);
-        view.addSignOutListener(AddSignOutActionListener);
+
+    private HomeView homeView;
+
+    public HomeController(HomeView view) {
+        this.homeView = view;
+
+        view.addRentListener(rentActionListener);
+        view.addRentOutListener(rentOutActionListener);
+        view.addViewProfileListener(viewProfileActionListener);
+        view.addSignOutListener(signOutActionListener);
     }
-    
-    private ActionListener RentActionListener = (ActionEvent e) -> {
+
+    private final ActionListener rentActionListener = (ActionEvent e) -> {
         //Go to RentView
         RentView rentView = new RentView();
-        RentController rentViewController = new RentController(rentView, view);
-        view.setVisible(false);
+        RentController rentViewController = new RentController(rentView, homeView);
+        homeView.setVisible(false);
     };
-    
-    private ActionListener RentOutActionListener = (ActionEvent e) -> {
+
+    private final ActionListener rentOutActionListener = (ActionEvent e) -> {
         //Go to RentOutView ----------RentoutController needs to be done
         RentOutView rentOutView = new RentOutView();
-        RentOutController rentOutController = new RentOutController(rentOutView, view);
-        view.setVisible(false);
+        RentOutController rentOutController = new RentOutController(rentOutView, homeView);
+        homeView.setVisible(false);
     };
-    
-    private ActionListener AddViewProfileActionListener = new ActionListener() {
-    @Override
-        public void actionPerformed(ActionEvent e) 
-        {
-            //Go to ViewProfile
-            String temp = "temp";
-            Double temp2 = 2.0;
-            ProfileView profileView = new ProfileView(temp, temp2);
-        }
+
+    private final ActionListener viewProfileActionListener = (ActionEvent e) -> {
+        String temp = "temp";
+        Double temp2 = 2.0;
+        ProfileView profileView = new ProfileView(temp, temp2);
+        ProfileController profileController = new ProfileController(profileView, homeView);
+        homeView.setVisible(false);
     };
-    
-    private ActionListener AddSignOutActionListener = new ActionListener() {
-    @Override
-        public void actionPerformed(ActionEvent e) 
-        {
-            //To do Sign out functionality
-        }
+
+    private final ActionListener signOutActionListener = (ActionEvent e) -> {
+        //To do Sign out functionality
     };
 }

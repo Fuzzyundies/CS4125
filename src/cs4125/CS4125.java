@@ -19,6 +19,14 @@ public class CS4125
     private static RentView rentView;
     private static double rating;
     private static String user;
+    
+    private static final int QUIT = 0;
+    private static final int LOGIN_VIEW = 1;
+    private static final int HOME_VIEW = 2;
+    private static final int PROFILE_VIEW = 3;
+    private static final int RENT_OUT_VIEW = 4;
+    private static final int RENT_VIEW = 5;
+    
             
     public static void main(String[] args) 
     {
@@ -49,12 +57,12 @@ public class CS4125
     {   
         switch (scene)
         {
-            case 0: System.exit(0); break;
-            case 1: loginView.setVisible(true); break;
-            case 2: homeView.setVisible(true); break;
-            case 3: profileView.setVisible(true); break;
-            case 4: rentOutView.setVisible(true); break;
-            case 5: rentView.setVisible(true); break;
+            case QUIT: System.exit(0); break;
+            case LOGIN_VIEW: loginView.setVisible(true); break;
+            case HOME_VIEW: homeView.setVisible(true); break;
+            case PROFILE_VIEW: profileView.setVisible(true); break;
+            case RENT_OUT_VIEW: rentOutView.setVisible(true); break;
+            case RENT_VIEW: rentView.setVisible(true); break;
         }
     }        
     
@@ -76,9 +84,9 @@ public class CS4125
         //HomeView home = new HomeView();
         //RentOutController rentOutController = new RentOutController(rentOut, home);
         
-        LoginView view = new LoginView();
-        Authentication model = new Authentication();
-        LoginController controller = new LoginController(view, model);
+        LoginView loginView = new LoginView();
+        Authentication authenticationModel = new Authentication();
+        LoginController loginController = new LoginController(loginView, authenticationModel);
     }
 
     

@@ -5,7 +5,8 @@ package Business.User;
  * @author neild
  */
 public class UserFactory {
-    public IUser createUser(final String userType) {
+
+    public IUser getUser(final String userType) {
         IUser user = null;
         switch (userType) {
             case "C":
