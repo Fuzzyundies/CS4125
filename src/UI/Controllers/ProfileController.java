@@ -23,16 +23,15 @@ public class ProfileController {
         this.profileView = profileView;
         this.homeView = homeView;
         profileView.addSubscriptionButtonListener(renewSubscriptionListener);
-        profileView.addHistBtnListener(viewHistoryListener);
+        profileView.addHistBtnListener(viewHistoryActionListener);
         profileView.addEditBtnListener(editProfileListener);
         profileView.addHomeBtnListener(backHomeListener);
     }
 
     private final ActionListener renewSubscriptionListener = (ActionEvent e) -> {
     };
-
-    private final ActionListener viewHistoryListener = (ActionEvent e) -> {
-    };
+    
+    
 
     private final ActionListener backToProfileListener = new ActionListener() {
         @Override
@@ -48,9 +47,25 @@ public class ProfileController {
         profileView.addBackBtnListner(backToProfileListener);
         //save..
     };
+    
+    private ActionListener viewHistoryActionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            profileView.createHistoryWindow();
+            profileView.addBackBtnListner(backHomeListener);
+            profileView.addSelectBtnListener(selectProductActionListener);
+        }
+    };
 
     private final ActionListener backHomeListener = (ActionEvent e) -> {
         backToHome();
+    };
+    
+    private ActionListener selectProductActionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Select product...");
+        }
     };
 
     private void backToHome() {

@@ -107,6 +107,56 @@ public class ProductDAO implements DAO
         return tmp;
     }
     
+    public static Product [] getHistory(int userID)
+    {
+        ArrayList<Product> products = new ArrayList<Product>();
+        
+        try 
+        {
+            connection = DriverManager.getConnection(JDBC_URL);
+            statement = connection.createStatement();
+            String query = "SELECT * " +
+                            "FROM BeanSquadRentalDB.Products " +
+                            "WHERE ownerID = (SELECT rID " +
+                                             "FROM History WHERE " + userID + " = 1)";
+            
+            resultSet = statement.executeQuery(query);
+            
+            int pID;
+            int ownerID;
+            String pName;
+            String description;
+            int is_available;
+            int catID;
+            double price;
+            int rating;
+            
+            while(resultSet.next())
+            {
+                pID = resultSet.getInt("pID");
+                ownerID = resultSet.getInt("ownerID");
+                pName = resultSet.getString("pName");
+                description = resultSet.getString("description");
+                is_available = resultSet.getInt("is_available");
+                catID = resultSet.getInt("catID");
+                price = resultSet.getDouble("price");
+                rating = resultSet.getInt("rating");
+                products.add(new Product(pID, pName, catID, ownerID, price, rating, description, 0)); //0 just for testing unavailable product
+            }
+        }
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+        
+        Product [] tmp = new Product[products.size()];
+        
+        for(int i = 0; i < tmp.length; i++)
+            tmp[i] = products.get(i);
+        
+        return tmp;
+    }
+    
     
     public static void close() throws SQLException
     {

@@ -9,13 +9,17 @@ package UI.UserInterfaces;
  *
  * @author Eric Lambert
  */
+import Business.Product.Product;
+import DatabaseManagement.ProductDAO;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 public class ProfileView extends JFrame {
@@ -36,6 +40,12 @@ public class ProfileView extends JFrame {
     private JTextField usernameInput;
     private JPasswordField firstPasswordInput;
     private JPasswordField secondPasswordInput;
+    
+    
+    // ------------- History Window -----------
+    private JList listOfHistory;
+    private JButton selectBtn;
+    // ----------------------------------------
 
 
     /*
@@ -118,6 +128,34 @@ public class ProfileView extends JFrame {
         mainPanel.revalidate();
         mainPanel.repaint();
     }
+    
+    public void createHistoryWindow()
+    {
+        System.out.println("Displaying user rental history...");
+        
+        Product [] products = ProductDAO.getHistory(/*USE USER ID*/1);
+        
+        this.setBounds(450, 250, 400, 200);
+        
+        selectBtn = new JButton("Select");
+        cancelBtn = new JButton("Back");
+        listOfHistory = new JList(products);
+        
+        mainPanel.removeAll();
+        
+        mainPanel.setLayout(new GridLayout(2, 1));
+        mainPanel.add(new JScrollPane(listOfHistory));
+        
+        JPanel btnContainer = new JPanel();
+        btnContainer.setLayout(new GridLayout(1, 2));
+        btnContainer.add(cancelBtn);
+        btnContainer.add(selectBtn);
+        
+        mainPanel.add(btnContainer);
+        
+        mainPanel.revalidate();
+        mainPanel.repaint();
+    }
 
     public void addSubscriptionButtonListener(ActionListener listener) {
         subBtn.addActionListener(listener);
@@ -137,5 +175,10 @@ public class ProfileView extends JFrame {
     
     public void addBackBtnListner(ActionListener backToProfileListener) {
         this.cancelBtn.addActionListener(backToProfileListener);
+    }
+    
+    public void addSelectBtnListener(ActionListener listener)
+    {
+        selectBtn.addActionListener(listener);
     }
 }
