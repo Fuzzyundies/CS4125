@@ -15,15 +15,15 @@ import java.awt.event.ActionListener;
 
 public class ProfileController 
 {
-    private ProfileView profile;
+    private final ProfileView profile;
     
     public ProfileController(ProfileView profile)
     {
         this.profile = profile;
-        //profile.addSubBtnListener(new subBtnListener());
-        //profile.addHistBtnListener(new histBtnListener());
-        //profile.addEditBtnListener(new editBtnListener());
-        //profile.addHomeBtnListener(new homeBtnListener());
+        profile.addSubBtnListener(new subBtnListener());
+        profile.addHistBtnListener(new histBtnListener());
+        profile.addEditBtnListener(new editBtnListener());
+        profile.addHomeBtnListener(new homeBtnListener());
     }
     
     class subBtnListener implements ActionListener

@@ -15,14 +15,19 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class ProfileView extends JFrame
 {
     private JPanel mainPanel, infoPanel, buttonPanel;
-    private JLabel nameL, ratingL, userNameL, userRatingL;
-    private JButton homeBtn, histBtn, subBtn, editBtn;
+    private final JLabel nameL;
+    private final JLabel ratingL;
+    private final JLabel userNameL;
+    private final JLabel userRatingL;
+    private final JButton homeBtn;
+    private final JButton histBtn;
+    private final JButton subBtn;
+    private final JButton editBtn;
     
     /*
     Must take in the username, and then check against the database for the information.
@@ -33,6 +38,10 @@ public class ProfileView extends JFrame
     //Accept Customer instead of values.
     public ProfileView(String user, double rating)
     {
+        mainPanel = new JPanel();
+        infoPanel = new JPanel();
+        buttonPanel = new JPanel();
+        
         //get Information from the database about the user
         user = "Temporary Bean";
         rating = 3.6;

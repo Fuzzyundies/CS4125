@@ -17,8 +17,8 @@ import java.awt.event.ActionListener;
  */
 public class LoginController 
 {
-    private LoginView loginView;
-    private Authentication authenticationModel;
+    private final LoginView loginView;
+    private final Authentication authenticationModel;
     
     public LoginController(LoginView view, Authentication model)
     {
