@@ -5,6 +5,10 @@ import Business.Product.Product;
 import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.RentView;
 import Business.BusinessManagement.Notifcation;
+import Business.Discount.FirstOrder;
+import Business.Discount.TwelveOff;
+import Business.Discount.Discount;
+import Business.Discount.MonthlyDiscount;
 import Business.User.Customer;
 import Business.User.UserFactory;
 import java.awt.event.ActionEvent;
@@ -55,8 +59,22 @@ public class RentController {
         public void actionPerformed(ActionEvent e) {
             Product p = rentView.getSelectedProduct();
             if (p != null) {
+
+                /*Order just processed is > 200 euro (300)
+                They have a monthly discount rate based on their subscription
+                They have spent >= 200 euro for 12.5% off
+                It is their first order
+                totals in 25% off discount for this order*/
+                
+                Discount monthlyTwentyFiveOffFirstOrder = new FirstOrder(new TwelveOff(new MonthlyDiscount()));
+                double discountTotal = monthlyTwentyFiveOffFirstOrder.applyDiscount();
+                double discountCalculator = 100 - discountTotal;
+                double productPriceAfterDiscount = ((discountCalculator * rentView.getSelectedProduct().getPrice()) / 100);
+                System.out.println("Was " + rentView.getSelectedProduct().getPrice() + " and with a discount of " + discountTotal + ", it is now: " + productPriceAfterDiscount);
+                
                 rentView.displayProductDetails(p);
                 rentView.addBackBtnListner(backToProductListActionListener);
+
                 if (p.getIs_available() >= 1) {
                     rentView.addRentProductBtnListener(rentProductActionListener);
                 } else {
