@@ -11,7 +11,6 @@ package UI.UserInterfaces;
  */
 import Business.Product.Product;
 import DatabaseManagement.ProductDAO;
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -41,6 +40,9 @@ public class ProfileView extends JFrame {
     private JTextField usernameInput;
     private JPasswordField firstPasswordInput;
     private JPasswordField secondPasswordInput;
+
+    //Rate user button
+    private JButton rateUser;
 
     // ------------- History Window -----------
     private JList listOfHistory;
@@ -166,6 +168,7 @@ public class ProfileView extends JFrame {
         this.setBounds(450, 250, 400, 200);
         rentBtn = new JButton("Rent Product Again");
         cancelBtn = new JButton("Back");
+        rateUser = new JButton("Rate User");
 
         String available;
         if (p.getIs_available() >= 1) {
@@ -176,7 +179,7 @@ public class ProfileView extends JFrame {
         }
         mainPanel.removeAll();
 
-        mainPanel.setLayout(new GridLayout(6, 2));
+        mainPanel.setLayout(new GridLayout(7, 2));
         mainPanel.add(new JLabel("Product:"));
         mainPanel.add(new JLabel(p.getName()));
         mainPanel.add(new JLabel("Description:"));
@@ -189,6 +192,7 @@ public class ProfileView extends JFrame {
         mainPanel.add(new JLabel(available)); // Check if user is currently renting?
         mainPanel.add(cancelBtn);
         mainPanel.add(rentBtn);
+        mainPanel.add(rateUser);
 
         mainPanel.revalidate();
         mainPanel.repaint();
@@ -237,5 +241,9 @@ public class ProfileView extends JFrame {
 
     public char[] getConfirmPassword() {
         return secondPasswordInput.getPassword();
+    }
+
+    public void addRateUserListener(ActionListener rateUserListener) {
+        rateUser.addActionListener(rateUserListener);
     }
 }

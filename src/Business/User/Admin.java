@@ -8,12 +8,10 @@ import Business.Product.Product;
  */
 public class Admin implements IUser, Observer {
 
-    //testing neils new branch
     private String id;
     private String name;
     private String email;
     private String password;
-    //private DBManager dbHelper;
 
     public Admin(String id, String name, String email, String password) {
         this.id = id;

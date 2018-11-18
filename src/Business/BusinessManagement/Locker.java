@@ -7,8 +7,6 @@ package Business.BusinessManagement;
 
 import java.util.Date;
 
-import Business.Product.Product;
-
 /**
  *
  * @author Benjamin Grimes

@@ -98,7 +98,7 @@ public class Customer implements ICustomer, IUser, Observer {
             history.showHistory();
         });
     }
-    
+
     @Override
     public void update(Product product) {
         System.out.println("Product now available:\n" + product.getId() + " - " + product.getName() + "\nSending email to " + getEmail() + "\n\n");

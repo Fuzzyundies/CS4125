@@ -33,7 +33,6 @@ public class RentController {
     private ActionListener selectActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println(rentView.getChosenCategory().getName());
             rentView.displayListOfProducts(rentView.getChosenCategory().getId());
             rentView.addBackBtnListner(backToCategoryActionListioner);
             rentView.addSelectBtnListener(selectProductActionListener);

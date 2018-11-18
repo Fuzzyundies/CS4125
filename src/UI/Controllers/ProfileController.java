@@ -15,7 +15,6 @@ import UI.UserInterfaces.ProfileView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import sun.security.util.Password;
 
 public class ProfileController {
 
@@ -49,11 +48,11 @@ public class ProfileController {
         String userName = profileView.getNewUserName();
         String password = new String(profileView.getPassword()); //java getPassword() returns char[]
         String confirmPassword = new String(profileView.getConfirmPassword()); //java getPassword() returns char[]
-        if (password.equals(confirmPassword) && (password.length() >= 5 && confirmPassword.length() >= 5)) {
+        if (password.equals(confirmPassword) && (password.length() >= 5 && confirmPassword.length() >= 5) && !userName.isEmpty()) {
             System.out.println("Update this user's profile credentials");
             //updateCredentials(userID, userName, password, confirmPassword);
         } else {
-            JOptionPane.showMessageDialog(null, "Passwords must match and contain at least 5 characters.", "Password incompatibility", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Passwords must match, contain at least 5 characters and Username cannot be empty", "Password incompatibility", JOptionPane.ERROR_MESSAGE);
         }
     };
 
@@ -75,6 +74,13 @@ public class ProfileController {
     private final ActionListener backHomeListener = (ActionEvent e) -> {
         backToHome();
     };
+    
+    private ActionListener rateUserListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Rate user");
+        }
+    };
 
     private ActionListener selectProductActionListener = new ActionListener() {
         @Override
@@ -84,6 +90,7 @@ public class ProfileController {
                 System.out.println("Select product...");
                 profileView.displayProductDetails(profileView.getSelectedProduct());
                 profileView.addBackBtnListener(backToHistory);
+                profileView.addRateUserListener(rateUserListener);
                 //profileView.addRentAginListener(); 
                 // TODO add option to rent again
                 // probably instatiate RentView?

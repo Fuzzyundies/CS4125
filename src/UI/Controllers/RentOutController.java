@@ -14,13 +14,12 @@ import java.awt.event.ActionListener;
 public class RentOutController {
 
     private RentOutView view;
-    private HomeView homeView;
+    private final HomeView homeView;
 
     public RentOutController(RentOutView view, HomeView homeView) //addAuthentication model as third arg
     {
         this.view = view;
         this.homeView = homeView;
-
         view.addAddNewProductBtnListener(addNewProductActionListener);
         view.viewProductsBtnListener(viewProductsActionListener);
         view.backBtnListener(backToHomeActionListener);
@@ -104,7 +103,6 @@ public class RentOutController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Stop Leasing out product...");
-
         }
     };
 

@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -83,7 +84,6 @@ public class RentView extends JFrame {
     public void displayListOfProducts(int cID) {
         System.out.println("Displaying list of products...");
         Product[] products = ProductDAO.getListProducts(cID);
-
         this.setBounds(450, 250, 400, 200);
 
         select = new JButton("Select");
