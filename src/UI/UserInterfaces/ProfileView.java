@@ -11,6 +11,7 @@ package UI.UserInterfaces;
  */
 import Business.Product.Product;
 import DatabaseManagement.ProductDAO;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -40,14 +41,12 @@ public class ProfileView extends JFrame {
     private JTextField usernameInput;
     private JPasswordField firstPasswordInput;
     private JPasswordField secondPasswordInput;
-    
-    
+
     // ------------- History Window -----------
     private JList listOfHistory;
     private JButton selectBtn;
     // ----------------------------------------
 
-    
     // ------------ Product Window --------------
     JButton rentBtn;
     // -----------------------------------------
@@ -99,13 +98,13 @@ public class ProfileView extends JFrame {
 
         mainPanel.add(infoPanel);
         mainPanel.add(buttonPanel);
-        
+
         mainPanel.revalidate();
         mainPanel.repaint();
         pack();
         this.setVisible(true);
     }
-    
+
     public void createEditProfileWindow() {
 
         //init components
@@ -124,43 +123,44 @@ public class ProfileView extends JFrame {
         mainPanel.add(usernameInput);
         mainPanel.add(new JLabel("Password:"));
         mainPanel.add(firstPasswordInput);
+        firstPasswordInput.setToolTipText("Password must contain at least 5 characters");
         mainPanel.add(new JLabel("Confirm Password:"));
         mainPanel.add(secondPasswordInput);
+        secondPasswordInput.setToolTipText("Password must contain at least 5 characters");
         mainPanel.add(saveBtn);
         mainPanel.add(cancelBtn);
 
         mainPanel.revalidate();
         mainPanel.repaint();
     }
-    
-    public void createHistoryWindow()
-    {
+
+    public void createHistoryWindow() {
         System.out.println("Displaying user rental history...");
-        
-        Product [] products = ProductDAO.getHistory(/*USE USER ID*/1);
-        
+
+        Product[] products = ProductDAO.getHistory(/*USE USER ID*/1);
+
         this.setBounds(450, 250, 400, 200);
-        
+
         selectBtn = new JButton("Select");
         cancelBtn = new JButton("Back");
         listOfHistory = new JList(products);
-        
+
         mainPanel.removeAll();
-        
+
         mainPanel.setLayout(new GridLayout(2, 1));
         mainPanel.add(new JScrollPane(listOfHistory));
-        
+
         JPanel btnContainer = new JPanel();
         btnContainer.setLayout(new GridLayout(1, 2));
         btnContainer.add(cancelBtn);
         btnContainer.add(selectBtn);
-        
+
         mainPanel.add(btnContainer);
-        
+
         mainPanel.revalidate();
         mainPanel.repaint();
     }
-    
+
     public void displayProductDetails(Product p) {
         System.out.println("Displaying product details...");
         this.setBounds(450, 250, 400, 200);
@@ -209,18 +209,33 @@ public class ProfileView extends JFrame {
     public void addHomeBtnListener(ActionListener listener) {
         homeBtn.addActionListener(listener);
     }
-    
-    public void addBackBtnListner(ActionListener backToProfileListener) {
+
+    public void addBackBtnListener(ActionListener backToProfileListener) {
         this.cancelBtn.addActionListener(backToProfileListener);
     }
-    
-    public void addSelectBtnListener(ActionListener listener)
-    {
+
+    public void addSelectBtnListener(ActionListener listener) {
         selectBtn.addActionListener(listener);
     }
-    
+
     public Product getSelectedProduct() {
         Product tmp = (Product) listOfHistory.getSelectedValue();
         return tmp;
+    }
+
+    public void addSaveBtnListener(ActionListener saveProfileListener) {
+        saveBtn.addActionListener(saveProfileListener);
+    }
+
+    public String getNewUserName() {
+        return usernameInput.getText();
+    }
+
+    public char[] getPassword() {
+        return firstPasswordInput.getPassword();
+    }
+
+    public char[] getConfirmPassword() {
+        return secondPasswordInput.getPassword();
     }
 }

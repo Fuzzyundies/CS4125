@@ -14,6 +14,8 @@ import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.ProfileView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import sun.security.util.Password;
 
 public class ProfileController {
 
@@ -43,19 +45,29 @@ public class ProfileController {
         }
     };
 
+    private ActionListener saveProfileListener = (ActionEvent e) -> {
+        String userName = profileView.getNewUserName();
+        String password = new String(profileView.getPassword()); //java getPassword() returns char[]
+        String confirmPassword = new String(profileView.getConfirmPassword()); //java getPassword() returns char[]
+        if (password.equals(confirmPassword) && (password.length() >= 5 && confirmPassword.length() >= 5)) {
+            System.out.println("Update this user's profile credentials");
+            //updateCredentials(userID, userName, password, confirmPassword);
+        } else {
+            JOptionPane.showMessageDialog(null, "Passwords must match and contain at least 5 characters.", "Password incompatibility", JOptionPane.ERROR_MESSAGE);
+        }
+    };
+
     private ActionListener editProfileListener = (ActionEvent e) -> {
         profileView.createEditProfileWindow();
-        profileView.addBackBtnListner(backToProfileListener);
-        profileView.addSubscriptionButtonListener(renewSubscriptionListener);
-
-        //save..
+        profileView.addBackBtnListener(backToProfileListener);
+        profileView.addSaveBtnListener(saveProfileListener);
     };
 
     private ActionListener viewHistoryActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             profileView.createHistoryWindow();
-            profileView.addBackBtnListner(backToProfileListener);
+            profileView.addBackBtnListener(backToProfileListener);
             profileView.addSelectBtnListener(selectProductActionListener);
         }
     };
@@ -71,7 +83,7 @@ public class ProfileController {
             if (p != null) {
                 System.out.println("Select product...");
                 profileView.displayProductDetails(profileView.getSelectedProduct());
-                profileView.addBackBtnListner(backToHistory);
+                profileView.addBackBtnListener(backToHistory);
                 //profileView.addRentAginListener(); 
                 // TODO add option to rent again
                 // probably instatiate RentView?
@@ -83,7 +95,7 @@ public class ProfileController {
         @Override
         public void actionPerformed(ActionEvent e) {
             profileView.createHistoryWindow();
-            profileView.addBackBtnListner(backHomeListener);
+            profileView.addBackBtnListener(backHomeListener);
             profileView.addSelectBtnListener(selectProductActionListener);
         }
     };
