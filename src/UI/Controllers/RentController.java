@@ -60,18 +60,16 @@ public class RentController {
             Product p = rentView.getSelectedProduct();
             if (p != null) {
 
-                /*Order just processed is > 200 euro (300)
-                They have a monthly discount rate based on their subscription
-                They have spent >= 200 euro for 12.5% off
-                It is their first order
-                totals in 25% off discount for this order*/
-                
+                /*Assumption: Order just processed is > 200 euro (300). They have a monthly discount rate based on their subscription 
+                (Condition 1) It is their first order
+                (Condition 2) They have spent >= 200 euro for 12.5% off -> totals in 25% off discount for this order*/
                 Discount monthlyTwentyFiveOffFirstOrder = new FirstOrder(new TwelveOff(new MonthlyDiscount()));
                 double discountTotal = monthlyTwentyFiveOffFirstOrder.applyDiscount();
                 double discountCalculator = 100 - discountTotal;
-                double productPriceAfterDiscount = ((discountCalculator * rentView.getSelectedProduct().getPrice()) / 100);
-                System.out.println("Was " + rentView.getSelectedProduct().getPrice() + " and with a discount of " + discountTotal + ", it is now: " + productPriceAfterDiscount);
-                
+                double productPriceAfterDiscount = ((discountCalculator * p.getPrice()) / 100);
+                System.out.println("Was " + p.getPrice() + " and with a discount of " + discountTotal + ", it is now: " + productPriceAfterDiscount);
+
+                p.setPrice(productPriceAfterDiscount); //set the new price of the product for the user
                 rentView.displayProductDetails(p);
                 rentView.addBackBtnListner(backToProductListActionListener);
 

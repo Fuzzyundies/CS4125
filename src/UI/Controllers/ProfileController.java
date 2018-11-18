@@ -9,6 +9,7 @@ package UI.Controllers;
  *
  * @author Eric Lambert
  */
+import Business.Product.Product;
 import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.ProfileView;
 import java.awt.event.ActionEvent;
@@ -30,8 +31,6 @@ public class ProfileController {
 
     private final ActionListener renewSubscriptionListener = (ActionEvent e) -> {
     };
-    
-    
 
     private final ActionListener backToProfileListener = new ActionListener() {
         @Override
@@ -39,20 +38,24 @@ public class ProfileController {
             profileView.displayProfile();
             profileView.addEditBtnListener(editProfileListener);
             profileView.addHomeBtnListener(backHomeListener);
+            profileView.addSubscriptionButtonListener(renewSubscriptionListener);
+            profileView.addHistBtnListener(viewHistoryActionListener);
         }
     };
 
     private ActionListener editProfileListener = (ActionEvent e) -> {
         profileView.createEditProfileWindow();
         profileView.addBackBtnListner(backToProfileListener);
+        profileView.addSubscriptionButtonListener(renewSubscriptionListener);
+
         //save..
     };
-    
+
     private ActionListener viewHistoryActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             profileView.createHistoryWindow();
-            profileView.addBackBtnListner(backHomeListener);
+            profileView.addBackBtnListner(backToProfileListener);
             profileView.addSelectBtnListener(selectProductActionListener);
         }
     };
@@ -60,19 +63,22 @@ public class ProfileController {
     private final ActionListener backHomeListener = (ActionEvent e) -> {
         backToHome();
     };
-    
+
     private ActionListener selectProductActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Select product...");
-            profileView.displayProductDetails(profileView.getSelectedProduct());
-            profileView.addBackBtnListner(backToHistory);
-            //profileView.addRentAginListener(); 
-            // TODO add option to rent again
-            // probably instatiate RentView?
+            Product p = profileView.getSelectedProduct();
+            if (p != null) {
+                System.out.println("Select product...");
+                profileView.displayProductDetails(profileView.getSelectedProduct());
+                profileView.addBackBtnListner(backToHistory);
+                //profileView.addRentAginListener(); 
+                // TODO add option to rent again
+                // probably instatiate RentView?
+            }
         }
     };
-    
+
     private ActionListener backToHistory = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {

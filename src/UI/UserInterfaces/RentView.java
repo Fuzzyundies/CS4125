@@ -126,7 +126,7 @@ public class RentView extends JFrame {
         panel.add(new JLabel("Description:"));
         panel.add(new JLabel(p.getDescription()));
         panel.add(new JLabel("Price:"));
-        panel.add(new JLabel("" + p.getPrice()));
+        panel.add(new JLabel("€" + p.getPrice()));
         panel.add(new JLabel("Rating:"));
         panel.add(new JLabel("" + p.getRating()));
         panel.add(new JLabel("Available:"));
