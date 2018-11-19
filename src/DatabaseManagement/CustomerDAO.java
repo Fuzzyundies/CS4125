@@ -215,4 +215,72 @@ public class CustomerDAO implements DAO
         return found;
     }
     
+    public String getUsername(int userID) throws SQLException
+    {
+        String uname = "";
+        
+        try{
+            connection = DriverManager.getConnection(JDBC_URL);
+            
+            //Query
+            String query = "SELECT username FROM BeanSquadRentalDB.Users WHERE userID = " + userID;
+            statement = connection.createStatement();
+            
+            resultSet = statement.executeQuery(query);
+            if(resultSet.next())
+            {
+                uname = resultSet.getString("username");
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        finally
+        {
+            if(connection != null)
+                connection.close();
+            if(statement != null)
+                statement.close();
+            if(resultSet != null)
+                resultSet.close();
+        }
+        
+        return uname;
+    }
+    
+    public String getEmail(int userID) throws SQLException
+    {
+        String email = "";
+        
+        try{
+            connection = DriverManager.getConnection(JDBC_URL);
+            
+            //Query
+            String query = "SELECT email FROM BeanSquadRentalDB.Users WHERE userID = " + userID;
+            statement = connection.createStatement();
+            
+            resultSet = statement.executeQuery(query);
+            if(resultSet.next())
+            {
+                email = resultSet.getString("email");
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        finally
+        {
+            if(connection != null)
+                connection.close();
+            if(statement != null)
+                statement.close();
+            if(resultSet != null)
+                resultSet.close();
+        }
+        
+        return email;
+    }
+    
 }

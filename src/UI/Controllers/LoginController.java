@@ -6,6 +6,8 @@
 package UI.Controllers;
 
 import Business.BusinessManagement.Authentication;
+import Business.User.Customer;
+import DatabaseManagement.CustomerDAO;
 import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.LoginView;
 import java.awt.event.ActionEvent;
@@ -60,11 +62,15 @@ public class LoginController
                     // User found, 
                     // TODO goto HOME
 
+                    cs4125.CS4125.userID = result;
+                    CustomerDAO dbAccess = new CustomerDAO();
+                    cs4125.CS4125.username = dbAccess.getUsername(cs4125.CS4125.userID);
+                    cs4125.CS4125.email = dbAccess.getEmail(cs4125.CS4125.userID);
+                    System.out.println("UserID:" + cs4125.CS4125.userID + " Username:" + cs4125.CS4125.username + " email:" + cs4125.CS4125.email);
                     HomeView homeView = new HomeView();  
                     HomeController homeController = new HomeController(homeView);
                     
                     loginView.setVisible(false);
-                    System.out.println("User found...\nID:" + result);
                 }
             }
             catch(Exception ex)

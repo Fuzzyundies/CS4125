@@ -10,6 +10,10 @@ import UI.UserInterfaces.ProfileView;
 
 public class CS4125 
 {
+    public static int userID;
+    public static String username;
+    public static String email;
+    
     private static RentOutView rentOutView;
     private static HomeView homeView;
     private static LoginView loginView;

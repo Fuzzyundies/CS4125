@@ -69,7 +69,6 @@ public class ProfileView extends JFrame {
         mainPanel.removeAll();
         infoPanel = new JPanel();
         buttonPanel = new JPanel();
-        String user = "Temporary Bean";
         double rating = 3.6;
         //setDefaultCloseOperation() see if can make it go back to home
         this.setTitle("Profile");
@@ -81,7 +80,7 @@ public class ProfileView extends JFrame {
         infoPanel.setLayout(new GridLayout(2, 2, 5, 5));
 
         nameL = new JLabel("User Name:");
-        userNameL = new JLabel(user);
+        userNameL = new JLabel(cs4125.CS4125.username);
         ratingL = new JLabel("Rating:");
         userRatingL = new JLabel(rating + ""); //Didn't lie .toString()
         infoPanel.add(nameL);
@@ -139,7 +138,7 @@ public class ProfileView extends JFrame {
     public void createHistoryWindow() {
         System.out.println("Displaying user rental history...");
 
-        Product[] products = ProductDAO.getHistory(/*USE USER ID*/1);
+        Product[] products = ProductDAO.getHistory(cs4125.CS4125.userID);
 
         this.setBounds(450, 250, 400, 200);
 
