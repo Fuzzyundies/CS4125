@@ -97,8 +97,8 @@ public class Notifcation implements Subject //interface ideally
         //r_code = locker.getRenterPin();
         //l_code = locker.getLeaserPin();
         temp_msg = headerEmail + productEmail + productName +lockerEmail + lockerNumber + pinEmail;
-        r_msg = temp_msg + r_code + signatureEmail;
-        l_msg = temp_msg + l_code + signatureEmail;
+        //r_msg = temp_msg + r_code + signatureEmail;
+        //l_msg = temp_msg + l_code + signatureEmail;
         
         try {
             Message message = new MimeMessage(session);

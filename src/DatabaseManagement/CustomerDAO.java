@@ -157,7 +157,7 @@ public class CustomerDAO implements DAO
             statement = connection.createStatement();
             String query = "SELECT * "
                     + "FROM BeanSquadRentalDB.Users "
-                    + "WHERE name = '" + username + "'";
+                    + "WHERE username = '" + username + "'";
             
             resultSet = statement.executeQuery(query);
             if(resultSet.next())
