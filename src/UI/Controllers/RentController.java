@@ -2,6 +2,7 @@ package UI.Controllers;
 
 import Business.Product.Product;
 
+import Business.BusinessManagement.Locker;
 import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.RentView;
 import Business.BusinessManagement.Notifcation;
@@ -128,8 +129,21 @@ public class RentController {
 
     private ActionListener confirmRentalActionListener = new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent e) 
+        {
             System.out.println("Confirm rental...");
+            //Transaction t = new Transaction(date, amount, renter, leaser, pID);
+            int max = 9999;
+            int min = 1000;
+            int range = max - min;
+            int r_code = (int)Math.random()*range + min; // generate renter code for locker
+            int l_code = (int)Math.random()*range + min;
+            while(r_code == l_code)
+                l_code = (int)Math.random()*range + min;
+             //Locker l = new Locker(renterPin, leaserPin, transaction, date);
+            //Notifcation n = new Notifcation(renter, leaser);
+            homeView.setVisible(true);
+            rentView.dispose();
         }
     };
 }

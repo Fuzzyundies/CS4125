@@ -15,7 +15,6 @@ import java.util.List;
 import java.sql.Timestamp;
 
 import java.util.Properties;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -40,7 +39,19 @@ public class Notifcation implements Subject //interface ideally
     private final static String username = "BeanSquadRental@gmail.com";
     private final static String password = "squad1234";
     private Timestamp timestamp;
-
+    private String locationEmail = "KilMadeUp";
+    private int lockerNumber = (int) Math.random()*100+1;
+    private String headerEmail = "Thank you for your patronage!";
+    private String productEmail = "\nThe item in question is: ";
+    private String pinEmail = "\nYour unique PIN is ";
+    private String lockerEmail = "\nThe locker for the item is: ";
+    private String signatureEmail = "\nSincerely,\nBeanSquad";
+    private String productName = "\nTemp Name"; //Needs to be connected to the Transaction
+    private String subjectEmail = "Product Rented"; //Needs to be connected to the Transaction
+    private String r_msg = "";
+    private String l_msg = "";
+    private String temp_msg = "";
+    
     public Notifcation(Customer renter, Customer leaser) {
         this.renter = renter;
         this.leaser = leaser;
@@ -81,19 +92,19 @@ public class Notifcation implements Subject //interface ideally
 
         String r_email = r.getEmail();
         String l_email = l.getEmail();
-
-        int r_code = 0; // generate renter code for locker
-        int l_code = 0; // generate leaser code for locker
-
-        String r_msg = "";
-        String l_msg = "";
-        String email_subject = "";
-
+        
+            // generate leaser code for locker
+        //r_code = locker.getRenterPin();
+        //l_code = locker.getLeaserPin();
+        temp_msg = headerEmail + productEmail + productName +lockerEmail + lockerNumber + pinEmail;
+        r_msg = temp_msg + r_code + signatureEmail;
+        l_msg = temp_msg + l_code + signatureEmail;
+        
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("BeanSquadRental@gmail.com"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(r_email));
-            message.setSubject("Testing Subject");
+            message.setSubject(subjectEmail);
             message.setText(r_msg);
             Transport.send(message);
             System.out.println("Sent to customer...");
@@ -101,7 +112,7 @@ public class Notifcation implements Subject //interface ideally
             message = new MimeMessage(session);
             message.setFrom(new InternetAddress("BeanSquadRental@gmail.com"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(l_email));
-            message.setSubject("Testing Subject");
+            message.setSubject(subjectEmail);
             message.setText(l_msg);
             Transport.send(message);
             System.out.println("Sent email to leaser...");
