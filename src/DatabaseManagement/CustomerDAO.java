@@ -48,17 +48,16 @@ public class CustomerDAO implements DAO
     
     public boolean insert(String name, String email, String password) throws SQLException
     {
-        /*
         boolean inserted = false;
         try
         {
             connection = DriverManager.getConnection(JDBC_URL);
             String query = "INSERT INTO BeanSquadRentalDB.Users "
-                    + "VALUES ( default, ? , ? , PASSWORD( ? ))";
+                    + "VALUES ( default, ? , PASSWORD( ? ) ,  ? , default, default, default )";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, name);
-            preparedStatement.setString(2, email);
-            preparedStatement.setString(3, password);
+            preparedStatement.setString(2, password);
+            preparedStatement.setString(3, email);
             int result = preparedStatement.executeUpdate();
             System.out.println(result);
             
@@ -81,8 +80,6 @@ public class CustomerDAO implements DAO
                 resultSet.close();
         }
         return inserted;
-        */
-        return false;
     }
 
     @Override
