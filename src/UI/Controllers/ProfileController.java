@@ -9,6 +9,7 @@ package UI.Controllers;
  *
  * @author Eric Lambert
  */
+import Business.BusinessManagement.Authentication;
 import Business.Product.Product;
 import DatabaseManagement.CustomerDAO;
 import UI.UserInterfaces.HomeView;
@@ -46,29 +47,48 @@ public class ProfileController {
         }
     };
 
-    private ActionListener saveProfileListener = (ActionEvent e) -> {
-        String userName = profileView.getNewUserName();
-        String email = profileView.getNewEmail();
-        String password = new String(profileView.getPassword()); //java getPassword() returns char[]
-        String confirmPassword = new String(profileView.getConfirmPassword()); //java getPassword() returns char[]
-        if (password.equals(confirmPassword) && (password.length() >= 5 && confirmPassword.length() >= 5) && !userName.isEmpty()) 
-        {
-            CustomerDAO dbAccess = new CustomerDAO();
-            try
+    private ActionListener saveProfileListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String userName = profileView.getNewUserName();
+            String email = profileView.getNewEmail();
+            String password = new String(profileView.getPassword()); //java getPassword() returns char[]
+            String confirmPassword = new String(profileView.getConfirmPassword()); //java getPassword() returns char[]
+
+            Authentication authenticationModel = new Authentication();
+            boolean emailInUse = authenticationModel.checkIfEmailInUse(email);
+            boolean usernameInUse = authenticationModel.checkIfUsernameInUse(userName);
+            if(emailInUse)
             {
-                dbAccess.updateProfile(userName, email, password);
-                JOptionPane.showMessageDialog(profileView, "Profile details have been updated", "Profile Updated", 1);
-                // Go back to profile 
-                
+                JOptionPane.showMessageDialog(profileView, "Email entered is already in use");
             }
-            catch(SQLException ex)
+            else if(usernameInUse)
             {
-                ex.printStackTrace();
+                JOptionPane.showMessageDialog(profileView, "Username is already in use");
             }
-        } 
-        else 
-        {
-            JOptionPane.showMessageDialog(null, "Passwords must match, contain at least 5 characters and Username cannot be empty", "Password incompatibility", JOptionPane.ERROR_MESSAGE);
+            else if (password.equals(confirmPassword) && (password.length() >= 5 && confirmPassword.length() >= 5) && !userName.isEmpty() && !emailInUse && !usernameInUse) 
+            {
+                CustomerDAO dbAccess = new CustomerDAO();
+                try
+                {
+                    dbAccess.updateProfile(userName, email, password);
+                    JOptionPane.showMessageDialog(profileView, "Profile details have been updated", "Profile Updated", 1);
+                    // Go back to profile 
+                    profileView.displayProfile();
+                    profileView.addEditBtnListener(editProfileListener);
+                    profileView.addHomeBtnListener(backHomeListener);
+                    profileView.addSubscriptionButtonListener(renewSubscriptionListener);
+                    profileView.addHistBtnListener(viewHistoryActionListener);
+                }
+                catch(SQLException ex)
+                {
+                    ex.printStackTrace();
+                }
+            } 
+            else 
+            {
+                JOptionPane.showMessageDialog(null, "Passwords must match, contain at least 5 characters and Username cannot be empty", "Password incompatibility", JOptionPane.ERROR_MESSAGE);
+            }
         }
     };
 
