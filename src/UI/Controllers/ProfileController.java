@@ -10,10 +10,12 @@ package UI.Controllers;
  * @author Eric Lambert
  */
 import Business.Product.Product;
+import DatabaseManagement.CustomerDAO;
 import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.ProfileView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class ProfileController {
@@ -46,12 +48,26 @@ public class ProfileController {
 
     private ActionListener saveProfileListener = (ActionEvent e) -> {
         String userName = profileView.getNewUserName();
+        String email = profileView.getNewEmail();
         String password = new String(profileView.getPassword()); //java getPassword() returns char[]
         String confirmPassword = new String(profileView.getConfirmPassword()); //java getPassword() returns char[]
-        if (password.equals(confirmPassword) && (password.length() >= 5 && confirmPassword.length() >= 5) && !userName.isEmpty()) {
-            System.out.println("Update this user's profile credentials");
-            //updateCredentials(userID, userName, password, confirmPassword);
-        } else {
+        if (password.equals(confirmPassword) && (password.length() >= 5 && confirmPassword.length() >= 5) && !userName.isEmpty()) 
+        {
+            CustomerDAO dbAccess = new CustomerDAO();
+            try
+            {
+                dbAccess.updateProfile(userName, email, password);
+                JOptionPane.showMessageDialog(profileView, "Profile details have been updated", "Profile Updated", 1);
+                // Go back to profile 
+                
+            }
+            catch(SQLException ex)
+            {
+                ex.printStackTrace();
+            }
+        } 
+        else 
+        {
             JOptionPane.showMessageDialog(null, "Passwords must match, contain at least 5 characters and Username cannot be empty", "Password incompatibility", JOptionPane.ERROR_MESSAGE);
         }
     };

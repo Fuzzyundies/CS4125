@@ -38,6 +38,7 @@ public class ProfileView extends JFrame {
     private JButton saveBtn;
     private JButton cancelBtn;
     private JTextField usernameInput;
+    private JTextField emailInput;
     private JPasswordField firstPasswordInput;
     private JPasswordField secondPasswordInput;
 
@@ -63,6 +64,7 @@ public class ProfileView extends JFrame {
         //get Information from the database about the user
         mainPanel = new JPanel();
         displayProfile();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public void displayProfile() {
@@ -109,7 +111,8 @@ public class ProfileView extends JFrame {
     public void createEditProfileWindow() {
 
         //init components
-        usernameInput = new JTextField();
+        usernameInput = new JTextField(cs4125.CS4125.username);
+        emailInput = new JTextField(cs4125.CS4125.email);
         firstPasswordInput = new JPasswordField();
         secondPasswordInput = new JPasswordField();
         saveBtn = new JButton("Save");
@@ -117,11 +120,13 @@ public class ProfileView extends JFrame {
 
         this.setBounds(450, 250, 400, 200);
         mainPanel.removeAll();
-        mainPanel.setLayout(new GridLayout(4, 2));
+        mainPanel.setLayout(new GridLayout(5, 2));
 
         //add in fields
         mainPanel.add(new JLabel("Username:"));
         mainPanel.add(usernameInput);
+        mainPanel.add(new JLabel("Email:"));
+        mainPanel.add(emailInput);
         mainPanel.add(new JLabel("Password:"));
         mainPanel.add(firstPasswordInput);
         firstPasswordInput.setToolTipText("Password must contain at least 5 characters");
@@ -232,6 +237,11 @@ public class ProfileView extends JFrame {
 
     public String getNewUserName() {
         return usernameInput.getText();
+    }
+    
+    public String getNewEmail()
+    {
+        return emailInput.getText();
     }
 
     public char[] getPassword() {

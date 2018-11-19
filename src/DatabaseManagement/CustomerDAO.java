@@ -283,4 +283,32 @@ public class CustomerDAO implements DAO
         return email;
     }
     
+    public void updateProfile(String newUsername, String newEmail, String newPassword) throws SQLException
+    {
+        
+        try
+        {
+            connection = DriverManager.getConnection(JDBC_URL);
+            String query = "UPDATE BeanSquadRentalDB.Users "
+                    + "SET username = '" + newUsername + "' , email = '" + newEmail
+            + "' , password = PASSWORD( '" + newPassword + "' ) "
+                    + "WHERE userID = " + cs4125.CS4125.userID;
+            System.out.println(query);
+            statement = connection.createStatement();
+            statement.executeUpdate(query);
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        finally
+        {
+            if(connection != null)
+                connection.close();
+            if(statement != null)
+                statement.close();
+            if(resultSet != null)
+                resultSet.close();
+        }
+    }
 }
