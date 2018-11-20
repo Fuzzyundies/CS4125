@@ -14,6 +14,7 @@ import Business.User.Customer;
 import Business.User.UserFactory;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 /**
  *
@@ -135,15 +136,19 @@ public class RentController {
             //Transaction t = new Transaction(date, amount, renter, leaser, pID);
             int max = 9999;
             int min = 1000;
-            int range = max - min;
-            int r_code = (int)Math.random()*range + min; // generate renter code for locker
-            int l_code = (int)Math.random()*range + min;
-            while(r_code == l_code)
-                l_code = (int)Math.random()*range + min;
-             //Locker l = new Locker(renterPin, leaserPin, transaction, date);
+            Random rand = new Random(System.currentTimeMillis());
+            int r_code = rand.nextInt((max-min)+1) + min;
+            int l_code = rand.nextInt((max-min)+1) + min;
+            
+            while(r_code == l_code){
+                System.out.println("In this loop");
+                l_code = rand.nextInt((max-min)+1) + min;
+            }
+            System.out.println("rcode: " + r_code + " lcode:" + l_code);
+            //Locker l = new Locker(renterPin, leaserPin, transaction, date);
             //Notifcation n = new Notifcation(renter, leaser);
-            homeView.setVisible(true);
-            rentView.dispose();
+            //homeView.setVisible(true);
+            //rentView.dispose();
         }
     };
 }
