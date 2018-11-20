@@ -31,6 +31,7 @@ public class Product {
         this.rating = rating;
         this.description = description;
         this.is_available = is_available;
+        this.productState = new ProductPending(); //assuming the product is pending first time around
         //this.URLPic = URLPic;
     }
 
@@ -101,5 +102,26 @@ public class Product {
     @Override
     public String toString() {
         return getName();
+    }
+
+    //State Behavioural Design Pattern
+    public ProductState getState() {
+        return productState;
+    }
+
+    public void setState(ProductState productState) {
+        this.productState = productState;
+    }
+
+    public String showStatus() {
+        return productState.getProductStatus(this);
+    }
+
+    public void nextState() {
+        productState.nextState(this);
+    }
+
+    public void previousState() {
+        productState.previousState(this);
     }
 }

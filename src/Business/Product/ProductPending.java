@@ -7,18 +7,17 @@ package Business.Product;
 public class ProductPending implements ProductState {
 
     @Override
-    public void nextState() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void nextState(Product p) {
+        p.setState(new ProductTransit());
     }
 
     @Override
-    public void previousState() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void previousState(Product p) {
+        System.out.println("The product is in it's root state.");
     }
 
     @Override
-    public String getProductStatus() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String getProductStatus(Product p) {
+        return p.getName()+ " is currently pending.";
     }
-
 }

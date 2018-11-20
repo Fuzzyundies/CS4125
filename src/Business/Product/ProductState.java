@@ -5,7 +5,10 @@ package Business.Product;
  * @author neild
  */
 public interface ProductState {
-    void nextState();
-    void previousState();
-    String getProductStatus();
+
+    void nextState(Product p);
+
+    void previousState(Product p);
+
+    String getProductStatus(Product p);
 }

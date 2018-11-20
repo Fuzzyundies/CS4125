@@ -4,20 +4,20 @@ package Business.Product;
  *
  * @author neild
  */
-public class ProductTransit implements ProductState {
+public class ProductStored implements ProductState {
 
     @Override
     public void nextState(Product p) {
-        p.setState(new ProductStored());
+        p.setState(new ProductReturned());
     }
 
     @Override
     public void previousState(Product p) {
-        p.setState(new ProductPending());
+        p.setState(new ProductTransit());
     }
 
     @Override
     public String getProductStatus(Product p) {
-        return p.getName() + " is currently in transit to a warehouse.";
+        return p.getName()+ " is currently stored in a warehouse locker.";
     }
 }
