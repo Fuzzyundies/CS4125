@@ -5,7 +5,9 @@
  */
 package UI.Controllers;
 
+import Business.BusinessManagement.Authentication;
 import UI.UserInterfaces.HomeView;
+import UI.UserInterfaces.LoginView;
 import UI.UserInterfaces.ProfileView;
 import UI.UserInterfaces.RentOutView;
 import UI.UserInterfaces.RentView;
@@ -19,10 +21,11 @@ import java.awt.event.ActionListener;
 public class HomeController {
 
     private HomeView homeView;
+    private LoginView loginView;
 
-    public HomeController(HomeView view) {
+    public HomeController(HomeView view, LoginView loginView) {
         this.homeView = view;
-
+        this.loginView = loginView;
         view.addRentListener(rentActionListener);
         view.addRentOutListener(rentOutActionListener);
         view.addViewProfileListener(viewProfileActionListener);
@@ -52,6 +55,15 @@ public class HomeController {
     };
 
     private final ActionListener signOutActionListener = (ActionEvent e) -> {
-        //To do Sign out functionality
+        LoginView loginView = new LoginView();
+        Authentication authenticationModel = new Authentication();
+        LoginController loginController = new LoginController(loginView, authenticationModel);
+        //loginView.resetNameText();
+        //loginView.resetPasswordText();
+        //loginView.resetEmailText();
+        //loginView.setVisible(true);
+        
+        // I tried to reset the fields but the error logging in exception kept getting snagged.
+        homeView.dispose();
     };
 }

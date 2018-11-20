@@ -66,15 +66,16 @@ public class LoginController
                     cs4125.CS4125.username = dbAccess.getUsername(cs4125.CS4125.userID);
                     cs4125.CS4125.email = dbAccess.getEmail(cs4125.CS4125.userID);
                     System.out.println("UserID:" + cs4125.CS4125.userID + " Username:" + cs4125.CS4125.username + " email:" + cs4125.CS4125.email);
-                    
                     //if(SubscriptionValid())
                     //{
                         HomeView homeView = new HomeView();
-                        HomeController homeController = new HomeController(homeView);
+                        HomeController homeController = new HomeController(homeView, loginView);
                     //}
                     //else
                         //Go to renew subscription page
                         //To do 
+                    
+                    
                     
                     loginView.setVisible(false);
                 }
