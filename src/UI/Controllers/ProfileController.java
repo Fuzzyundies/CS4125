@@ -34,6 +34,7 @@ public class ProfileController {
     }
 
     private final ActionListener renewSubscriptionListener = (ActionEvent e) -> {
+        
     };
 
     private final ActionListener backToProfileListener = new ActionListener() {

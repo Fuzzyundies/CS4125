@@ -19,8 +19,10 @@ public class Customer implements ICustomer, IUser, Observer {
     //private List<ITransaction> transactions;
     //private ISubscription subscription;
 
-    public Customer(String id, String name, String email, String password, List<IHistory> history) {
+    public Customer(String id, String name, String email, String password, List<IHistory> history) //, ISubscription subscription) 
+    {
         this.userHistory = history;
+        //this.subscription = subscription;
         this.id = id;
         this.name = name;
         this.email = email;
@@ -46,6 +48,13 @@ public class Customer implements ICustomer, IUser, Observer {
     public String getPassword() {
         return this.password;
     }
+    
+    /*
+    public ISubscription getSubscription()
+    {
+        return this.subscription;
+    }
+    */
 
     public int getRating() {
         return rating;
@@ -84,6 +93,12 @@ public class Customer implements ICustomer, IUser, Observer {
     public String getCustomer() {
         return this.toString();
     }
+    /*
+    public void setSubscription(ISubscription s)
+    {
+        this.subscription = s;
+    }
+    */
 
     public void rent(/*Product p*/) {
 
