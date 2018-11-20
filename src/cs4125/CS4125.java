@@ -36,6 +36,8 @@ public class CS4125 {
         int scene = 1;
         //panelCreator();
         //sceneManager(scene);
+
+        //Testing out state behavioural design pattern
         Product p = new Product(1, "BBQ", 2, 10, 19.99, 5, "Beautiful BBQ", 1);
         System.out.println(p.showStatus());
         p.nextState();
@@ -47,7 +49,6 @@ public class CS4125 {
         p.nextState();
 
         login();
-
     }
 
     private static void panelCreator() {
@@ -97,14 +98,6 @@ public class CS4125 {
     }
 
     private static void login() {
-        //Temp login: username = username1, password = password1
-        //RentOutView rentOut = new RentOutView();
-
-        //HomeView home = new HomeView();
-        //RentOutController rentOutController = new RentOutController(rentOut, home);
-        LoginView loginView = new LoginView();
-        Authentication authenticationModel = new Authentication();
-        LoginController loginController = new LoginController(loginView, authenticationModel);
+        new LoginController(new LoginView(), new Authentication());
     }
-
 }

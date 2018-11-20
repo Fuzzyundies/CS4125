@@ -238,9 +238,8 @@ public class ProfileView extends JFrame {
     public String getNewUserName() {
         return usernameInput.getText();
     }
-    
-    public String getNewEmail()
-    {
+
+    public String getNewEmail() {
         return emailInput.getText();
     }
 
