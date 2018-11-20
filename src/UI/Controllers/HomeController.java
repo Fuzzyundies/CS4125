@@ -55,6 +55,7 @@ public class HomeController {
     };
 
     private final ActionListener signOutActionListener = (ActionEvent e) -> {
+        loginView.dispose();
         LoginView loginView = new LoginView();
         Authentication authenticationModel = new Authentication();
         LoginController loginController = new LoginController(loginView, authenticationModel);
@@ -64,6 +65,7 @@ public class HomeController {
         //loginView.setVisible(true);
         
         // I tried to reset the fields but the error logging in exception kept getting snagged.
+        System.out.println("Signed out");
         homeView.dispose();
     };
 }
