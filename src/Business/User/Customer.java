@@ -54,6 +54,12 @@ public class Customer implements ICustomer, IUser, Observer {
     {
         return this.subscription;
     }
+    
+    public void setSubscription(ISubscription s)
+    {
+        this.subscription = s;
+    }
+    
     */
 
     public int getRating() {
@@ -93,12 +99,7 @@ public class Customer implements ICustomer, IUser, Observer {
     public String getCustomer() {
         return this.toString();
     }
-    /*
-    public void setSubscription(ISubscription s)
-    {
-        this.subscription = s;
-    }
-    */
+    
 
     public void rent(/*Product p*/) {
 
