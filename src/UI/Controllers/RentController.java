@@ -6,6 +6,7 @@ import Business.BusinessManagement.Locker;
 import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.RentView;
 import Business.BusinessManagement.Notifcation;
+import Business.BusinessManagement.Transaction;
 import Business.Discount.FirstOrder;
 import Business.Discount.TwelveOff;
 import Business.Discount.Discount;
@@ -134,21 +135,49 @@ public class RentController {
         {
             System.out.println("Confirm rental...");
             //Transaction t = new Transaction(date, amount, renter, leaser, pID);
+            // Generate the locker codes
             int max = 9999;
             int min = 1000;
             Random rand = new Random(System.currentTimeMillis());
             int r_code = rand.nextInt((max-min)+1) + min;
             int l_code = rand.nextInt((max-min)+1) + min;
-            
             while(r_code == l_code){
                 System.out.println("In this loop");
                 l_code = rand.nextInt((max-min)+1) + min;
             }
-            System.out.println("rcode: " + r_code + " lcode:" + l_code);
-            //Locker l = new Locker(renterPin, leaserPin, transaction, date);
+            
+            // Get the product selected for rent
+            Product selectedProduct = rentView.getSelectedProduct();
+            
+            // Might want to use Timestamp instead of Date
+            
+            // Create the new transaction
+            // TODO add in transaction fields for a credit card. (Card no., cardholder name, etc.)
+            // saleDate - maybe just a timestamp?
+            // amount = calculate from filled in fields
+            // Could just change the renter and leaser to use ids instead of begin an instance of customer.
+            // renter - 
+            // leaser - 
+            // productID - can just get the product from getSelectedProduct method.
+            //Transaction newTransaction = new Transaction(saleDate, amount, renter, leaser, selectedProduct.getId();)
+            
+            
+            // Maybe a Timestamp instead?
+            
+            //Locker l = new Locker(r_code, l_code, newTransaction, date);
+            
+            
+            // can pass renter and leaser ID instead of two customer objects.
+            // Then use the method in CustomerDAO to get both emails buy passing in the ID
+            // This will allow us to then send an email to both.
+            // Might want to pass the locker to notification too? have it as a data member
+            // This will allow us to add the locker info to the email being sent.
+            
             //Notifcation n = new Notifcation(renter, leaser);
-            //homeView.setVisible(true);
-            //rentView.dispose();
+            
+
+            homeView.setVisible(true);
+            rentView.dispose();
         }
     };
 }
