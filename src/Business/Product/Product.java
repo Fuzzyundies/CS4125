@@ -5,8 +5,6 @@
  */
 package Business.Product;
 
-import Business.User.Customer;
-
 /**
  *
  * @author Benjamin Grimes
@@ -22,6 +20,7 @@ public class Product {
     private String description;
     private int is_available;
     //private String URLPic;
+    private ProductState productState;
 
     public Product(int id, String name, int catID, int ownerID, double price, int rating, String description, int is_available/*, String URLPic*/) {
         this.id = id;
@@ -38,7 +37,7 @@ public class Product {
     public int getIs_available() {
         return is_available;
     }
-    
+
     public void setIs_available(final int isAvailable) {
         this.is_available = isAvailable;
     }
@@ -58,7 +57,6 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
-
 
     public int getCategoryID() {
         return catID;
@@ -99,10 +97,9 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
-  
+
     @Override
-    public String toString()
-    {
+    public String toString() {
         return getName();
     }
 }
