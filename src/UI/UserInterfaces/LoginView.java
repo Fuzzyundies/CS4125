@@ -34,6 +34,7 @@ public class LoginView extends JFrame {
     private JButton cancel_btn;
     private JButton confirm_btn;
     private JTextField email_textF;
+    private JTextField creditCard;
     // ---------------------------
 
     public LoginView() {
@@ -67,14 +68,14 @@ public class LoginView extends JFrame {
         this.setVisible(true);
         this.setTitle("Login");
     }
-
-    //blahlahtrlae hpoerjapgoajeporvkae
+    
     public void displaySignUpView() {
-        this.setBounds(300, 300, 300, 300);
+        this.setBounds(300, 300, 500, 300);
 
         uname_textF = new JTextField();
         pw_textF = new JPasswordField();
         email_textF = new JTextField();
+        creditCard = new JTextField();
 
         cancel_btn = new JButton("Cancel");
         confirm_btn = new JButton("Confirm");
@@ -88,8 +89,8 @@ public class LoginView extends JFrame {
         panel.add(email_textF);
         panel.add(new JLabel("Password:"));
         panel.add(pw_textF);
-        panel.add(new JLabel("Add"));
-        panel.add(new JLabel("Transaction Fields"));
+        panel.add(new JLabel("Credit Card details (Not implemented)"));
+        panel.add(creditCard);
         panel.add(cancel_btn);
         panel.add(confirm_btn);
 
@@ -102,6 +103,11 @@ public class LoginView extends JFrame {
 
     public String getName() {
         return uname_textF.getText();
+    }
+    
+    public String getCreditCard()
+    {
+        return creditCard.getText();
     }
 
     public String getPassword() {

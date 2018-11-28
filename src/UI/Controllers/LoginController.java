@@ -66,6 +66,7 @@ public class LoginController
                     cs4125.CS4125.username = dbAccess.getUsername(cs4125.CS4125.userID);
                     cs4125.CS4125.email = dbAccess.getEmail(cs4125.CS4125.userID);
                     System.out.println("UserID:" + cs4125.CS4125.userID + " Username:" + cs4125.CS4125.username + " email:" + cs4125.CS4125.email);
+                    
                     //if(SubscriptionValid())
                     //{
                         HomeView homeView = new HomeView();
@@ -144,8 +145,13 @@ public class LoginController
                 else
                 {
                     // Create new customer
-                    authenticationModel.addNewUser(username, email, password);
-                    backToLogin();
+                    //Validate CreditCard, take in 1234 as valid
+                    int cC = Integer.parseInt(loginView.getCreditCard());
+                    if(cC == 1234)  //creditCard is valid
+                    {
+                        authenticationModel.addNewUser(username, email, password);
+                        backToLogin();
+                    }
                 }
             }
         }
