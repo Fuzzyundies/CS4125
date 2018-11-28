@@ -6,8 +6,11 @@
 package DatabaseManagement;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
@@ -51,5 +54,74 @@ public class TransactionDAO implements DAO
         boolean deleted = false;
         
         return deleted;
+    }
+    
+    public void addTransaction(int productID, int renterID, int leaserID, double amount, java.util.Date startDate, java.util.Date endDate, int lockerID, int lCode, int rCode) throws SQLException
+    {
+        try
+        {
+            // insert the transaction
+            connection = DriverManager.getConnection(JDBC_URL);
+            statement = connection.createStatement();
+            String query = "INSERT INTO BeanSquadRentalDB.RentalTransactions "
+                    + "VALUES( default, NOW(), default, " + amount + " );";
+            
+            statement.executeUpdate(query);
+            
+            statement = connection.createStatement();
+            query = "SELECT LAST_INSERT_ID() FROM BeanSquadRentalDB.RentalTransactions";
+            resultSet = statement.executeQuery(query);
+            
+            if(resultSet.next())
+            {
+                int transactionID = resultSet.getInt(1);
+                // insert into history
+                
+                java.text.SimpleDateFormat formatter = 
+                new java.text.SimpleDateFormat("YYYY-MM-DD HH:MM:SS");
+
+                String sDate = formatter.format(startDate);
+                String eDate = formatter.format(endDate);
+                
+                query = "INSERT INTO BeanSquadRentalDB.History VALUES("
+                        + "default, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1, renterID);
+                preparedStatement.setInt(2, leaserID);
+                preparedStatement.setInt(3, productID);
+                preparedStatement.setInt(4, transactionID);
+                preparedStatement.setDate(5, new Date(startDate.getTime()));
+                preparedStatement.setDate(6, new Date(endDate.getTime()));
+                preparedStatement.setInt(7, lockerID);
+                preparedStatement.setInt(8, lCode);
+                preparedStatement.setInt(9, rCode);
+                preparedStatement.executeUpdate();
+                /*
+                statement = connection.createStatement();
+                query = "INSERT INTO BeanSquadRentalDB.History "
+                        + "VALUES (default, " + renterID + ", " + leaserID + ", "
+                        + productID + ", " + transactionID + ", '" + sDate
+                        + "', '" + eDate + "', "
+                        + lockerID + ", " + lCode + ", " + rCode + ");";
+                System.out.println(query);
+                statement.executeUpdate(query);
+                */
+            }
+            
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            if(connection != null)
+                connection.close();
+            if(statement != null)
+                statement.close();
+            if(resultSet != null)
+                resultSet.close();
+        }
     }
 }

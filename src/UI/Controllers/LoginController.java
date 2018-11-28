@@ -13,6 +13,7 @@ import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.LoginView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -146,11 +147,18 @@ public class LoginController
                 {
                     // Create new customer
                     //Validate CreditCard, take in 1234 as valid
-                    int cC = Integer.parseInt(loginView.getCreditCard());
+                    int cC;
+                    try{
+                    cC = Integer.parseInt(loginView.getCreditCard());
                     if(cC == 1234)  //creditCard is valid
                     {
                         authenticationModel.addNewUser(username, email, password);
                         backToLogin();
+                    }
+                    }
+                    catch(NumberFormatException ex)
+                    {
+                        JOptionPane.showMessageDialog(loginView, "Please enter credit card details", "Invalid Credentials", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
