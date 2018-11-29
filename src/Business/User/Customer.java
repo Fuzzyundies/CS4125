@@ -48,7 +48,7 @@ public class Customer implements ICustomer, IUser, Observer {
     public String getPassword() {
         return this.password;
     }
-    
+
     /*
     public ISubscription getSubscription()
     {
@@ -60,8 +60,7 @@ public class Customer implements ICustomer, IUser, Observer {
         this.subscription = s;
     }
     
-    */
-
+     */
     public int getRating() {
         return rating;
     }
@@ -99,7 +98,6 @@ public class Customer implements ICustomer, IUser, Observer {
     public String getCustomer() {
         return this.toString();
     }
-    
 
     public void rent(/*Product p*/) {
 

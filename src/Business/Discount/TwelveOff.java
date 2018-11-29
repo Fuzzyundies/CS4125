@@ -14,5 +14,4 @@ public class TwelveOff extends DiscountDecorator {
     public double applyDiscount() {
         return super.applyDiscount() + 12.5;
     }
-
 }

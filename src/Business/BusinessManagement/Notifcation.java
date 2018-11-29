@@ -40,7 +40,7 @@ public class Notifcation implements Subject //interface ideally
     private final static String password = "squad1234";
     private Timestamp timestamp;
     private String locationEmail = "KilMadeUp";
-    private int lockerNumber = (int) Math.random()*100+1;
+    private int lockerNumber = (int) Math.random() * 100 + 1;
     private String headerEmail = "Thank you for your patronage!";
     private String productEmail = "\nThe item in question is: ";
     private String pinEmail = "\nYour unique PIN is ";
@@ -51,7 +51,7 @@ public class Notifcation implements Subject //interface ideally
     private String r_msg = "";
     private String l_msg = "";
     private String temp_msg = "";
-    
+
     public Notifcation(Customer renter, Customer leaser) {
         this.renter = renter;
         this.leaser = leaser;
@@ -92,14 +92,14 @@ public class Notifcation implements Subject //interface ideally
 
         String r_email = r.getEmail();
         String l_email = l.getEmail();
-        
-            // generate leaser code for locker
+
+        // generate leaser code for locker
         //r_code = locker.getRenterPin();
         //l_code = locker.getLeaserPin();
-        temp_msg = headerEmail + productEmail + productName +lockerEmail + lockerNumber + pinEmail;
+        temp_msg = headerEmail + productEmail + productName + lockerEmail + lockerNumber + pinEmail;
         //r_msg = temp_msg + r_code + signatureEmail;
         //l_msg = temp_msg + l_code + signatureEmail;
-        
+
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("BeanSquadRental@gmail.com"));

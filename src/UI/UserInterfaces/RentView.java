@@ -14,7 +14,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -63,8 +62,8 @@ public class RentView extends JFrame {
         panel.setLayout(new GridLayout(2, 2, 5, 5));
         panel.add(new JLabel("Categories:"));
         panel.add(categoryList);
-        panel.add(select);
         panel.add(back);
+        panel.add(select);
 
         panel.revalidate();
         panel.repaint();
@@ -80,7 +79,6 @@ public class RentView extends JFrame {
         
     }
      */
-    
     public void displayListOfProducts(int cID) {
         System.out.println("Displaying list of products...");
         Product[] products = ProductDAO.getListProducts(cID);
@@ -197,7 +195,7 @@ public class RentView extends JFrame {
         Product tmp = (Product) listOfProducts.getSelectedValue();
         return tmp;
     }
-    
+
     public void registerObserverListener(ActionListener registerObserverActionListener) {
         this.rent_btn.addActionListener(registerObserverActionListener);
     }
