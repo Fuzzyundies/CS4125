@@ -6,6 +6,7 @@
 package Business.BusinessManagement;
 
 import DatabaseManagement.CustomerDAO;
+import java.time.LocalDate;
 
 /**
  *
@@ -77,7 +78,8 @@ public class Authentication
         boolean inserted = false;
         try
         {
-            inserted = dbAccess.insert(username, email, password);
+            // todo change these to local dates of start and end of subscription
+            inserted = dbAccess.addNewCustomer(username, email, password, LocalDate.now(), LocalDate.now());
         }
         catch(Exception ex)
         {

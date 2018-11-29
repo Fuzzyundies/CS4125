@@ -6,12 +6,14 @@
 package DatabaseManagement;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 /**
  *
@@ -45,19 +47,37 @@ public class CustomerDAO implements DAO
         
         return inserted;
     }
+
+    @Override
+    public boolean update(Object o) 
+    {
+        boolean updated = false;
+        
+        return updated;
+    }
+
+    @Override
+    public boolean delete(Object o) 
+    {
+        boolean deleted = false;
+        
+        return deleted;
+    }
     
-    public boolean insert(String name, String email, String password) throws SQLException
+    public boolean addNewCustomer(String name, String email, String password, LocalDate subStartDate, LocalDate subEndDate) throws SQLException
     {
         boolean inserted = false;
         try
         {
             connection = DriverManager.getConnection(JDBC_URL);
             String query = "INSERT INTO BeanSquadRentalDB.Users "
-                    + "VALUES ( default, ? , PASSWORD( ? ) ,  ? , default, default, default )";
+                    + "VALUES ( default, ? , PASSWORD( ? ) ,  ? , default, default, default, ? , ? )";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, password);
             preparedStatement.setString(3, email);
+            preparedStatement.setDate(4, Date.valueOf(subStartDate));
+            preparedStatement.setDate(5, Date.valueOf(subEndDate));
             int result = preparedStatement.executeUpdate();
             System.out.println(result);
             
@@ -80,22 +100,6 @@ public class CustomerDAO implements DAO
                 resultSet.close();
         }
         return inserted;
-    }
-
-    @Override
-    public boolean update(Object o) 
-    {
-        boolean updated = false;
-        
-        return updated;
-    }
-
-    @Override
-    public boolean delete(Object o) 
-    {
-        boolean deleted = false;
-        
-        return deleted;
     }
     
     public int findCustomer(String username, String pw) throws SQLException
@@ -140,6 +144,38 @@ public class CustomerDAO implements DAO
         }
         
         return id;
+    }
+    
+    public LocalDate[] getSubscriptionDetails(String username)
+    {
+        LocalDate [] subDates = new LocalDate[2];
+        
+        try{
+            connection = DriverManager.getConnection(JDBC_URL);
+            String query = "SELECT subStartDate, subEndDate FROM "
+                    + "BeanSquadRentalDB.Users WHERE username = '" + username + "';";
+            
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(query);
+            if(resultSet.next())
+            {
+                subDates[0] = resultSet.getDate("subStartDate").toLocalDate();
+                subDates[1] = resultSet.getDate("subEndDate").toLocalDate();
+            }
+            
+            if(connection != null)
+                connection.close();
+            if(statement != null)
+                statement.close();
+            if(resultSet != null)
+                resultSet.close();
+        }
+        catch(SQLException sEx)
+        {
+            sEx.printStackTrace();
+        }
+        
+        return subDates;
     }
     
     public boolean findUsername(String username) throws SQLException

@@ -97,16 +97,6 @@ public class TransactionDAO implements DAO
                 preparedStatement.setInt(8, lCode);
                 preparedStatement.setInt(9, rCode);
                 preparedStatement.executeUpdate();
-                /*
-                statement = connection.createStatement();
-                query = "INSERT INTO BeanSquadRentalDB.History "
-                        + "VALUES (default, " + renterID + ", " + leaserID + ", "
-                        + productID + ", " + transactionID + ", '" + sDate
-                        + "', '" + eDate + "', "
-                        + lockerID + ", " + lCode + ", " + rCode + ");";
-                System.out.println(query);
-                statement.executeUpdate(query);
-                */
             }
             
         }
