@@ -5,6 +5,7 @@
  */
 package Business.BusinessManagement;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -14,11 +15,11 @@ import java.util.Date;
 public class Subscription 
 {
     private int subID;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private boolean isActive;
     
-    public Subscription(int id, Date startDate, Date endDate)
+    public Subscription(int id, LocalDate startDate, LocalDate endDate)
     {
         this.subID = id;
         this.startDate = startDate;
@@ -31,17 +32,17 @@ public class Subscription
         return subID;
     }
 
-    public Date getStartDate() 
+    public LocalDate getStartDate() 
     {
         return startDate;
     }
 
-    public Date getEndDate() 
+    public LocalDate getEndDate() 
     {
         return endDate;
     }
 
-    public boolean isIsActive() 
+    public boolean getIsActive() 
     {
         return isActive;
     }
@@ -52,13 +53,13 @@ public class Subscription
         this.subID = subID;
     }
 
-    public void setStartDate(Date startDate) 
+    public void setStartDate(LocalDate startDate) 
     {
         // TODO implement validation for setStartDate method
         this.startDate = startDate;
     }
 
-    public void setEndDate(Date endDate) 
+    public void setEndDate(LocalDate endDate) 
     {
         // TODO implement validation for setEndDate method
         this.endDate = endDate;
@@ -70,7 +71,7 @@ public class Subscription
         this.isActive = isActive;
     }
     
-    public void renew(Date s, Date newEndDate)
+    public void renew(LocalDate s, LocalDate newEndDate)
     {
         // TODO implement renew method
     }

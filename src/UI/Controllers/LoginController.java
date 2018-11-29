@@ -6,11 +6,15 @@
 package UI.Controllers;
 
 import Business.BusinessManagement.Authentication;
+import Business.BusinessManagement.Subscription;
 import DatabaseManagement.CustomerDAO;
 import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.LoginView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -150,7 +154,15 @@ public class LoginController
                     cC = Integer.parseInt(loginView.getCreditCard());
                     if(cC == 1234)  //creditCard is valid
                     {
+                        //create subscription for that user, setting start date to current date
+                        
+                        
+                        LocalDate sDate = LocalDate.now();
+                        LocalDate eDate = LocalDate.now().plusMonths(3);
+                        //System.out.println(date); 
+                        Subscription sub = new Subscription(1, sDate, eDate);
                         authenticationModel.addNewUser(username, email, password);
+                        
                         backToLogin();
                     }
                     }
