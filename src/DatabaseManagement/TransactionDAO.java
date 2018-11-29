@@ -56,7 +56,8 @@ public class TransactionDAO implements DAO
         return deleted;
     }
     
-    public void addTransaction(int productID, int renterID, int leaserID, double amount, java.util.Date startDate, java.util.Date endDate, int lockerID, int lCode, int rCode) throws SQLException
+    public void addTransaction(int productID, int renterID, int leaserID, double amount, 
+            java.util.Date startDate, java.util.Date endDate, int lockerID, int lCode, int rCode)
     {
         try
         {
@@ -99,19 +100,16 @@ public class TransactionDAO implements DAO
                 preparedStatement.executeUpdate();
             }
             
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-        finally
-        {
             if(connection != null)
                 connection.close();
             if(statement != null)
                 statement.close();
             if(resultSet != null)
                 resultSet.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
         }
     }
     
