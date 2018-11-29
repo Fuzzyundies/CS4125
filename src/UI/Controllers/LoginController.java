@@ -6,8 +6,6 @@
 package UI.Controllers;
 
 import Business.BusinessManagement.Authentication;
-import Business.User.Customer;
-import Business.User.Subscription;
 import DatabaseManagement.CustomerDAO;
 import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.LoginView;
