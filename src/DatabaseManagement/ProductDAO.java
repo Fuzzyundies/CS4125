@@ -117,7 +117,7 @@ public class ProductDAO implements DAO
             statement = connection.createStatement();
             String query = "SELECT * " +
                             "FROM BeanSquadRentalDB.Products " +
-                            "WHERE ownerID = (SELECT rID " +
+                            "WHERE ownerID IN (SELECT rID " +
                                              "FROM History WHERE " + userID + " = 1)";
             
             resultSet = statement.executeQuery(query);
