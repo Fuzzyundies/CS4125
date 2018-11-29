@@ -33,9 +33,7 @@ public class ProfileController {
         profileView.addHomeBtnListener(backHomeListener);
     }
 
-    private final ActionListener renewSubscriptionListener = (ActionEvent e) -> {
-        
-    };
+   
 
     private final ActionListener backToProfileListener = new ActionListener() {
         @Override
@@ -105,6 +103,34 @@ public class ProfileController {
             profileView.createHistoryWindow();
             profileView.addBackBtnListener(backToProfileListener);
             profileView.addSelectBtnListener(selectProductActionListener);
+        }
+    };
+    
+    private ActionListener renewSubscriptionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            profileView.createRenewSubscriptionWindow();
+            profileView.addBackBtnListener(backToProfileListener);
+            profileView.addRenewBtnListener(renewListener);
+        }
+    };
+    
+    private ActionListener renewListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Renew Listener");
+            //To do -- Validate credit card
+            if(Integer.parseInt(profileView.getCreditCard()) == 1234)
+            {
+                //setting up new subscription for that user
+                JOptionPane.showMessageDialog(profileView, "Subscription renewed for 3 months");
+                backToHome();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(profileView, "Incorrect Credit Card details");
+                profileView.clearCreditCard();
+            }
         }
     };
 

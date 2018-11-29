@@ -45,6 +45,11 @@ public class ProfileView extends JFrame {
     //Rate user button
     private JButton rateUser;
 
+    // ---- Renew Subscription Window ---------
+    private JButton renewBtn;
+    private JTextField cC;  //CreditCard details 
+    // -----------------------------------------
+    
     // ------------- History Window -----------
     private JList listOfHistory;
     private JButton selectBtn;
@@ -166,6 +171,29 @@ public class ProfileView extends JFrame {
         mainPanel.revalidate();
         mainPanel.repaint();
     }
+    
+    public void createRenewSubscriptionWindow() {
+        System.out.println("Displaying user subscription renewal window...");
+
+        this.setBounds(450, 250, 400, 200);
+        
+        selectBtn = new JButton("Select");
+        cancelBtn = new JButton("Back");
+        cC = new JTextField();
+        renewBtn = new JButton("Renew Subscription");
+
+        mainPanel.removeAll();
+
+        mainPanel.setLayout(new GridLayout(2, 2));
+        
+        mainPanel.add(new JLabel("Credit Card Details:"));
+        mainPanel.add(cC);
+        mainPanel.add(cancelBtn);
+        mainPanel.add(renewBtn);
+
+        mainPanel.revalidate();
+        mainPanel.repaint();
+    }
 
     public void displayProductDetails(Product p) {
         System.out.println("Displaying product details...");
@@ -225,6 +253,10 @@ public class ProfileView extends JFrame {
     public void addSelectBtnListener(ActionListener listener) {
         selectBtn.addActionListener(listener);
     }
+    
+    public void addRenewBtnListener(ActionListener listener) {
+        renewBtn.addActionListener(listener);
+    }
 
     public Product getSelectedProduct() {
         Product tmp = (Product) listOfHistory.getSelectedValue();
@@ -241,6 +273,16 @@ public class ProfileView extends JFrame {
 
     public String getNewEmail() {
         return emailInput.getText();
+    }
+    
+    public String getCreditCard(){
+        return cC.getText();
+    }
+    
+    public void clearCreditCard()
+    {
+        cC.setText("");
+        mainPanel.revalidate();
     }
 
     public char[] getPassword() {

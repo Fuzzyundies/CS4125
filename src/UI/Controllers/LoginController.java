@@ -21,75 +21,65 @@ import javax.swing.JOptionPane;
  *
  * @author Benjamin Grimes
  */
-public class LoginController 
-{
+public class LoginController {
+
     private final LoginView loginView;
     private final Authentication authenticationModel;
-    
-    public LoginController(LoginView view, Authentication model)
-    {
+
+    public LoginController(LoginView view, Authentication model) {
         this.loginView = view;
         this.authenticationModel = model;
         view.addLoginBtnListener(new LoginBtnListener());
         view.addSignUpBtnListener(new SignUpBtnListener());
     }
-    
-    private void backToLogin()
-    {
+
+    private void backToLogin() {
         loginView.displayLoginView();
         loginView.addLoginBtnListener(new LoginBtnListener());
         loginView.addSignUpBtnListener(new SignUpBtnListener());
     }
-    
-    class LoginBtnListener implements ActionListener
-    {
+
+    class LoginBtnListener implements ActionListener {
+
         @Override
-        public void actionPerformed(ActionEvent e) 
-        {
+        public void actionPerformed(ActionEvent e) {
             String username = "";
             String password = "";
-            
-            try
-            {
+
+            try {
                 username = loginView.getName();
                 password = loginView.getPassword();
-                
+
                 authenticationModel.checkForUser(username, password);
                 int result = authenticationModel.getResult();
-                
-                if(result <= 0)
-                {
+
+                if (result <= 0) {
                     loginView.displayErrorMessage("User not found");
-                }
-                else
-                {
+                } else {
 
                     cs4125.CS4125.userID = result;
                     CustomerDAO dbAccess = new CustomerDAO();
                     cs4125.CS4125.username = dbAccess.getUsername(cs4125.CS4125.userID);
                     cs4125.CS4125.email = dbAccess.getEmail(cs4125.CS4125.userID);
                     System.out.println("UserID:" + cs4125.CS4125.userID + " Username:" + cs4125.CS4125.username + " email:" + cs4125.CS4125.email);
-                    
+
                     //if(SubscriptionValid())
                     //{
-                        HomeView homeView = new HomeView();
-                        HomeController homeController = new HomeController(homeView, loginView);
+                    HomeView homeView = new HomeView();
+                    HomeController homeController = new HomeController(homeView, loginView);
                     //}
                     //else
-                        //Go to renew subscription page
-                        //To do 
-                    
-                    
-                    
+                    //Go to renew subscription page
+                    //To do 
+
                     loginView.setVisible(false);
                 }
-            }
-            catch(Exception ex)
-            {
+            } catch (Exception ex) {
                 loginView.displayErrorMessage("Error loggin in");
             }
         }
     }
+
     /*
     public boolean SubscriptionValid()
     {
@@ -97,83 +87,68 @@ public class LoginController
         -if endDate before currentDate return false
         -if endDate after currentDate return true
     }
-    */
+     */
 
-    class SignUpBtnListener implements ActionListener
-    {
+    class SignUpBtnListener implements ActionListener {
 
         @Override
-        public void actionPerformed(ActionEvent e) 
-        {
+        public void actionPerformed(ActionEvent e) {
             loginView.displaySignUpView();
             loginView.addCancelBtnListener(new CancelBtnListener());
             loginView.addConfirmBtnListener(new ConfirmBtnListner());
         }
     }
-    
-    class CancelBtnListener implements ActionListener
-    {
+
+    class CancelBtnListener implements ActionListener {
 
         @Override
-        public void actionPerformed(ActionEvent e) 
-        {
+        public void actionPerformed(ActionEvent e) {
             System.out.println("Back to login");
             backToLogin();
         }
-        
+
     }
-    
-    class ConfirmBtnListner implements ActionListener
-    {
+
+    class ConfirmBtnListner implements ActionListener {
+
         @Override
-        public void actionPerformed(ActionEvent e)
-        {
+        public void actionPerformed(ActionEvent e) {
             String username = loginView.getName();
             String email = loginView.getEmail();
             String password = loginView.getPassword();
-            
+
             boolean inUse = authenticationModel.checkIfEmailInUse(email);
-            
-            if(inUse)
-            {
+
+            if (inUse) {
                 loginView.displayErrorMessage("Email is in use");
-            }
-            else
-            {
+            } else {
                 inUse = authenticationModel.checkIfUsernameInUse(username);
-                if(inUse)
-                {
+                if (inUse) {
                     loginView.displayErrorMessage("Username is in use");
-                }
-                else
-                {
+                } else {
                     // Create new customer
                     //Validate CreditCard, take in 1234 as valid
                     int cC;
-                    try{
-                    cC = Integer.parseInt(loginView.getCreditCard());
-                    if(cC == 1234)  //creditCard is valid
-                    {
-                        //create subscription for that user, setting start date to current date
-                        
-                        
-                        LocalDate sDate = LocalDate.now();
-                        LocalDate eDate = LocalDate.now().plusMonths(3);
-                        //System.out.println(date); 
-                        Subscription sub = new Subscription(1, sDate, eDate);
-                        authenticationModel.addNewUser(username, email, password);
-                        
-                        backToLogin();
-                    }
-                    }
-                    catch(NumberFormatException ex)
-                    {
+                    try {
+                        cC = Integer.parseInt(loginView.getCreditCard());
+                        if (cC == 1234) //creditCard is valid
+                        {
+                            //create subscription for that user, setting start date to current date
+
+                            LocalDate sDate = LocalDate.now();
+                            LocalDate eDate = LocalDate.now().plusMonths(3);
+                            //System.out.println(date); 
+                            Subscription sub = new Subscription(1, sDate, eDate);
+                            authenticationModel.addNewUser(username, email, password);
+
+                            backToLogin();
+                        }
+                    } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(loginView, "Please enter credit card details", "Invalid Credentials", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
         }
     }
-    
-    
+
 }

@@ -40,7 +40,7 @@ public class HomeController {
     };
 
     private final ActionListener rentOutActionListener = (ActionEvent e) -> {
-        //Go to RentOutView ----------RentoutController needs to be done
+        //Go to RentOutView 
         RentOutView rentOutView = new RentOutView();
         RentOutController rentOutController = new RentOutController(rentOutView, homeView);
         homeView.setVisible(false);
