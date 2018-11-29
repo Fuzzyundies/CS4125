@@ -55,24 +55,49 @@ public class Subscription
 
     public void setStartDate(LocalDate startDate) 
     {
-        // TODO implement validation for setStartDate method
-        this.startDate = startDate;
+        if(this.startDate.isBefore(startDate))      
+            System.out.println("Current Startdate before new StartDate");
+        else if(this.startDate.equals(startDate))
+            System.out.println("Current Startdate equal to new StartDate");
+        else
+            this.startDate = startDate;
     }
 
     public void setEndDate(LocalDate endDate) 
     {
-        // TODO implement validation for setEndDate method
-        this.endDate = endDate;
+        if(this.endDate.isBefore(this.startDate))
+            System.out.println("New Enddate after current StartDate");
+        else if(this.endDate.isAfter(endDate))
+            System.out.println("Current Enddate after new EndDate");
+        else 
+            this.endDate = endDate;
     }
 
     public void setIsActive(boolean isActive) 
     {
-        // TODO implement validation for isIsActive method
-        this.isActive = isActive;
+        if(this.endDate.isBefore(LocalDate.now()) && isActive)
+        {
+            System.out.println("Current EndDate expired");
+            this.isActive = !isActive;
+        }
+        else if(this.startDate.isAfter(LocalDate.now()) && isActive)
+        {
+            System.out.println("Current Startdate not started yet");
+            this.isActive = !isActive;
+        }
+        else if((this.startDate.isEqual(LocalDate.now()) || this.startDate.isBefore(LocalDate.now()) && this.endDate.isAfter(LocalDate.now())))
+            this.isActive = isActive;
     }
     
     public void renew(LocalDate s, LocalDate newEndDate)
     {
         // TODO implement renew method
+        if((s.isEqual(LocalDate.now()) || s.isBefore(LocalDate.now()) && newEndDate.isAfter(LocalDate.now())))
+        {
+            this.startDate = s;
+            this.endDate = newEndDate;
+            this.isActive = true;
+        }
+        
     }
 }
