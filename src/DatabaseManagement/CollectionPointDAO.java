@@ -8,6 +8,7 @@ package DatabaseManagement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
@@ -51,5 +52,22 @@ public class CollectionPointDAO implements DAO
         boolean deleted = false;
         
         return deleted;
+    }
+    
+    @Override
+    public void close()
+    {
+        try{
+        if(connection != null)
+            connection.close();
+        if(statement != null)
+            statement.close();
+        if(resultSet != null)
+            resultSet.close();
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+        }
     }
 }

@@ -11,6 +11,7 @@ import Business.Discount.FirstOrder;
 import Business.Discount.TwelveOff;
 import Business.Discount.Discount;
 import Business.Discount.MonthlyDiscount;
+import Business.Product.Category;
 import Business.User.Customer;
 import Business.User.UserFactory;
 import java.awt.event.ActionEvent;
@@ -29,6 +30,7 @@ public class RentController {
     public RentController(RentView view, HomeView homeView) {
         this.rentView = view;
         this.homeView = homeView;
+        rentView.displayRentView(Category.getCategories());
         rentView.addSelectBtnListener(selectActionListener);
         rentView.addBackBtnListner(backActionListener);
     }
@@ -50,7 +52,7 @@ public class RentController {
     private ActionListener backToCategoryActionListioner = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            rentView.displayRentView();
+            rentView.displayRentView(Category.getCategories());
             rentView.addSelectBtnListener(selectActionListener);
             rentView.addBackBtnListner(backActionListener);
         }

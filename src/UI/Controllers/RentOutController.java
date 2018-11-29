@@ -5,6 +5,7 @@
  */
 package UI.Controllers;
 
+import Business.Product.Category;
 import Business.Product.Product;
 import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.RentOutView;
@@ -20,6 +21,7 @@ public class RentOutController {
     {
         this.view = view;
         this.homeView = homeView;
+        view.displayRentOutNewProduct(Category.getCategories());
         view.addAddNewProductBtnListener(addNewProductActionListener);
         view.viewProductsBtnListener(viewProductsActionListener);
         view.backBtnListener(backToHomeActionListener);
@@ -53,7 +55,7 @@ public class RentOutController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Goto add new product...");
-            view.displayRentOutNewProduct();
+            view.displayRentOutNewProduct(Category.getCategories());
             view.addAddListener(AddAddActionListener);
             view.cancelAddListener(CancelActionListener);
         }

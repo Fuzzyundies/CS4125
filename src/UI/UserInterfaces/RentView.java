@@ -42,15 +42,9 @@ public class RentView extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new JPanel();
         add(panel);
-        displayRentView();
     }
 
-    public void displayRentView() {
-        try {
-            categories = CategoriesDAO.getCategories();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+    public void displayRentView(Category [] categories) {
 
         this.setBounds(450, 250, 400, 200);
         panel.removeAll();

@@ -83,21 +83,12 @@ public class CustomerDAO implements DAO
             
             if(result == 1)
                 inserted = true;
+            
+            close();
         }
         catch(Exception ex)
         {
             ex.printStackTrace();
-        }
-        finally
-        {
-            if(connection != null)
-                connection.close();
-            if(statement != null)
-                statement.close();
-            if(preparedStatement != null)
-                preparedStatement.close();
-            if(resultSet != null)
-                resultSet.close();
         }
         return inserted;
     }
@@ -105,7 +96,6 @@ public class CustomerDAO implements DAO
     public int findCustomer(String username, String pw) throws SQLException
     {
         int id = 0;
-        
         try 
         {
             System.out.println("Connecting to " + DBNAME + "...");
@@ -128,19 +118,11 @@ public class CustomerDAO implements DAO
             {
                 // No result found.
             }
+            close();
         }
         catch (Exception ex) 
         {
             ex.printStackTrace();
-        }
-        finally
-        {
-            if(connection != null)
-                connection.close();
-            if(statement != null)
-                statement.close();
-            if(resultSet != null)
-                resultSet.close();
         }
         
         return id;
@@ -149,7 +131,6 @@ public class CustomerDAO implements DAO
     public LocalDate[] getSubscriptionDetails(String username)
     {
         LocalDate [] subDates = new LocalDate[2];
-        
         try{
             connection = DriverManager.getConnection(JDBC_URL);
             String query = "SELECT subStartDate, subEndDate FROM "
@@ -163,25 +144,18 @@ public class CustomerDAO implements DAO
                 subDates[1] = resultSet.getDate("subEndDate").toLocalDate();
             }
             
-            if(connection != null)
-                connection.close();
-            if(statement != null)
-                statement.close();
-            if(resultSet != null)
-                resultSet.close();
+            close();
         }
         catch(SQLException sEx)
         {
             sEx.printStackTrace();
         }
-        
         return subDates;
     }
     
-    public boolean findUsername(String username) throws SQLException
+    public boolean findUsername(String username)
     {
         boolean found = false;
-        
         try 
         {
             connection = DriverManager.getConnection(JDBC_URL);
@@ -197,28 +171,18 @@ public class CustomerDAO implements DAO
             {
                 found = true;
             }
+            close();
         }
         catch (Exception e) 
         {
             e.printStackTrace();
         }
-        finally
-        {
-            if(connection != null)
-                connection.close();
-            if(statement != null)
-                statement.close();
-            if(resultSet != null)
-                resultSet.close();
-        }
-        
         return found;
     }
     
-    public boolean findEmail(String email) throws SQLException
+    public boolean findEmail(String email)
     {
         boolean found = false;
-        
         try
         {
             connection = DriverManager.getConnection(JDBC_URL);
@@ -234,24 +198,16 @@ public class CustomerDAO implements DAO
             {
                 found = true;
             }
+            close();
         }
         catch(Exception ex)
         {
             ex.printStackTrace();
         }
-        finally
-        {
-            if(connection != null)
-                connection.close();
-            if(statement != null)
-                statement.close();
-            if(resultSet != null)
-                resultSet.close();
-        }
         return found;
     }
     
-    public String getUsername(int userID) throws SQLException
+    public String getUsername(int userID)
     {
         String uname = "";
         
@@ -267,25 +223,18 @@ public class CustomerDAO implements DAO
             {
                 uname = resultSet.getString("username");
             }
+            
+            close();
         }
         catch(Exception ex)
         {
             ex.printStackTrace();
         }
-        finally
-        {
-            if(connection != null)
-                connection.close();
-            if(statement != null)
-                statement.close();
-            if(resultSet != null)
-                resultSet.close();
-        }
         
         return uname;
     }
     
-    public String getEmail(int userID) throws SQLException
+    public String getEmail(int userID)
     {
         String email = "";
         
@@ -301,19 +250,12 @@ public class CustomerDAO implements DAO
             {
                 email = resultSet.getString("email");
             }
+            
+            close();
         }
         catch(Exception ex)
         {
             ex.printStackTrace();
-        }
-        finally
-        {
-            if(connection != null)
-                connection.close();
-            if(statement != null)
-                statement.close();
-            if(resultSet != null)
-                resultSet.close();
         }
         
         return email;
@@ -332,19 +274,29 @@ public class CustomerDAO implements DAO
             System.out.println(query);
             statement = connection.createStatement();
             statement.executeUpdate(query);
+            
+            close();
         }
         catch(Exception ex)
         {
             ex.printStackTrace();
         }
-        finally
+    }
+    
+    @Override
+    public void close()
+    {
+        try{
+        if(connection != null)
+            connection.close();
+        if(statement != null)
+            statement.close();
+        if(resultSet != null)
+            resultSet.close();
+        }
+        catch(SQLException ex)
         {
-            if(connection != null)
-                connection.close();
-            if(statement != null)
-                statement.close();
-            if(resultSet != null)
-                resultSet.close();
+            ex.printStackTrace();
         }
     }
 }

@@ -47,7 +47,7 @@ public class CategoriesDAO implements DAO
     }
     
     
-    public static Category[] getCategories() throws SQLException
+    public Category[] getCategories()
     {
         ArrayList<Category> categoryList = new ArrayList<>();
         
@@ -68,14 +68,11 @@ public class CategoriesDAO implements DAO
                 catName = resultSet.getString("catName");
                 categoryList.add(new Category(catID , catName));
             }
+            close();
         }
         catch (Exception e) 
         {
             e.printStackTrace();
-        }
-        finally
-        {
-            close();
         }
         
         Category [] cats = new Category[categoryList.size()];
@@ -87,13 +84,20 @@ public class CategoriesDAO implements DAO
         return cats;
     }
     
-    public static void close() throws SQLException
+    @Override
+    public void close()
     {
+        try{
         if(connection != null)
             connection.close();
         if(statement != null)
             statement.close();
         if(resultSet != null)
             resultSet.close();
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+        }
     }
 }

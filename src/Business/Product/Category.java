@@ -5,6 +5,8 @@
  */
 package Business.Product;
 
+import DatabaseManagement.CategoriesDAO;
+
 /**
  *
  * @author Benjamin Grimes
@@ -34,6 +36,12 @@ public class Category
 
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public static Category[] getCategories()
+    {
+        CategoriesDAO dbAccess = new CategoriesDAO();
+        return dbAccess.getCategories();
     }
     
     @Override

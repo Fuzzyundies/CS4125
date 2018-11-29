@@ -32,7 +32,6 @@ public class RentOutView extends JFrame
     // ----------------------------------
     
     // --------- Rent out new product -----
-    private Category[] categories;
     private JPanel panel;
     private JTextField productNameText;
     private JTextField description;
@@ -86,15 +85,8 @@ public class RentOutView extends JFrame
         this.setTitle("Rent out");
     }
     
-    public void displayRentOutNewProduct()
+    public void displayRentOutNewProduct(Category [] categories)
     {
-        try{
-            categories = CategoriesDAO.getCategories();
-        }
-        catch(SQLException ex)
-        {
-            ex.printStackTrace();
-        }
         
         this.setBounds(500, 250, 300, 300);
         

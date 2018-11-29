@@ -158,13 +158,20 @@ public class ProductDAO implements DAO
     }
     
     
-    public static void close() throws SQLException
+    @Override
+    public void close()
     {
+        try{
         if(connection != null)
             connection.close();
         if(statement != null)
             statement.close();
         if(resultSet != null)
             resultSet.close();
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+        }
     }
 }

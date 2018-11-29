@@ -24,4 +24,6 @@ public interface DAO
     boolean update(Object o);
     
     boolean delete(Object o);
+    
+    void close();
 }
