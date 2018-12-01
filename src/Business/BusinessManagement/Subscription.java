@@ -6,7 +6,6 @@
 package Business.BusinessManagement;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  *
@@ -14,12 +13,12 @@ import java.util.Date;
  */
 public class Subscription 
 {
-    private int subID;
+    private String subID;       //is users email
     private LocalDate startDate;
     private LocalDate endDate;
     private boolean isActive;
     
-    public Subscription(int id, LocalDate startDate, LocalDate endDate)
+    public Subscription(String id, LocalDate startDate, LocalDate endDate)
     {
         this.subID = id;
         this.startDate = startDate;
@@ -27,7 +26,7 @@ public class Subscription
         isActive = true;
     }
 
-    public int getSubID() 
+    public String getSubID() 
     {
         return subID;
     }
@@ -47,7 +46,7 @@ public class Subscription
         return isActive;
     }
 
-    public void setSubID(int subID) 
+    public void setSubID(String subID) 
     {
         // TODO implement validation for setSubID method
         this.subID = subID;
@@ -98,6 +97,11 @@ public class Subscription
             this.endDate = newEndDate;
             this.isActive = true;
         }
-        
+    }
+    
+    public String toString()
+    {
+        String s = "" + this.startDate + "," + this.endDate;
+        return s;
     }
 }

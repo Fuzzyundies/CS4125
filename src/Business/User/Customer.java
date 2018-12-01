@@ -1,6 +1,8 @@
 package Business.User;
 
+import Business.BusinessManagement.Subscription;
 import Business.Product.Product;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -18,15 +20,16 @@ public class Customer implements ICustomer, IUser, Observer {
     private String password;
     //private List<ITransaction> transactions;
     //private ISubscription subscription;
+    private Subscription subscription;
 
-    public Customer(String id, String name, String email, String password, List<IHistory> history) //, ISubscription subscription) 
+    public Customer(String id, String name, String email, String password, List<IHistory> history, LocalDate s, LocalDate e) //, ISubscription subscription) 
     {
         this.userHistory = history;
-        //this.subscription = subscription;
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.subscription = new Subscription(this.email, s, e);
     }
 
     @Override
@@ -49,18 +52,22 @@ public class Customer implements ICustomer, IUser, Observer {
         return this.password;
     }
 
-    /*
-    public ISubscription getSubscription()
+    
+    public LocalDate getSubscriptionStart()
     {
-        return this.subscription;
+        return subscription.getStartDate();
     }
     
-    public void setSubscription(ISubscription s)
+    public LocalDate getSubscriptionEnd()
     {
-        this.subscription = s;
+        return subscription.getEndDate();
     }
     
-     */
+    public boolean isSubValid()
+    {
+        return subscription.getIsActive();
+    }
+    
     public int getRating() {
         return rating;
     }

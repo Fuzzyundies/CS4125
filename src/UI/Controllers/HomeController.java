@@ -13,6 +13,7 @@ import UI.UserInterfaces.RentOutView;
 import UI.UserInterfaces.RentView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,10 +23,14 @@ public class HomeController {
 
     private HomeView homeView;
     private LoginView loginView;
+    private Authentication authModel;
+    private boolean isSubValid;
 
-    public HomeController(HomeView view, LoginView loginView) {
+    public HomeController(HomeView view, LoginView loginView, Authentication a) {
         this.homeView = view;
         this.loginView = loginView;
+        this.authModel = a;
+        isSubValid = authModel.getValidSubscription(cs4125.CS4125.email, cs4125.CS4125.username);
         view.addRentListener(rentActionListener);
         view.addRentOutListener(rentOutActionListener);
         view.addViewProfileListener(viewProfileActionListener);
@@ -34,16 +39,24 @@ public class HomeController {
 
     private final ActionListener rentActionListener = (ActionEvent e) -> {
         //Go to RentView
-        RentView rentView = new RentView();
-        RentController rentViewController = new RentController(rentView, homeView);
-        homeView.setVisible(false);
+        if (isSubValid) {
+            RentView rentView = new RentView();
+            RentController rentViewController = new RentController(rentView, homeView);
+            homeView.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Renew Your Subscription.");
+        }
     };
 
     private final ActionListener rentOutActionListener = (ActionEvent e) -> {
         //Go to RentOutView 
-        RentOutView rentOutView = new RentOutView();
-        RentOutController rentOutController = new RentOutController(rentOutView, homeView);
-        homeView.setVisible(false);
+        if (isSubValid) {
+            RentOutView rentOutView = new RentOutView();
+            RentOutController rentOutController = new RentOutController(rentOutView, homeView);
+            homeView.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Renew Your Subscription.");
+        }
     };
 
     private final ActionListener viewProfileActionListener = (ActionEvent e) -> {
@@ -63,7 +76,7 @@ public class HomeController {
         //loginView.resetPasswordText();
         //loginView.resetEmailText();
         //loginView.setVisible(true);
-        
+
         // I tried to reset the fields but the error logging in exception kept getting snagged.
         System.out.println("Signed out");
         homeView.dispose();

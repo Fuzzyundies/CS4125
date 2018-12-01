@@ -73,18 +73,59 @@ public class Authentication
         return customerID;
     }
     
-    public boolean addNewUser(String username, String email, String password)
+    public boolean addNewUser(String username, String email, String password, LocalDate s, LocalDate e)
     {
         boolean inserted = false;
         try
         {
             // todo change these to local dates of start and end of subscription
-            inserted = dbAccess.addNewCustomer(username, email, password, LocalDate.now(), LocalDate.now());
+            inserted = dbAccess.addNewCustomer(username, email, password, s, e);
+            //Subscription sub = new Subscription(email, s, e);
         }
         catch(Exception ex)
         {
             ex.printStackTrace();
         }
         return inserted;
+    }
+    
+    public LocalDate getStartSubscription(String username)
+    {
+        LocalDate start =LocalDate.now();
+    
+        try{
+            LocalDate[] l = dbAccess.getSubscriptionDetails(username);
+            start = l[0];
+        }
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+        return start;
+    }
+    
+    public LocalDate getEndSubscription(String username)
+    {
+        LocalDate end = LocalDate.now();
+    
+        try{
+            LocalDate[] l = dbAccess.getSubscriptionDetails(username);
+            end = l[1];
+        }
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+        return end;
+    }
+    
+    public boolean getValidSubscription(String email, String username)
+    {
+        Subscription sub = new Subscription(email, getStartSubscription(username), getEndSubscription(username));
+        
+        if(sub.getIsActive())
+            return true;
+        else 
+            return false;
     }
 }

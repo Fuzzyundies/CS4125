@@ -7,6 +7,7 @@ package UI.Controllers;
 
 import Business.BusinessManagement.Authentication;
 import Business.BusinessManagement.Subscription;
+import Business.User.Customer;
 import DatabaseManagement.CustomerDAO;
 import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.LoginView;
@@ -66,7 +67,7 @@ public class LoginController {
                     //if(SubscriptionValid())
                     //{
                     HomeView homeView = new HomeView();
-                    HomeController homeController = new HomeController(homeView, loginView);
+                    HomeController homeController = new HomeController(homeView, loginView, authenticationModel);
                     //}
                     //else
                     //Go to renew subscription page
@@ -137,9 +138,8 @@ public class LoginController {
 
                             LocalDate sDate = LocalDate.now();
                             LocalDate eDate = LocalDate.now().plusMonths(3);
-                            //System.out.println(date); 
-                            Subscription sub = new Subscription(1, sDate, eDate);
-                            authenticationModel.addNewUser(username, email, password);
+
+                            authenticationModel.addNewUser(username, email, password, sDate, eDate);
 
                             backToLogin();
                         }
