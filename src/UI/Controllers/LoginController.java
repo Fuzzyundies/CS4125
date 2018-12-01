@@ -138,7 +138,7 @@ public class LoginController {
 
                             LocalDate sDate = LocalDate.now();
                             LocalDate eDate = LocalDate.now().plusMonths(3);
-                            //LocalDate eDate = LocalDate.now().minusDays(3);
+                            //LocalDate eDate = LocalDate.now().minusDays(3);   //for testing if a subscription is valid or not
 
                             authenticationModel.addNewUser(username, email, password, sDate, eDate);
 

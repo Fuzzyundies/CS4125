@@ -17,16 +17,19 @@ import UI.UserInterfaces.ProfileView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
 public class ProfileController {
 
     private ProfileView profileView;
     private HomeView homeView;
+    private Authentication authModel;
 
-    public ProfileController(ProfileView profileView, HomeView homeView) {
+    public ProfileController(ProfileView profileView, HomeView homeView, Authentication a) {
         this.profileView = profileView;
         this.homeView = homeView;
+        this.authModel = a;
         profileView.addSubscriptionButtonListener(renewSubscriptionListener);
         profileView.addHistBtnListener(viewHistoryActionListener);
         profileView.addEditBtnListener(editProfileListener);
@@ -112,6 +115,7 @@ public class ProfileController {
             try {
                 if (Integer.parseInt(profileView.getCreditCard()) == 1234) {
                     //setting up new subscription for that user
+                    authModel.setRenewSubscription(LocalDate.now().plusMonths(3));
                     JOptionPane.showMessageDialog(profileView, "Subscription renewed for 3 months");
                     backToHome();
                 } else {

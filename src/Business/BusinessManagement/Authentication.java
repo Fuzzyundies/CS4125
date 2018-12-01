@@ -128,4 +128,9 @@ public class Authentication
         else 
             return false;
     }
+    
+    public void setRenewSubscription(LocalDate e)
+    {
+        dbAccess.renewSubscription(e);
+    }
 }

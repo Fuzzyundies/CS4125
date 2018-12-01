@@ -37,9 +37,20 @@ public class HomeController {
         view.addViewProfileListener(viewProfileActionListener);
         view.addSignOutListener(signOutActionListener);
     }
+    
+    public void hasRenewed()
+    {
+        if(authModel.getValidSubscription(cs4125.CS4125.email, cs4125.CS4125.username))
+            isSubValid = true;
+        else
+            isSubValid = false;
+    }
 
     private final ActionListener rentActionListener = (ActionEvent e) -> {
         //Go to RentView
+        if(!isSubValid)
+            hasRenewed();
+        
         if (isSubValid) {
             RentView rentView = new RentView();
             RentController rentViewController = new RentController(rentView, homeView);
@@ -51,6 +62,9 @@ public class HomeController {
 
     private final ActionListener rentOutActionListener = (ActionEvent e) -> {
         //Go to RentOutView 
+        if(!isSubValid)
+            hasRenewed();
+        
         if (isSubValid) {
             RentOutView rentOutView = new RentOutView();
             RentOutController rentOutController = new RentOutController(rentOutView, homeView);
@@ -64,7 +78,7 @@ public class HomeController {
         String temp = "temp";
         Double temp2 = 2.0;
         ProfileView profileView = new ProfileView(temp, temp2);
-        ProfileController profileController = new ProfileController(profileView, homeView);
+        ProfileController profileController = new ProfileController(profileView, homeView, authModel);
         homeView.setVisible(false);
     };
 
