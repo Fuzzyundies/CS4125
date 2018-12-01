@@ -12,6 +12,7 @@ package UI.Controllers;
 import Business.BusinessManagement.Authentication;
 import Business.Product.Product;
 import DatabaseManagement.CustomerDAO;
+import DatabaseManagement.ProductDAO;
 import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.ProfileView;
 import java.awt.event.ActionEvent;
@@ -91,7 +92,8 @@ public class ProfileController {
     private ActionListener viewHistoryActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            profileView.createHistoryWindow();
+            Product[] products = cs4125.CS4125.loggedInUser.getUserHistory();
+            profileView.createHistoryWindow(products);
             profileView.addBackBtnListener(backToProfileListener);
             profileView.addSelectBtnListener(selectProductActionListener);
         }
@@ -158,7 +160,8 @@ public class ProfileController {
     private ActionListener backToHistory = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            profileView.createHistoryWindow();
+            Product[] products = cs4125.CS4125.loggedInUser.getUserHistory();
+            profileView.createHistoryWindow(products);
             profileView.addBackBtnListener(backHomeListener);
             profileView.addSelectBtnListener(selectProductActionListener);
         }

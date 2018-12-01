@@ -2,7 +2,6 @@ package UI.Controllers;
 
 import Business.Product.Product;
 
-import Business.BusinessManagement.Locker;
 import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.RentView;
 import Business.BusinessManagement.Notifcation;
@@ -183,7 +182,7 @@ public class RentController {
             selectedProduct.setIs_available(0);
             
             // Add product to users history
-            //Customer c = new Customer(id, name, email);
+            cs4125.CS4125.loggedInUser.addProductToHistory(selectedProduct, newTransaction.getTID(), startDate, endDate);
             
             homeView.setVisible(true);
             rentView.dispose();

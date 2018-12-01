@@ -145,10 +145,8 @@ public class ProfileView extends JFrame {
         mainPanel.repaint();
     }
 
-    public void createHistoryWindow() {
+    public void createHistoryWindow(Product [] products) {
         System.out.println("Displaying user rental history...");
-
-        Product[] products = ProductDAO.getHistory(cs4125.CS4125.loggedInUser.getID());
 
         this.setBounds(450, 250, 400, 200);
 

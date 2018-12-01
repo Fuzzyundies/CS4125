@@ -19,6 +19,7 @@ import java.time.LocalDate;
  */
 public class Transaction 
 {
+    private int tID;
     private String transactionID;
     private LocalDate saleDate;
     private double amount;
@@ -30,6 +31,7 @@ public class Transaction
     
     public Transaction(LocalDate saleDate, double amount, int renterID, int productID)
     {
+        tID = -1;
         // TODO generate transactionID
         this.transactionID = null;
         this.saleDate = saleDate;
@@ -37,6 +39,11 @@ public class Transaction
         this.renterID = renterID;
         this.productID = productID;
         this.leaserID = getLeaserID();
+    }
+    
+    public int getTID()
+    {
+        return tID;
     }
     
     public int getLeaserID()
@@ -110,6 +117,6 @@ public class Transaction
     {
         TransactionDAO dbAccess = new TransactionDAO();
         
-        dbAccess.addTransaction(productID, renterID, leaserID, amount, saleDate, saleDate, renterID, renterID, renterID);
+        tID = dbAccess.addTransaction(productID, renterID, leaserID, amount, saleDate, saleDate, renterID, renterID, renterID);
     }
 }

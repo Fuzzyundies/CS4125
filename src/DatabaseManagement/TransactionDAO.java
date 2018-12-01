@@ -68,8 +68,10 @@ public class TransactionDAO implements DAO {
         }
     }
 
-    public void addTransaction(int productID, int renterID, int leaserID, double amount,
-            LocalDate startDate, LocalDate endDate, int lockerID, int lCode, int rCode) {
+    public int addTransaction(int productID, int renterID, int leaserID, double amount,
+            LocalDate startDate, LocalDate endDate, int lockerID, int lCode, int rCode) 
+    {
+        int transactionID = -1;
         try {
             // insert the transaction
             connection = DriverManager.getConnection(JDBC_URL);
@@ -84,7 +86,7 @@ public class TransactionDAO implements DAO {
             resultSet = statement.executeQuery(query);
 
             if (resultSet.next()) {
-                int transactionID = resultSet.getInt(1);
+                transactionID = resultSet.getInt(1);
                 // insert into history
 
                 query = "INSERT INTO BeanSquadRentalDB.History VALUES("
@@ -115,6 +117,8 @@ public class TransactionDAO implements DAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        return transactionID;
     }
 
     @Override

@@ -2,6 +2,7 @@ package Business.User;
 
 import Business.BusinessManagement.Subscription;
 import Business.Product.Product;
+import DatabaseManagement.CustomerDAO;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -112,14 +113,25 @@ public class Customer implements ICustomer, IUser, Observer {
 
     }
 
-    public void getUserHistory() {
+    public Product[] getUserHistory() 
+    {
+        CustomerDAO dbAccess = new CustomerDAO();
+        return dbAccess.getHistory(cs4125.CS4125.loggedInUser.getID());
+        /*
         userHistory.forEach((history) -> {
             history.showHistory();
         });
+        */
     }
 
     @Override
     public void update(Product product) {
         System.out.println("Product now available:\n" + product.getId() + " - " + product.getName() + "\nSending email to " + getEmail() + "\n\n");
+    }
+
+    public void addProductToHistory(Product selectedProduct , int tID, LocalDate sDate, LocalDate eDate) 
+    {
+        CustomerDAO dbAccess = new CustomerDAO();
+        dbAccess.addToHistory(selectedProduct, tID, sDate, eDate);
     }
 }
