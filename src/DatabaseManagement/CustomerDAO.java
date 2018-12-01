@@ -153,6 +153,25 @@ public class CustomerDAO implements DAO
         return subDates;
     }
     
+    public void renewSubscription(LocalDate newEndDate)
+    {
+        try
+        {
+            connection = DriverManager.getConnection(JDBC_URL);
+            String query = "UPDATE BeanSquadRentalDB.Users"
+                    + " SET subEndDate = ? WHERE userID = " + cs4125.CS4125.userID;
+            
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setDate(1, Date.valueOf(newEndDate));
+            preparedStatement.executeUpdate();
+            close();
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    
     public boolean findUsername(String username)
     {
         boolean found = false;
