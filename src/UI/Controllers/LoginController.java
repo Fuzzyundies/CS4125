@@ -138,6 +138,7 @@ public class LoginController {
 
                             LocalDate sDate = LocalDate.now();
                             LocalDate eDate = LocalDate.now().plusMonths(3);
+                            //LocalDate eDate = LocalDate.now().minusDays(3);
 
                             authenticationModel.addNewUser(username, email, password, sDate, eDate);
 

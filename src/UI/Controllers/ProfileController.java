@@ -109,6 +109,7 @@ public class ProfileController {
     private ActionListener renewSubscriptionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+            //In here need to renew the subscription
             profileView.createRenewSubscriptionWindow();
             profileView.addBackBtnListener(backToProfileListener);
             profileView.addRenewBtnListener(renewListener);

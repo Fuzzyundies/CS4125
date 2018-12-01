@@ -43,7 +43,20 @@ public class Subscription
 
     public boolean getIsActive() 
     {
-        return isActive;
+        if(this.endDate.isBefore(LocalDate.now()) && isActive)
+        {
+            System.out.println("Current EndDate expired");
+            this.isActive = !isActive;
+        }
+        else if(this.startDate.isAfter(LocalDate.now()) && isActive)
+        {
+            System.out.println("Current Startdate not started yet");
+            this.isActive = !isActive;
+        }
+        else if((this.startDate.isEqual(LocalDate.now()) || this.startDate.isBefore(LocalDate.now()) && this.endDate.isAfter(LocalDate.now())))
+            this.isActive = isActive;
+        
+        return this.isActive;
     }
 
     public void setSubID(String subID) 

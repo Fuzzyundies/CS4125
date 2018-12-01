@@ -31,6 +31,7 @@ public class HomeController {
         this.loginView = loginView;
         this.authModel = a;
         isSubValid = authModel.getValidSubscription(cs4125.CS4125.email, cs4125.CS4125.username);
+        System.out.println("IN HOMECONTROLLER+ subValid?" + isSubValid);
         view.addRentListener(rentActionListener);
         view.addRentOutListener(rentOutActionListener);
         view.addViewProfileListener(viewProfileActionListener);
