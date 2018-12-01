@@ -30,7 +30,7 @@ public class HomeController {
         this.homeView = view;
         this.loginView = loginView;
         this.authModel = a;
-        isSubValid = authModel.getValidSubscription(cs4125.CS4125.email, cs4125.CS4125.username);
+        isSubValid = authModel.getValidSubscription(cs4125.CS4125.loggedInUser.getEmail(), cs4125.CS4125.loggedInUser.getName());
         System.out.println("IN HOMECONTROLLER+ subValid?" + isSubValid);
         view.addRentListener(rentActionListener);
         view.addRentOutListener(rentOutActionListener);
@@ -39,7 +39,7 @@ public class HomeController {
     }
 
     public void hasRenewed() {
-        if (authModel.getValidSubscription(cs4125.CS4125.email, cs4125.CS4125.username)) {
+        if (authModel.getValidSubscription(cs4125.CS4125.loggedInUser.getEmail(), cs4125.CS4125.loggedInUser.getName())) {
             isSubValid = true;
         } else {
             isSubValid = false;

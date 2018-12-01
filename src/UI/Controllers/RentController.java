@@ -72,7 +72,7 @@ public class RentController {
                 (Condition 2) They have spent >= 200 euro for 12.5% off -> totals in 25% off discount for this order*/
 
                 TransactionDAO transaction = new TransactionDAO();
-                if (transaction.checkCustomerFirstOrder(cs4125.CS4125.userID)) {
+                if (transaction.checkCustomerFirstOrder(cs4125.CS4125.loggedInUser.getID())) {
 
                     System.out.println("First Order");
                     Discount monthlyTwentyFiveOffFirstOrder = new FirstOrderDiscount(new TwelveDiscount(new MonthlyDiscount()));
@@ -166,13 +166,13 @@ public class RentController {
 
             // Create the new transaction
             double amount = selectedProduct.getPrice() * rentView.getNumberOfDays();
-            Transaction newTransaction = new Transaction(LocalDate.now(), amount, cs4125.CS4125.userID, selectedProduct.getId());
+            Transaction newTransaction = new Transaction(LocalDate.now(), amount, cs4125.CS4125.loggedInUser.getID(), selectedProduct.getId());
             newTransaction.executeTransaction();
 
             int leaserID = newTransaction.getLeaserID();
 
             // Notify the renter and leaser
-            Notifcation initialNotifcation = new Notifcation(cs4125.CS4125.userID, leaserID);
+            Notifcation initialNotifcation = new Notifcation(cs4125.CS4125.loggedInUser.getID(), leaserID);
             initialNotifcation.setRenterEmail("Rental Confirmation", "You've rented " + selectedProduct.getName() + ""
                     + ".\n It will be available for collection tomorrow at depot XXXX.\n "
                     + "Your rental period: " + startDate + " until " + endDate + "\n" + "Cost: "
@@ -180,14 +180,14 @@ public class RentController {
             initialNotifcation.setLeaserEmail("Rental Confirmation", "Hello leaser");
             initialNotifcation.sendEmail();
 
-            //Locker l = new Locker(r_code, l_code, newTransaction, date);
-            // TODO Change the Product state
-            //selectedProduct.setState(/*rented*/);
             selectedProduct.setIs_available(0);
-            /*
+            
+            // Add product to users history
+            //Customer c = new Customer(id, name, email);
+            
             homeView.setVisible(true);
             rentView.dispose();
-             */
+             
         }
     };
 }

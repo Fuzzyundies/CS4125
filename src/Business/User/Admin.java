@@ -8,12 +8,12 @@ import Business.Product.Product;
  */
 public class Admin implements IUser, Observer {
 
-    private String id;
+    private int id;
     private String name;
     private String email;
     private String password;
 
-    public Admin(String id, String name, String email, String password) {
+    public Admin(int id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -37,7 +37,7 @@ public class Admin implements IUser, Observer {
     }
 
     @Override
-    public String getID() {
+    public int getID() {
         return id;
     }
 
@@ -57,7 +57,7 @@ public class Admin implements IUser, Observer {
     }
 
     @Override
-    public void setID(String id) {
+    public void setID(int id) {
         this.id = id;
     }
 

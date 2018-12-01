@@ -138,7 +138,7 @@ public class CustomerDAO implements DAO {
         try {
             connection = DriverManager.getConnection(JDBC_URL);
             String query = "UPDATE BeanSquadRentalDB.Users"
-                    + " SET subEndDate = ? WHERE userID = " + cs4125.CS4125.userID;
+                    + " SET subEndDate = ? WHERE userID = " + cs4125.CS4125.loggedInUser.getID();
 
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setDate(1, Date.valueOf(newEndDate));
@@ -246,7 +246,7 @@ public class CustomerDAO implements DAO {
             String query = "UPDATE BeanSquadRentalDB.Users "
                     + "SET username = '" + newUsername + "' , email = '" + newEmail
                     + "' , password = PASSWORD( '" + newPassword + "' ) "
-                    + "WHERE userID = " + cs4125.CS4125.userID;
+                    + "WHERE userID = " + cs4125.CS4125.loggedInUser.getID();
             System.out.println(query);
             statement = connection.createStatement();
             statement.executeUpdate(query);

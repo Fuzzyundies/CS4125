@@ -87,7 +87,7 @@ public class ProfileView extends JFrame {
         infoPanel.setLayout(new GridLayout(2, 2, 5, 5));
 
         nameL = new JLabel("User Name:");
-        userNameL = new JLabel(cs4125.CS4125.username);
+        userNameL = new JLabel(cs4125.CS4125.loggedInUser.getName());
         ratingL = new JLabel("Rating:");
         userRatingL = new JLabel(rating + ""); //Didn't lie .toString()
         infoPanel.add(nameL);
@@ -116,8 +116,8 @@ public class ProfileView extends JFrame {
     public void createEditProfileWindow() {
 
         //init components
-        usernameInput = new JTextField(cs4125.CS4125.username);
-        emailInput = new JTextField(cs4125.CS4125.email);
+        usernameInput = new JTextField(cs4125.CS4125.loggedInUser.getName());
+        emailInput = new JTextField(cs4125.CS4125.loggedInUser.getEmail());
         firstPasswordInput = new JPasswordField();
         secondPasswordInput = new JPasswordField();
         saveBtn = new JButton("Save");
@@ -148,7 +148,7 @@ public class ProfileView extends JFrame {
     public void createHistoryWindow() {
         System.out.println("Displaying user rental history...");
 
-        Product[] products = ProductDAO.getHistory(cs4125.CS4125.userID);
+        Product[] products = ProductDAO.getHistory(cs4125.CS4125.loggedInUser.getID());
 
         this.setBounds(450, 250, 400, 200);
 

@@ -1,14 +1,13 @@
 package cs4125;
 
 import Business.BusinessManagement.Authentication;
+import Business.User.Customer;
 import UI.Controllers.LoginController;
 import UI.UserInterfaces.LoginView;
 
-public class CS4125 {
-
-    public static int userID;
-    public static String username;
-    public static String email;
+public class CS4125 
+{
+    public static Customer loggedInUser;
 
     public static void main(String[] args) {
         login();

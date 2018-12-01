@@ -58,11 +58,12 @@ public class LoginController {
                     loginView.displayErrorMessage("User not found");
                 } else {
 
-                    cs4125.CS4125.userID = result;
+                    //cs4125.CS4125.userID = result;
                     CustomerDAO dbAccess = new CustomerDAO();
-                    cs4125.CS4125.username = dbAccess.getUsername(cs4125.CS4125.userID);
-                    cs4125.CS4125.email = dbAccess.getEmail(cs4125.CS4125.userID);
-                    System.out.println("UserID:" + cs4125.CS4125.userID + " Username:" + cs4125.CS4125.username + " email:" + cs4125.CS4125.email);
+                    //cs4125.CS4125.username = dbAccess.getUsername(cs4125.CS4125.userID);
+                    //cs4125.CS4125.email = dbAccess.getEmail(cs4125.CS4125.userID);
+                    cs4125.CS4125.loggedInUser = new Customer(result, dbAccess.getUsername(result), dbAccess.getEmail(result));
+                    //System.out.println("UserID:" + cs4125.CS4125.userID + " Username:" + cs4125.CS4125.username + " email:" + cs4125.CS4125.email);
 
                     //if(SubscriptionValid())
                     //{

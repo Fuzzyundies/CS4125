@@ -13,27 +13,25 @@ public class Customer implements ICustomer, IUser, Observer {
 
     private List<IHistory> userHistory;
     private int rating;
-    private String paymentDetails;
-    private String id;
+    //private String paymentDetails;
+    private int id;
     private String name;
     private String email;
-    private String password;
+    //private String password;
     //private List<ITransaction> transactions;
     //private ISubscription subscription;
     private Subscription subscription;
 
-    public Customer(String id, String name, String email, String password, List<IHistory> history, LocalDate s, LocalDate e) //, ISubscription subscription) 
+    public Customer(int id, String name, String email) //, ISubscription subscription) 
     {
-        this.userHistory = history;
         this.id = id;
         this.name = name;
         this.email = email;
-        this.password = password;
-        this.subscription = new Subscription(this.email, s, e);
+        //this.subscription = new Subscription(this.email, s, e);
     }
 
     @Override
-    public String getID() {
+    public int getID() {
         return this.id;
     }
 
@@ -49,7 +47,7 @@ public class Customer implements ICustomer, IUser, Observer {
 
     @Override
     public String getPassword() {
-        return this.password;
+        return "";//this.password;
     }
 
     
@@ -73,11 +71,11 @@ public class Customer implements ICustomer, IUser, Observer {
     }
 
     public String getPaymentDetails() {
-        return paymentDetails;
+        return "";//paymentDetails;
     }
 
     @Override
-    public void setID(String id) {
+    public void setID(int id) {
         this.id = id;
     }
 
@@ -93,7 +91,7 @@ public class Customer implements ICustomer, IUser, Observer {
 
     @Override
     public void setPassword(String password) {
-        this.password = password;
+        //this.password = password;
     }
 
     @Override
