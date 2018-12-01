@@ -8,6 +8,10 @@ package Business.BusinessManagement;
 import java.util.Date;
 
 import Business.User.Customer;
+import DatabaseManagement.CustomerDAO;
+import DatabaseManagement.ProductDAO;
+import DatabaseManagement.TransactionDAO;
+import java.time.LocalDate;
 
 /**
  *
@@ -16,24 +20,30 @@ import Business.User.Customer;
 public class Transaction 
 {
     private String transactionID;
-    private Date saleDate;
+    private LocalDate saleDate;
     private double amount;
-    private Customer renter;
-    private Customer leaser;
-    private String productID;
+    private int renterID;
+    private int leaserID;
+    private int productID;
     
     //builder - debits & credits 
     
-    public Transaction(Date saleDate, double amount, Customer renter, 
-            Customer leaser, String productID)
+    public Transaction(LocalDate saleDate, double amount, int renterID, int productID)
     {
         // TODO generate transactionID
         this.transactionID = null;
         this.saleDate = saleDate;
         this.amount = amount;
-        this.renter = renter;
-        this.leaser = leaser;
+        this.renterID = renterID;
         this.productID = productID;
+        this.leaserID = getLeaserID();
+    }
+    
+    public int getLeaserID()
+    {
+        ProductDAO dbAccess = new ProductDAO();
+        int lID = dbAccess.getLeaserID(productID);
+        return lID;
     }
 
     public String getTransactionID() 
@@ -41,7 +51,7 @@ public class Transaction
         return transactionID;
     }
 
-    public Date getSaleDate() 
+    public LocalDate getSaleDate() 
     {
         return saleDate;
     }
@@ -51,17 +61,12 @@ public class Transaction
         return amount;
     }
 
-    public Customer getRenter() 
+    public int getRenterID() 
     {
-        return renter;
+        return renterID;
     }
 
-    public Customer getLeaser() 
-    {
-        return leaser;
-    }
-
-    public String getProductID() 
+    public int getProductID() 
     {
         return productID;
     }
@@ -72,7 +77,7 @@ public class Transaction
         this.transactionID = transactionID;
     }
 
-    public void setSaleDate(Date saleDate) 
+    public void setSaleDate(LocalDate saleDate) 
     {
         // TODO implement validation for setSaleDate method
         this.saleDate = saleDate;
@@ -84,19 +89,13 @@ public class Transaction
         this.amount = amount;
     }
 
-    public void setRenter(Customer renter) 
+    public void setRenter(int renterID) 
     {
         // TODO implement validation for setRenter method
-        this.renter = renter;
+        this.renterID = renterID;
     }
 
-    public void setLeaser(Customer leaser) 
-    {
-        // TODO implement validation for setLeaser method
-        this.leaser = leaser;
-    }
-
-    public void setProductID(String productID) 
+    public void setProductID(int productID) 
     {
         // TODO implement validation for setProductID method
         this.productID = productID;
@@ -105,5 +104,12 @@ public class Transaction
     public void applyDiscount(double discount)
     {
         // TODO implement applyDiscount method
+    }
+    
+    public void executeTransaction()
+    {
+        TransactionDAO dbAccess = new TransactionDAO();
+        
+        dbAccess.addTransaction(productID, renterID, leaserID, amount, saleDate, saleDate, renterID, renterID, renterID);
     }
 }

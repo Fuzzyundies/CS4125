@@ -136,13 +136,11 @@ public class RentView extends JFrame {
 
         panel.removeAll();
 
-        panel.setLayout(new GridLayout(5, 2));
+        panel.setLayout(new GridLayout(4, 2));
         panel.add(new JLabel("Product:"));
         panel.add(new JLabel(p.getName()));
-        panel.add(new JLabel("TODO ADD TRANSCTION FIELDS"));
-        panel.add(new JLabel(""));
         panel.add(new JLabel("Collection Depot:"));
-        panel.add(new JLabel("TODO get depot location"));
+        panel.add(new JLabel("XXXX"));
 
         panel.add(new JLabel("Rental Period:"));
 

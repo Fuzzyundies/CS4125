@@ -16,6 +16,8 @@ import Business.User.Customer;
 import Business.User.UserFactory;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Random;
 
 /**
@@ -135,7 +137,6 @@ public class RentController {
         @Override
         public void actionPerformed(ActionEvent e) 
         {
-            //Transaction t = new Transaction(date, amount, renter, leaser, pID);
             // Generate the locker codes
             int max = 9999;
             int min = 1000;
@@ -150,6 +151,13 @@ public class RentController {
             
             // Get the product selected for rent
             Product selectedProduct = rentView.getSelectedProduct();
+            LocalDate today = LocalDate.now();
+            LocalDate startDate = today.plus(1, ChronoUnit.DAYS);
+            LocalDate endDate = startDate.plus(rentView.getNumberOfDays(), ChronoUnit.DAYS);
+            
+            System.out.println("Today" + today);
+            System.out.println("StartDate: " + startDate);
+            System.out.println("End Date: " + endDate);
             
             // Create the new transaction
             // TODO add in transaction fields for a credit card. (Card no., cardholder name, etc.)
@@ -159,7 +167,22 @@ public class RentController {
             // renter - 
             // leaser - 
             // productID - can just get the product from getSelectedProduct method.
-            //Transaction newTransaction = new Transaction(saleDate, amount, renter, leaser, selectedProduct.getId();)
+            double amount = selectedProduct.getPrice() * rentView.getNumberOfDays();
+            Transaction newTransaction = new Transaction(LocalDate.now(), amount, cs4125.CS4125.userID, selectedProduct.getId());
+            newTransaction.executeTransaction();
+            
+            int leaserID = newTransaction.getLeaserID();
+            
+            Notifcation initialNotifcation = new Notifcation(cs4125.CS4125.userID, leaserID);
+            initialNotifcation.setRenterEmail("Rental Confirmation","You've rented " + selectedProduct.getName() + ""
+                    + ".\n It will be available for collection tomorrow at depot XXXX.\n "
+                    + "Your rental period: " + startDate + " until " + endDate + "\n"+ "Cost: "
+                            + amount);
+            initialNotifcation.setLeaserEmail("Rental Confirmation","Hello leaser");
+            initialNotifcation.sendEmail();
+            
+            
+            
             
             
             // Maybe a Timestamp instead?
@@ -173,7 +196,7 @@ public class RentController {
             // Might want to pass the locker to notification too? have it as a data member
             // This will allow us to add the locker info to the email being sent.
             
-            //Notifcation n = new Notifcation(renter, leaser);
+            //Notifcation n = new Notifcation(, leaser);
             
 
             /*

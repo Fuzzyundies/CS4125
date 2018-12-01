@@ -9,6 +9,7 @@ import Business.Product.Product;
 import Business.User.Customer;
 
 import Business.User.Observer;
+import DatabaseManagement.CustomerDAO;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +32,8 @@ public class Notifcation implements Subject //interface ideally
 {
 
     private List<Observer> observers;
-    private Customer renter;
-    private Customer leaser;
+    private String renterEmail;
+    private String leaserEmail;
 
     // NOTE: Limited to 99 emails every 24 hours. 
     // Uses Google SMTP instead of AWS SES because AWS costs approx 10 cent per email.
@@ -49,12 +50,14 @@ public class Notifcation implements Subject //interface ideally
     private String productName = "\nTemp Name"; //Needs to be connected to the Transaction
     private String subjectEmail = "Product Rented"; //Needs to be connected to the Transaction
     private String r_msg = "";
+    private String r_subject = "";
     private String l_msg = "";
-    private String temp_msg = "";
-
-    public Notifcation(Customer renter, Customer leaser) {
-        this.renter = renter;
-        this.leaser = leaser;
+    private String l_subject = "";
+    
+    public Notifcation(int renterID, int leaserID) 
+    {
+        this.renterEmail = getUserEmail(renterID);
+        this.leaserEmail = getUserEmail(leaserID);
         this.observers = new ArrayList();
     }
 
@@ -62,19 +65,30 @@ public class Notifcation implements Subject //interface ideally
         this.observers = new ArrayList<>();
     }
 
-    public Customer getRenter() {
-        return renter;
-    }
-
-    public Customer getLeaser() {
-        return leaser;
-    }
 
     public Timestamp getTimestamp() {
         return timestamp;
     }
+    
+    private String getUserEmail(int userID)
+    {
+        CustomerDAO dbAccess = new CustomerDAO();
+        return dbAccess.getEmail(userID);
+    }
+    
+    public void setRenterEmail(String subject, String message)
+    {
+        this.r_subject = subject;
+        this.r_msg = message;
+    }
+    
+    public void setLeaserEmail(String subject, String message)
+    {
+        this.l_subject = subject;
+        this.l_msg = message;
+    }
 
-    public void sendEmail(Customer r, Customer l) {
+    public void sendEmail() {
         // TODO implement sendEmail method
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -90,29 +104,21 @@ public class Notifcation implements Subject //interface ideally
         }
         );
 
-        String r_email = r.getEmail();
-        String l_email = l.getEmail();
-
-        // generate leaser code for locker
-        //r_code = locker.getRenterPin();
-        //l_code = locker.getLeaserPin();
-        temp_msg = headerEmail + productEmail + productName + lockerEmail + lockerNumber + pinEmail;
-        //r_msg = temp_msg + r_code + signatureEmail;
-        //l_msg = temp_msg + l_code + signatureEmail;
-
         try {
+            renterEmail = "benjamingrimes182@gmail.com";
+            leaserEmail = "benjamingrimes182@gmail.com";
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("BeanSquadRental@gmail.com"));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(r_email));
-            message.setSubject(subjectEmail);
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(renterEmail));
+            message.setSubject(r_subject);
             message.setText(r_msg);
             Transport.send(message);
             System.out.println("Sent to customer...");
 
             message = new MimeMessage(session);
             message.setFrom(new InternetAddress("BeanSquadRental@gmail.com"));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(l_email));
-            message.setSubject(subjectEmail);
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(leaserEmail));
+            message.setSubject(l_subject);
             message.setText(l_msg);
             Transport.send(message);
             System.out.println("Sent email to leaser...");

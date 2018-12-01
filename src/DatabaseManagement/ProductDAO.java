@@ -157,6 +157,28 @@ public class ProductDAO implements DAO
         return tmp;
     }
     
+    public int getLeaserID(int productID)
+    {
+        int leaserID = -1;
+        try{
+            connection = DriverManager.getConnection(JDBC_URL);
+            statement = connection.createStatement();
+            String query = "SELECT ownerID "
+                    + "FROM BeanSquadRentalDB.Products "
+                    + "WHERE pID = " + productID + ";";
+            resultSet = statement.executeQuery(query);
+            if(resultSet.next())
+            {
+                return resultSet.getInt("ownerID");
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return leaserID;
+    }
+    
     
     @Override
     public void close()

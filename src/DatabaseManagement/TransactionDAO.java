@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 /**
  *
@@ -57,7 +58,7 @@ public class TransactionDAO implements DAO
     }
     
     public void addTransaction(int productID, int renterID, int leaserID, double amount, 
-            java.util.Date startDate, java.util.Date endDate, int lockerID, int lCode, int rCode)
+            LocalDate startDate, LocalDate endDate, int lockerID, int lCode, int rCode)
     {
         try
         {
@@ -65,7 +66,7 @@ public class TransactionDAO implements DAO
             connection = DriverManager.getConnection(JDBC_URL);
             statement = connection.createStatement();
             String query = "INSERT INTO BeanSquadRentalDB.RentalTransactions "
-                    + "VALUES( default, NOW(), default, " + amount + " );";
+                    + "VALUES( default, NOW(), default, " + amount + ", " + renterID + ", " + productID + " );";
             
             statement.executeUpdate(query);
             
@@ -78,12 +79,6 @@ public class TransactionDAO implements DAO
                 int transactionID = resultSet.getInt(1);
                 // insert into history
                 
-                java.text.SimpleDateFormat formatter = 
-                new java.text.SimpleDateFormat("YYYY-MM-DD HH:MM:SS");
-
-                String sDate = formatter.format(startDate);
-                String eDate = formatter.format(endDate);
-                
                 query = "INSERT INTO BeanSquadRentalDB.History VALUES("
                         + "default, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 
@@ -92,8 +87,8 @@ public class TransactionDAO implements DAO
                 preparedStatement.setInt(2, leaserID);
                 preparedStatement.setInt(3, productID);
                 preparedStatement.setInt(4, transactionID);
-                preparedStatement.setDate(5, new Date(startDate.getTime()));
-                preparedStatement.setDate(6, new Date(endDate.getTime()));
+                preparedStatement.setDate(5, Date.valueOf(startDate));
+                preparedStatement.setDate(6, Date.valueOf(endDate));
                 preparedStatement.setInt(7, lockerID);
                 preparedStatement.setInt(8, lCode);
                 preparedStatement.setInt(9, rCode);
