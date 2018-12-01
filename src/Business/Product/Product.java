@@ -34,7 +34,7 @@ public class Product {
         this.rating = rating; 
         this.description = description;
         this.is_available = is_available;
-        this.productState = new ProductPending(); //assuming the product is pending first time around
+        this.productState = new ProductIdle(); //assuming the product is pending first time around
     }
 
     public int getIs_available() {

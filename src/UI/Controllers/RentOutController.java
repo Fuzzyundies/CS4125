@@ -21,7 +21,7 @@ public class RentOutController {
     {
         this.view = view;
         this.homeView = homeView;
-        view.displayRentOutNewProduct(Category.getCategories());
+        //view.displayRentOutNewProduct(Category.getCategories());
         view.addAddNewProductBtnListener(addNewProductActionListener);
         view.viewProductsBtnListener(viewProductsActionListener);
         view.backBtnListener(backToHomeActionListener);

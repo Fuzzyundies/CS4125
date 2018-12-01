@@ -20,6 +20,13 @@ public class AdminTest {
     public AdminTest() {
         userFactory = new UserFactory();
     }
+    
+    @Test
+    public void testGetEmail() {
+        //Purposely fail this test
+        user = userFactory.getUser("A");
+        assertEquals("someEmail@mail.ie", user.getEmail());
+    }
 
     @Test
     public void testResetPassword() {
@@ -43,12 +50,7 @@ public class AdminTest {
         assertEquals("101", user.getID());
     }
 
-    @Test
-    public void testGetEmail() {
-        //Purposely fail this test
-        user = userFactory.getUser("A");
-        assertEquals("someEmail@mail.ie", user.getEmail());
-    }
+    
 
     @Test
     public void testGetName() {

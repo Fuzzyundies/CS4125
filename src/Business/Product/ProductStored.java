@@ -8,16 +8,16 @@ public class ProductStored implements ProductState {
 
     @Override
     public void nextState(Product p) {
-        p.setState(new ProductReturned());
+        p.setState(new ProductTaken());
     }
 
     @Override
     public void previousState(Product p) {
-        p.setState(new ProductTransit());
+        p.setState(new ProductIdle());
     }
 
     @Override
     public String getProductStatus(Product p) {
-        return p.getName()+ " is currently stored in a warehouse locker.";
+        return p.getName() + " is currently stored in a warehouse locker.";
     }
 }
