@@ -135,7 +135,6 @@ public class RentController {
         @Override
         public void actionPerformed(ActionEvent e) 
         {
-            System.out.println("Confirm rental...");
             //Transaction t = new Transaction(date, amount, renter, leaser, pID);
             // Generate the locker codes
             int max = 9999;
@@ -147,6 +146,7 @@ public class RentController {
                 System.out.println("In this loop");
                 l_code = rand.nextInt((max-min)+1) + min;
             }
+            System.out.println(r_code + " " + l_code);
             
             // Get the product selected for rent
             Product selectedProduct = rentView.getSelectedProduct();
@@ -176,8 +176,10 @@ public class RentController {
             //Notifcation n = new Notifcation(renter, leaser);
             
 
+            /*
             homeView.setVisible(true);
             rentView.dispose();
+            */
         }
     };
 }

@@ -3,11 +3,9 @@ package UI.UserInterfaces;
 import Business.Product.Category;
 
 import Business.Product.Product;
-import DatabaseManagement.CategoriesDAO;
 import DatabaseManagement.ProductDAO;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -37,6 +35,8 @@ public class RentView extends JFrame {
     // ------------------------------------------------
 
     // ----------- Rent Product View ------------------
+    private String [] days = {"1", "2", "3", "4", "5", "6", "7"};
+    JComboBox numOfDays;
     // ------------------------------------------------
     public RentView() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,12 +67,6 @@ public class RentView extends JFrame {
         this.setTitle("Categories");
     }
 
-    /*
-    public void displayBrowseCategories()
-    {
-        
-    }
-     */
     public void displayListOfProducts(int cID) {
         System.out.println("Displaying list of products...");
         Product[] products = ProductDAO.getListProducts(cID);
@@ -93,6 +87,7 @@ public class RentView extends JFrame {
         btnContainer.add(select);
         panel.add(btnContainer);
 
+        this.setTitle("List of Products");
         panel.revalidate();
         panel.repaint();
     }
@@ -125,13 +120,15 @@ public class RentView extends JFrame {
         panel.add(new JLabel(available));
         panel.add(back);
         panel.add(rent_btn);
+        
+        this.setTitle("Product Details");
 
         panel.revalidate();
         panel.repaint();
     }
 
-    public void displayRentProduct(Product p) {
-        System.out.println("Displaying confirm rental...");
+    public void displayRentProduct(Product p) 
+    {
         select = new JButton("Confirm rental");
         back = new JButton("Back");
 
@@ -148,22 +145,23 @@ public class RentView extends JFrame {
         panel.add(new JLabel("TODO get depot location"));
 
         panel.add(new JLabel("Rental Period:"));
-        JPanel period_panel = new JPanel();
-        GridLayout period_grid = new GridLayout(1, 2);
-        period_panel.setLayout(period_grid);
 
-        JComboBox fromDatesComboBox = new JComboBox();
-        JComboBox toDatesComboBox = new JComboBox();
-        period_panel.add(fromDatesComboBox);
-        period_panel.add(toDatesComboBox);
-        panel.add(period_panel);
+        numOfDays = new JComboBox(days);
 
+        panel.add(numOfDays);
         panel.add(back);
         panel.add(select);
-
+        
+        this.setTitle("Rent Product");
         panel.revalidate();
         panel.repaint();
     }
+    
+    public int getNumberOfDays()
+    {
+        return numOfDays.getSelectedIndex() + 1;
+    }
+        
 
     public void displayRentalConfirmation() {
         System.out.println("Displaying rental confirmation...");
