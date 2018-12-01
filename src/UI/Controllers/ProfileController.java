@@ -33,8 +33,6 @@ public class ProfileController {
         profileView.addHomeBtnListener(backHomeListener);
     }
 
-   
-
     private final ActionListener backToProfileListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -57,19 +55,13 @@ public class ProfileController {
             Authentication authenticationModel = new Authentication();
             boolean emailInUse = authenticationModel.checkIfEmailInUse(email);
             boolean usernameInUse = authenticationModel.checkIfUsernameInUse(userName);
-            if(emailInUse)
-            {
+            if (emailInUse) {
                 JOptionPane.showMessageDialog(profileView, "Email entered is already in use");
-            }
-            else if(usernameInUse)
-            {
+            } else if (usernameInUse) {
                 JOptionPane.showMessageDialog(profileView, "Username is already in use");
-            }
-            else if (password.equals(confirmPassword) && (password.length() >= 5 && confirmPassword.length() >= 5) && !userName.isEmpty() && !emailInUse && !usernameInUse) 
-            {
+            } else if (password.equals(confirmPassword) && (password.length() >= 5 && confirmPassword.length() >= 5) && !userName.isEmpty() && !emailInUse && !usernameInUse) {
                 CustomerDAO dbAccess = new CustomerDAO();
-                try
-                {
+                try {
                     dbAccess.updateProfile(userName, email, password);
                     JOptionPane.showMessageDialog(profileView, "Profile details have been updated", "Profile Updated", 1);
                     // Go back to profile 
@@ -78,14 +70,10 @@ public class ProfileController {
                     profileView.addHomeBtnListener(backHomeListener);
                     profileView.addSubscriptionButtonListener(renewSubscriptionListener);
                     profileView.addHistBtnListener(viewHistoryActionListener);
-                }
-                catch(SQLException ex)
-                {
+                } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
-            } 
-            else 
-            {
+            } else {
                 JOptionPane.showMessageDialog(null, "Passwords must match, contain at least 5 characters and Username cannot be empty", "Password incompatibility", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -105,7 +93,7 @@ public class ProfileController {
             profileView.addSelectBtnListener(selectProductActionListener);
         }
     };
-    
+
     private ActionListener renewSubscriptionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -115,22 +103,23 @@ public class ProfileController {
             profileView.addRenewBtnListener(renewListener);
         }
     };
-    
+
     private ActionListener renewListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Renew Listener");
             //To do -- Validate credit card
-            if(Integer.parseInt(profileView.getCreditCard()) == 1234)
-            {
-                //setting up new subscription for that user
-                JOptionPane.showMessageDialog(profileView, "Subscription renewed for 3 months");
-                backToHome();
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(profileView, "Incorrect Credit Card details");
-                profileView.clearCreditCard();
+            try {
+                if (Integer.parseInt(profileView.getCreditCard()) == 1234) {
+                    //setting up new subscription for that user
+                    JOptionPane.showMessageDialog(profileView, "Subscription renewed for 3 months");
+                    backToHome();
+                } else {
+                    JOptionPane.showMessageDialog(profileView, "Incorrect Credit Card details");
+                    profileView.clearCreditCard();
+                }
+            } catch (NumberFormatException ex) {
+
             }
         }
     };
@@ -138,7 +127,7 @@ public class ProfileController {
     private final ActionListener backHomeListener = (ActionEvent e) -> {
         backToHome();
     };
-    
+
     private ActionListener rateUserListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
