@@ -7,8 +7,8 @@ import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.RentView;
 import Business.BusinessManagement.Notifcation;
 import Business.BusinessManagement.Transaction;
-import Business.Discount.FirstOrder;
-import Business.Discount.TwelveOff;
+import Business.Discount.FirstOrderDiscount;
+import Business.Discount.TwelveDiscount;
 import Business.Discount.Discount;
 import Business.Discount.MonthlyDiscount;
 import Business.Product.Category;
@@ -69,7 +69,7 @@ public class RentController {
                 /*Assumption: Order just processed is > 200 euro (300). They have a monthly discount rate based on their subscription 
                 (Condition 1) It is their first order
                 (Condition 2) They have spent >= 200 euro for 12.5% off -> totals in 25% off discount for this order*/
-                Discount monthlyTwentyFiveOffFirstOrder = new FirstOrder(new TwelveOff(new MonthlyDiscount()));
+                Discount monthlyTwentyFiveOffFirstOrder = new FirstOrderDiscount(new TwelveDiscount(new MonthlyDiscount()));
                 double discountTotal = monthlyTwentyFiveOffFirstOrder.applyDiscount();
                 double discountCalculator = 100 - discountTotal;
                 double productPriceAfterDiscount = ((discountCalculator * p.getPrice()) / 100);

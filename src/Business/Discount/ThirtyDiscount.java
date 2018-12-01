@@ -4,9 +4,9 @@ package Business.Discount;
  *
  * @author neild
  */
-public class ThirtyOff extends DiscountDecorator {
+public class ThirtyDiscount extends DiscountDecorator {
 
-    public ThirtyOff(final Discount discount) {
+    public ThirtyDiscount(final Discount discount) {
         super(discount);
     }
 
