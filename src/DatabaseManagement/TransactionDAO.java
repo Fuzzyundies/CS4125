@@ -59,7 +59,7 @@ public class TransactionDAO implements DAO {
         try {
             connection = DriverManager.getConnection(JDBC_URL);
             statement = connection.createStatement();
-            String sql = "SELECT * BeanSquadRentalDB.RentalTransactions WHERE renterID = " + customerID; //check if this customer has rented a product before
+            String sql = "SELECT * BeanSquadRentalDB.RentalTransactions WHERE renterID = " + customerID + ";"; //check if this customer has rented a product before
             //statement.executeUpdate(sql);
             resultSet = statement.executeQuery(sql);
             if (resultSet.next()) { //as a renter they have previous transactions - not their first order
