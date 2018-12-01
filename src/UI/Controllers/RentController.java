@@ -151,8 +151,6 @@ public class RentController {
             // Get the product selected for rent
             Product selectedProduct = rentView.getSelectedProduct();
             
-            // Might want to use Timestamp instead of Date
-            
             // Create the new transaction
             // TODO add in transaction fields for a credit card. (Card no., cardholder name, etc.)
             // saleDate - maybe just a timestamp?
