@@ -5,6 +5,8 @@
  */
 package DatabaseManagement;
 
+import Business.Product.Product;
+import static DatabaseManagement.DAO.JDBC_URL;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -13,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
@@ -255,6 +258,82 @@ public class CustomerDAO implements DAO {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+    
+    public void addToHistory(Product selectedProduct, int tID, LocalDate sDate, LocalDate eDate) 
+    {
+        try 
+        {
+            connection = DriverManager.getConnection(JDBC_URL); 
+            String query = "INSERT INTO BeanSquadRentalDB.History VALUES ("
+                    + " default, ?, ?, ?, ?, ?, ?, default, default, default )";
+            
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, cs4125.CS4125.loggedInUser.getID());
+            preparedStatement.setInt(2, selectedProduct.getOwner());
+            preparedStatement.setInt(3, selectedProduct.getId());
+            preparedStatement.setInt(4, tID);
+            preparedStatement.setDate(5, Date.valueOf(sDate));
+            preparedStatement.setDate(6, Date.valueOf(eDate));
+            
+            preparedStatement.executeUpdate();
+            
+            close();
+        }
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+    }
+    
+    public Product [] getHistory(int userID)
+    {
+        ArrayList<Product> products = new ArrayList<Product>();
+        
+        try 
+        {
+            connection = DriverManager.getConnection(JDBC_URL);
+            statement = connection.createStatement();
+            String query = "SELECT * "
+                    + "FROM BeanSquadRentalDB.Products p "
+                    + "WHERE p.pID IN (SELECT h.pID "
+                    + "FROM History h "
+                    + "WHERE h.rID = " + userID + " AND h.pID = p.pID);";
+            resultSet = statement.executeQuery(query);
+            
+            int pID;
+            int ownerID;
+            String pName;
+            String description;
+            int is_available;
+            int catID;
+            double price;
+            int rating;
+            
+            while(resultSet.next())
+            {
+                pID = resultSet.getInt("pID");
+                ownerID = resultSet.getInt("ownerID");
+                pName = resultSet.getString("pName");
+                description = resultSet.getString("description");
+                is_available = resultSet.getInt("is_available");
+                catID = resultSet.getInt("catID");
+                price = resultSet.getDouble("price");
+                rating = resultSet.getInt("rating");
+                products.add(new Product(pID, pName, catID, ownerID, price, rating, description, 0)); //0 just for testing unavailable product
+            }
+        }
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+        
+        Product [] tmp = new Product[products.size()];
+        
+        for(int i = 0; i < tmp.length; i++)
+            tmp[i] = products.get(i);
+        
+        return tmp;
     }
 
     @Override
