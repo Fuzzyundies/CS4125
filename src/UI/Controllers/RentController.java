@@ -160,19 +160,13 @@ public class RentController {
             System.out.println("End Date: " + endDate);
             
             // Create the new transaction
-            // TODO add in transaction fields for a credit card. (Card no., cardholder name, etc.)
-            // saleDate - maybe just a timestamp?
-            // amount = calculate from filled in fields
-            // Could just change the renter and leaser to use ids instead of begin an instance of customer.
-            // renter - 
-            // leaser - 
-            // productID - can just get the product from getSelectedProduct method.
             double amount = selectedProduct.getPrice() * rentView.getNumberOfDays();
             Transaction newTransaction = new Transaction(LocalDate.now(), amount, cs4125.CS4125.userID, selectedProduct.getId());
             newTransaction.executeTransaction();
             
             int leaserID = newTransaction.getLeaserID();
             
+            // Notify the renter and leaser
             Notifcation initialNotifcation = new Notifcation(cs4125.CS4125.userID, leaserID);
             initialNotifcation.setRenterEmail("Rental Confirmation","You've rented " + selectedProduct.getName() + ""
                     + ".\n It will be available for collection tomorrow at depot XXXX.\n "
@@ -180,25 +174,12 @@ public class RentController {
                             + amount);
             initialNotifcation.setLeaserEmail("Rental Confirmation","Hello leaser");
             initialNotifcation.sendEmail();
-            
-            
-            
-            
-            
-            // Maybe a Timestamp instead?
-            
+                        
             //Locker l = new Locker(r_code, l_code, newTransaction, date);
             
-            
-            // can pass renter and leaser ID instead of two customer objects.
-            // Then use the method in CustomerDAO to get both emails buy passing in the ID
-            // This will allow us to then send an email to both.
-            // Might want to pass the locker to notification too? have it as a data member
-            // This will allow us to add the locker info to the email being sent.
-            
-            //Notifcation n = new Notifcation(, leaser);
-            
-
+            // TODO Change the Product state
+            //selectedProduct.setState(/*rented*/);
+            selectedProduct.setIs_available(0);
             /*
             homeView.setVisible(true);
             rentView.dispose();

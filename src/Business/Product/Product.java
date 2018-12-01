@@ -5,6 +5,8 @@
  */
 package Business.Product;
 
+import DatabaseManagement.ProductDAO;
+
 /**
  *
  * @author Benjamin Grimes
@@ -28,7 +30,8 @@ public class Product {
         this.catID = catID;
         this.ownerID = ownerID;
         this.price = price;
-        this.rating = rating;
+        System.out.println("PRICE: " + price);
+        this.rating = rating; 
         this.description = description;
         this.is_available = is_available;
         this.productState = new ProductPending(); //assuming the product is pending first time around
@@ -38,8 +41,14 @@ public class Product {
         return is_available;
     }
 
-    public void setIs_available(final int isAvailable) {
-        this.is_available = isAvailable;
+    public void setIs_available(int isAvailable) 
+    {
+        if(isAvailable == 1 || isAvailable == 0)
+        {
+            this.is_available = isAvailable;
+            ProductDAO dbAccess = new ProductDAO();
+            dbAccess.setProductAvailability(id, isAvailable);
+        }
     }
 
     public int getId() {

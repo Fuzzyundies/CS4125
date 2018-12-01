@@ -67,7 +67,7 @@ public class ProductDAO implements DAO
             statement = connection.createStatement();
             String query = "Select * "
                     + "FROM BeanSquadRentalDB.Products "
-                    + "WHERE catID = " + cID;
+                    + "WHERE catID = " + cID + " AND is_available = 1";
             
             resultSet = statement.executeQuery(query);
             
@@ -90,7 +90,7 @@ public class ProductDAO implements DAO
                 catID = resultSet.getInt("catID");
                 price = resultSet.getDouble("price");
                 rating = resultSet.getInt("rating");
-                products.add(new Product(pID, pName, catID, ownerID, 300, rating, description, is_available)); //300 for testing purposes 
+                products.add(new Product(pID, pName, catID, ownerID, price, rating, description, is_available)); //300 for testing purposes 
             }
             
         }
@@ -171,12 +171,32 @@ public class ProductDAO implements DAO
             {
                 return resultSet.getInt("ownerID");
             }
+            close();
         }
         catch(Exception ex)
         {
             ex.printStackTrace();
         }
         return leaserID;
+    }
+    
+    public void setProductAvailability(int pID, int available)
+    {
+        try
+        {
+            connection = DriverManager.getConnection(JDBC_URL);
+            statement = connection.createStatement();
+            
+            String query = "UPDATE BeanSquadRentalDB.Products "
+                    + "SET is_available = " + available
+                    + " WHERE pID = '" + pID + "' ;";  
+            
+            statement.executeUpdate(query);
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
     
     

@@ -104,9 +104,8 @@ public class Notifcation implements Subject //interface ideally
         }
         );
 
-        try {
-            renterEmail = "benjamingrimes182@gmail.com";
-            leaserEmail = "benjamingrimes182@gmail.com";
+        try 
+        {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("BeanSquadRental@gmail.com"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(renterEmail));
