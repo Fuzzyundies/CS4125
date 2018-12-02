@@ -8,7 +8,7 @@ public class ProductReturned implements ProductState {
 
     @Override
     public void nextState(Product p) {
-        System.out.println(new ProductIdle());
+        p.setState(new ProductIdle()); //cycle around to beginning
     }
 
     @Override
