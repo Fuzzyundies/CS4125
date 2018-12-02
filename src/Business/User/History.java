@@ -21,7 +21,7 @@ public class History implements IHistory {
     }
 
     public String getRenter() {
-        return renter.getCustomer();
+        return renter.getCustomer(); //Program to interfaces, not implementation
     }
 
     public void setRenter(ICustomer renter) {
@@ -29,7 +29,7 @@ public class History implements IHistory {
     }
 
     public String getLeaser() {
-        return leaser.getCustomer();
+        return leaser.getCustomer(); //Program to interfaces, not implementation
     }
 
     public void setLeaser(ICustomer leaser) {

@@ -27,8 +27,7 @@ import javax.mail.internet.MimeMessage;
  *
  * @author Benjamin Grimes
  */
-public class Notifcation implements Subject //interface ideally
-{
+public class Notifcation implements Subject {
 
     private List<Observer> observers;
     private String renterEmail;
@@ -52,9 +51,8 @@ public class Notifcation implements Subject //interface ideally
     private String r_subject = "";
     private String l_msg = "";
     private String l_subject = "";
-    
-    public Notifcation(int renterID, int leaserID) 
-    {
+
+    public Notifcation(int renterID, int leaserID) {
         this.renterEmail = getUserEmail(renterID);
         this.leaserEmail = getUserEmail(leaserID);
         this.observers = new ArrayList();
@@ -64,25 +62,21 @@ public class Notifcation implements Subject //interface ideally
         this.observers = new ArrayList<>();
     }
 
-
     public Timestamp getTimestamp() {
         return timestamp;
     }
-    
-    private String getUserEmail(int userID)
-    {
+
+    private String getUserEmail(int userID) {
         CustomerDAO dbAccess = new CustomerDAO();
         return dbAccess.getEmail(userID);
     }
-    
-    public void setRenterEmail(String subject, String message)
-    {
+
+    public void setRenterEmail(String subject, String message) {
         this.r_subject = subject;
         this.r_msg = message;
     }
-    
-    public void setLeaserEmail(String subject, String message)
-    {
+
+    public void setLeaserEmail(String subject, String message) {
         this.l_subject = subject;
         this.l_msg = message;
     }
@@ -103,8 +97,7 @@ public class Notifcation implements Subject //interface ideally
         }
         );
 
-        try 
-        {
+        try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("BeanSquadRental@gmail.com"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(renterEmail));
@@ -144,7 +137,7 @@ public class Notifcation implements Subject //interface ideally
 
     @Override
     public void notify(Product product) {
-        observers.forEach((o) -> { //for eacg loop
+        observers.forEach((o) -> { //notify observers of product availability
             o.update(product);
         });
     }
@@ -152,5 +145,4 @@ public class Notifcation implements Subject //interface ideally
     public void notifyProductReturned(Product product) {
         notify(product);
     }
-
 }

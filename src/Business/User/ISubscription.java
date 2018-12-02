@@ -7,5 +7,4 @@ package Business.User;
 public interface ISubscription {
 
     String getSubscription();
-
 }

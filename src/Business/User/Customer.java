@@ -22,7 +22,7 @@ public class Customer implements ICustomer, IUser, Observer {
     //private ISubscription subscription;
     private Subscription subscription;
 
-    public Customer(int id, final String name, final String email) {
+    public Customer(final int id, final String name, final String email) {
         this.id = id;
         this.name = name;
         this.email = email;
