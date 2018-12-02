@@ -67,9 +67,8 @@ public class RentView extends JFrame {
         this.setTitle("Categories");
     }
 
-    public void displayListOfProducts(int cID) {
+    public void displayListOfProducts(Product [] products) {
         System.out.println("Displaying list of products...");
-        Product[] products = ProductDAO.getListProducts(cID);
         this.setBounds(450, 250, 400, 200);
 
         select = new JButton("Select");

@@ -39,8 +39,10 @@ public class RentController {
 
     private ActionListener selectActionListener = new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) {
-            rentView.displayListOfProducts(rentView.getChosenCategory().getId());
+        public void actionPerformed(ActionEvent e) 
+        {
+            Product [] products = Category.getProductsOfCategory(rentView.getChosenCategory().getId());
+            rentView.displayListOfProducts(products);
             rentView.addBackBtnListner(backToCategoryActionListioner);
             rentView.addSelectBtnListener(selectProductActionListener);
         }
@@ -113,7 +115,8 @@ public class RentController {
     private ActionListener backToProductListActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            rentView.displayListOfProducts(rentView.getChosenCategory().getId());
+            Product [] products = Category.getProductsOfCategory(rentView.getChosenCategory().getId());
+            rentView.displayListOfProducts(products);
             rentView.addBackBtnListner(backToCategoryActionListioner);
             rentView.addSelectBtnListener(selectProductActionListener);
         }

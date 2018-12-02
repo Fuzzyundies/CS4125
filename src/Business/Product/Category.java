@@ -6,6 +6,7 @@
 package Business.Product;
 
 import DatabaseManagement.CategoriesDAO;
+import DatabaseManagement.ProductDAO;
 
 /**
  *
@@ -42,6 +43,12 @@ public class Category
     {
         CategoriesDAO dbAccess = new CategoriesDAO();
         return dbAccess.getCategories();
+    }
+    
+    public static Product[] getProductsOfCategory(int id) 
+    {
+        ProductDAO dbAccess = new ProductDAO();
+        return dbAccess.getListProducts(id);
     }
     
     @Override

@@ -57,7 +57,7 @@ public class ProductDAO implements DAO
         return deleted;
     }
     
-    public static Product[] getListProducts(int cID)
+    public Product[] getListProducts(int cID)
     {
         ArrayList<Product> products = new ArrayList<Product>();
         
