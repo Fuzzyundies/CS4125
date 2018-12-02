@@ -6,7 +6,6 @@
 package Business.BusinessManagement;
 
 import Business.Product.Product;
-import Business.User.Customer;
 
 import Business.User.Observer;
 import DatabaseManagement.CustomerDAO;

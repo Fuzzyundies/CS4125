@@ -68,7 +68,7 @@ public class LoginView extends JFrame {
         this.setVisible(true);
         this.setTitle("Login");
     }
-    
+
     public void displaySignUpView() {
         this.setBounds(300, 300, 500, 300);
 
@@ -104,9 +104,8 @@ public class LoginView extends JFrame {
     public String getName() {
         return uname_textF.getText();
     }
-    
-    public String getCreditCard()
-    {
+
+    public String getCreditCard() {
         return creditCard.getText();
     }
 

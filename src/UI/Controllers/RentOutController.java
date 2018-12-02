@@ -21,14 +21,9 @@ public class RentOutController {
     {
         this.view = view;
         this.homeView = homeView;
-        //view.displayRentOutNewProduct(Category.getCategories());
         view.addAddNewProductBtnListener(addNewProductActionListener);
         view.viewProductsBtnListener(viewProductsActionListener);
         view.backBtnListener(backToHomeActionListener);
-        /*
-        view.addAddListener(AddAddActionListener);
-        view.cancelAddListener(CancelAddActionListener);
-         */
     }
 
     private void backToHome() {
@@ -107,5 +102,4 @@ public class RentOutController {
             System.out.println("Stop Leasing out product...");
         }
     };
-
 }

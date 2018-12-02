@@ -39,9 +39,8 @@ public class RentController {
 
     private ActionListener selectActionListener = new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) 
-        {
-            Product [] products = Category.getProductsOfCategory(rentView.getChosenCategory().getId());
+        public void actionPerformed(ActionEvent e) {
+            Product[] products = Category.getProductsOfCategory(rentView.getChosenCategory().getId());
             rentView.displayListOfProducts(products);
             rentView.addBackBtnListner(backToCategoryActionListioner);
             rentView.addSelectBtnListener(selectProductActionListener);
@@ -68,14 +67,9 @@ public class RentController {
             Product p = rentView.getSelectedProduct();
             if (p != null) {
 
-                /*Assumption: Order just processed is > 200 euro (300). They have a monthly discount rate based on their subscription 
-                (Condition 1) It is their first order
-                (Condition 2) They have spent >= 200 euro for 12.5% off -> totals in 25% off discount for this order*/
-
                 TransactionDAO transaction = new TransactionDAO();
                 if (transaction.checkCustomerFirstOrder(cs4125.CS4125.loggedInUser.getID())) {
 
-                    System.out.println("First Order");
                     Discount monthlyTwentyFiveOffFirstOrder = new FirstOrderDiscount(new TwelveDiscount(new MonthlyDiscount()));
                     double discountTotal = monthlyTwentyFiveOffFirstOrder.applyDiscount();
                     double discountCalculator = 100 - discountTotal;
@@ -105,7 +99,6 @@ public class RentController {
             notification.registerObserver(customer);
 
             //Some time later - product is now available - leaser makes it available via their list of products
-            //testing
             p.setIs_available(1);
             notification.notify(p);
             notification.unregisterObserver(customer);
@@ -115,7 +108,7 @@ public class RentController {
     private ActionListener backToProductListActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Product [] products = Category.getProductsOfCategory(rentView.getChosenCategory().getId());
+            Product[] products = Category.getProductsOfCategory(rentView.getChosenCategory().getId());
             rentView.displayListOfProducts(products);
             rentView.addBackBtnListner(backToCategoryActionListioner);
             rentView.addSelectBtnListener(selectProductActionListener);
@@ -183,13 +176,13 @@ public class RentController {
             initialNotifcation.sendEmail();
 
             selectedProduct.setIs_available(0);
-            
+
             // Add product to users history
             cs4125.CS4125.loggedInUser.addProductToHistory(selectedProduct, newTransaction.getTID(), startDate, endDate);
-            
+
             homeView.setVisible(true);
             rentView.dispose();
-             
+
         }
     };
 }

@@ -15,7 +15,7 @@ import java.time.LocalDate;
 
 public class Authentication 
 {
-    private CustomerDAO dbAccess;
+    private final CustomerDAO dbAccess;
     private int customerID;
     
     public Authentication()

@@ -72,8 +72,8 @@ public class CustomerTest {
     @Test
     public void testSetID() {
         user = userFactory.getUser("C");
-        user.setID("233");
-        assertEquals("233", user.getID());
+        user.setID(233);
+        assertEquals(233, user.getID());
     }
 
     /**

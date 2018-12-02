@@ -23,12 +23,10 @@ public class Customer implements ICustomer, IUser, Observer {
     //private ISubscription subscription;
     private Subscription subscription;
 
-    public Customer(int id, String name, String email) //, ISubscription subscription) 
-    {
+    public Customer(int id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
-        //this.subscription = new Subscription(this.email, s, e);
     }
 
     @Override
@@ -51,22 +49,18 @@ public class Customer implements ICustomer, IUser, Observer {
         return "";//this.password;
     }
 
-    
-    public LocalDate getSubscriptionStart()
-    {
+    public LocalDate getSubscriptionStart() {
         return subscription.getStartDate();
     }
-    
-    public LocalDate getSubscriptionEnd()
-    {
+
+    public LocalDate getSubscriptionEnd() {
         return subscription.getEndDate();
     }
-    
-    public boolean isSubValid()
-    {
+
+    public boolean isSubValid() {
         return subscription.getIsActive();
     }
-    
+
     public int getRating() {
         return rating;
     }
@@ -105,23 +99,14 @@ public class Customer implements ICustomer, IUser, Observer {
         return this.toString();
     }
 
-    public void rent(/*Product p*/) {
-
-    }
-
-    public void rentOut(/*Product p*/) {
-
-    }
-
-    public Product[] getUserHistory() 
-    {
+    public Product[] getUserHistory() {
         CustomerDAO dbAccess = new CustomerDAO();
         return dbAccess.getHistory(cs4125.CS4125.loggedInUser.getID());
         /*
         userHistory.forEach((history) -> {
             history.showHistory();
         });
-        */
+         */
     }
 
     @Override
@@ -129,8 +114,7 @@ public class Customer implements ICustomer, IUser, Observer {
         System.out.println("Product now available:\n" + product.getId() + " - " + product.getName() + "\nSending email to " + getEmail() + "\n\n");
     }
 
-    public void addProductToHistory(Product selectedProduct , int tID, LocalDate sDate, LocalDate eDate) 
-    {
+    public void addProductToHistory(Product selectedProduct, int tID, LocalDate sDate, LocalDate eDate) {
         CustomerDAO dbAccess = new CustomerDAO();
         dbAccess.addToHistory(selectedProduct, tID, sDate, eDate);
     }

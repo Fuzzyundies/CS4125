@@ -6,16 +6,13 @@
 package UI.Controllers;
 
 import Business.BusinessManagement.Authentication;
-import Business.BusinessManagement.Subscription;
 import Business.User.Customer;
 import DatabaseManagement.CustomerDAO;
 import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.LoginView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -57,23 +54,11 @@ public class LoginController {
                 if (result <= 0) {
                     loginView.displayErrorMessage("User not found");
                 } else {
-
-                    //cs4125.CS4125.userID = result;
                     CustomerDAO dbAccess = new CustomerDAO();
-                    //cs4125.CS4125.username = dbAccess.getUsername(cs4125.CS4125.userID);
-                    //cs4125.CS4125.email = dbAccess.getEmail(cs4125.CS4125.userID);
                     cs4125.CS4125.loggedInUser = new Customer(result, dbAccess.getUsername(result), dbAccess.getEmail(result));
-                    //System.out.println("UserID:" + cs4125.CS4125.userID + " Username:" + cs4125.CS4125.username + " email:" + cs4125.CS4125.email);
 
-                    //if(SubscriptionValid())
-                    //{
                     HomeView homeView = new HomeView();
                     HomeController homeController = new HomeController(homeView, loginView, authenticationModel);
-                    //}
-                    //else
-                    //Go to renew subscription page
-                    //To do 
-
                     loginView.setVisible(false);
                 }
             } catch (Exception ex) {
@@ -90,7 +75,6 @@ public class LoginController {
         -if endDate after currentDate return true
     }
      */
-
     class SignUpBtnListener implements ActionListener {
 
         @Override
@@ -152,5 +136,4 @@ public class LoginController {
             }
         }
     }
-
 }

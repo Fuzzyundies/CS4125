@@ -5,8 +5,8 @@ import Business.User.Customer;
 import UI.Controllers.LoginController;
 import UI.UserInterfaces.LoginView;
 
-public class CS4125 
-{
+public class CS4125 {
+
     public static Customer loggedInUser;
 
     public static void main(String[] args) {

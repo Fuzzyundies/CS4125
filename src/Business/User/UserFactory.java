@@ -1,7 +1,5 @@
 package Business.User;
 
-import java.time.LocalDate;
-
 /**
  *
  * @author neild

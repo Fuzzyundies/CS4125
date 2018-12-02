@@ -11,7 +11,7 @@ public class DiscountDecorator extends Discount {
     – Condition 2: 12.5% off for order €200 or more
     – Condition 3: 30% off for first order and order €200 or more
      */
-    private Discount discount;
+    private final Discount discount;
 
     public DiscountDecorator(final Discount discount) {
         this.discount = discount;

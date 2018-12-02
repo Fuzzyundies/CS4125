@@ -20,7 +20,7 @@ public class AdminTest {
     public AdminTest() {
         userFactory = new UserFactory();
     }
-    
+
     @Test
     public void testGetEmail() {
         //Purposely fail this test
@@ -49,8 +49,6 @@ public class AdminTest {
         user = userFactory.getUser("A");
         assertEquals("101", user.getID());
     }
-
-    
 
     @Test
     public void testGetName() {

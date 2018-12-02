@@ -89,12 +89,6 @@ public class HomeController {
         LoginView loginView = new LoginView();
         Authentication authenticationModel = new Authentication();
         LoginController loginController = new LoginController(loginView, authenticationModel);
-        //loginView.resetNameText();
-        //loginView.resetPasswordText();
-        //loginView.resetEmailText();
-        //loginView.setVisible(true);
-
-        // I tried to reset the fields but the error logging in exception kept getting snagged.
         System.out.println("Signed out");
         homeView.dispose();
     };

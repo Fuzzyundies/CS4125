@@ -12,7 +12,6 @@ package UI.Controllers;
 import Business.BusinessManagement.Authentication;
 import Business.Product.Product;
 import DatabaseManagement.CustomerDAO;
-import DatabaseManagement.ProductDAO;
 import UI.UserInterfaces.HomeView;
 import UI.UserInterfaces.ProfileView;
 import java.awt.event.ActionEvent;
@@ -150,9 +149,6 @@ public class ProfileController {
                 profileView.displayProductDetails(profileView.getSelectedProduct());
                 profileView.addBackBtnListener(backToHistory);
                 profileView.addRateUserListener(rateUserListener);
-                //profileView.addRentAginListener(); 
-                // TODO add option to rent again
-                // probably instatiate RentView?
             }
         }
     };
