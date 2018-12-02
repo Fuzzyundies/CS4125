@@ -27,18 +27,17 @@ public class LoginController {
     public LoginController(LoginView view, Authentication model) {
         this.loginView = view;
         this.authenticationModel = model;
-        view.addLoginBtnListener(new LoginBtnListener());
-        view.addSignUpBtnListener(new SignUpBtnListener());
+        view.addLoginBtnListener(LoginBtnListener);
+        view.addSignUpBtnListener(SignUpBtnListener);
     }
 
     private void backToLogin() {
         loginView.displayLoginView();
-        loginView.addLoginBtnListener(new LoginBtnListener());
-        loginView.addSignUpBtnListener(new SignUpBtnListener());
+        loginView.addLoginBtnListener(LoginBtnListener);
+        loginView.addSignUpBtnListener(SignUpBtnListener);
     }
 
-    class LoginBtnListener implements ActionListener {
-
+    private ActionListener LoginBtnListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             String username = "";
@@ -65,7 +64,7 @@ public class LoginController {
                 loginView.displayErrorMessage("Error loggin in");
             }
         }
-    }
+    };
 
     /*
     public boolean SubscriptionValid()
@@ -75,28 +74,26 @@ public class LoginController {
         -if endDate after currentDate return true
     }
      */
-    class SignUpBtnListener implements ActionListener {
-
+    
+    private ActionListener SignUpBtnListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             loginView.displaySignUpView();
-            loginView.addCancelBtnListener(new CancelBtnListener());
-            loginView.addConfirmBtnListener(new ConfirmBtnListner());
+            loginView.addCancelBtnListener(CancelBtnListener);
+            loginView.addConfirmBtnListener(ConfirmBtnListener);
         }
-    }
+    };
+    
 
-    class CancelBtnListener implements ActionListener {
-
+    private ActionListener CancelBtnListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Back to login");
             backToLogin();
         }
-
-    }
-
-    class ConfirmBtnListner implements ActionListener {
-
+    };
+    
+    private ActionListener ConfirmBtnListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             String username = loginView.getName();
@@ -135,5 +132,5 @@ public class LoginController {
                 }
             }
         }
-    }
+    };
 }
