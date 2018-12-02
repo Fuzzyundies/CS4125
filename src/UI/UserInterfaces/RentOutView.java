@@ -123,15 +123,12 @@ public class RentOutView extends JFrame
         this.setTitle("RentOutView");
     }
     
-    public void displayProductsUpForRent()
+    public void displayProductsUpForRent(Product [] products)
     {
         this.setBounds(500, 250, 300, 300);
         
         // TODO get list of products where:
         // ownerID = loggedInUserID
-        Product [] products = ProductDAO.getListProducts(1); // Temp value
-        
-        
         
         panel.removeAll();
         

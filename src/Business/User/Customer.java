@@ -134,4 +134,9 @@ public class Customer implements ICustomer, IUser, Observer {
         CustomerDAO dbAccess = new CustomerDAO();
         dbAccess.addToHistory(selectedProduct, tID, sDate, eDate);
     }
+
+    public Product[] getLeasedProducts() {
+        CustomerDAO dbAccess = new CustomerDAO();
+        return dbAccess.getProductsUpForLease(id);
+    }
 }

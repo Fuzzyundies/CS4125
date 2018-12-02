@@ -78,7 +78,7 @@ public class RentOutController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("View products ive up for lease...");
-            view.displayProductsUpForRent();
+            view.displayProductsUpForRent(cs4125.CS4125.loggedInUser.getLeasedProducts());
             view.backBtnListener(CancelActionListener);
             view.selectProductBtnListener(selectProducListener);
         }
@@ -95,7 +95,7 @@ public class RentOutController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("View products ive up for lease...");
-            view.displayProductsUpForRent();
+            view.displayProductsUpForRent(cs4125.CS4125.loggedInUser.getLeasedProducts());
             view.backBtnListener(CancelActionListener);
             view.selectProductBtnListener(selectProducListener);
         }
