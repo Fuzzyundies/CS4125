@@ -94,12 +94,10 @@ public class RentController {
         Product p = rentView.getSelectedProduct();
         if (p != null) {
             System.out.println("\n\nAdding you to the queue");
-            UserFactory userFactory = new UserFactory();
             Notifcation notification = new Notifcation();
-            Customer customer = (Customer) userFactory.getUser("C");
+            Customer customer = cs4125.CS4125.loggedInUser;
             notification.registerObserver(customer);
-
-            //Some time later - product is now available - leaser makes it available via their list of products
+            //Some time later - product is now available - test
             p.setIs_available(1);
             notification.notify(p);
             notification.unregisterObserver(customer);
