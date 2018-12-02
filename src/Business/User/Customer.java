@@ -14,7 +14,6 @@ public class Customer implements ICustomer, IUser, Observer {
 
     private List<IHistory> userHistory;
     private int rating;
-    //private String paymentDetails;
     private int id;
     private String name;
     private String email;
@@ -23,7 +22,7 @@ public class Customer implements ICustomer, IUser, Observer {
     //private ISubscription subscription;
     private Subscription subscription;
 
-    public Customer(int id, String name, String email) {
+    public Customer(int id, final String name, final String email) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -70,22 +69,22 @@ public class Customer implements ICustomer, IUser, Observer {
     }
 
     @Override
-    public void setID(int id) {
+    public void setID(final int id) {
         this.id = id;
     }
 
     @Override
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
     @Override
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
     @Override
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         //this.password = password;
     }
 

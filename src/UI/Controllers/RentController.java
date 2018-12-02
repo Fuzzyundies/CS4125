@@ -70,8 +70,10 @@ public class RentController {
                 TransactionDAO transaction = new TransactionDAO();
                 if (transaction.checkCustomerFirstOrder(cs4125.CS4125.loggedInUser.getID())) {
 
-                    Discount monthlyTwentyFiveOffFirstOrder = new FirstOrderDiscount(new TwelveDiscount(new MonthlyDiscount()));
-                    double discountTotal = monthlyTwentyFiveOffFirstOrder.applyDiscount();
+                    Discount discount = (p.getPrice() > 200) ? new FirstOrderDiscount(new TwelveDiscount(new MonthlyDiscount())) :
+                            new FirstOrderDiscount(new MonthlyDiscount());
+
+                    double discountTotal = discount.applyDiscount();
                     double discountCalculator = 100 - discountTotal;
                     double productPriceAfterDiscount = ((discountCalculator * p.getPrice()) / 100);
                     System.out.println("Was " + p.getPrice() + " and with a discount of " + discountTotal + ", it is now: " + productPriceAfterDiscount);
@@ -79,7 +81,6 @@ public class RentController {
                 }
                 rentView.displayProductDetails(p);
                 rentView.addBackBtnListner(backToProductListActionListener);
-
                 if (p.getIs_available() >= 1) {
                     rentView.addRentProductBtnListener(rentProductActionListener);
                 } else {
